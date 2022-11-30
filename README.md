@@ -1,12 +1,24 @@
-# project-atelier
-test nick
-test nick2
+Project Atelier
+===============
 
-Luke Anger
-my updated readme
-test nick
+![Project Atelier logo](docs/daff_logo_with_icon.svg "Project Atelier")
 
-BANANA
-request review
+Project Atelier is a frontend retail web portal for HackReactor's Front End Capstone project.
 
-test branch change
+## Table of Contents
+
+1. [Usage](#Usage)
+1. [Requirements](#Requirements)
+1. [Development](#Development)
+
+## Usage
+
+To be filled out later.
+
+## Requirements
+
+To be filled out later.
+
+## Development
+
+To be filled out later.
