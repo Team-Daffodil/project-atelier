@@ -1,0 +1,9 @@
+{
+  "editor.renderWhitespace": "all",
+  "editor.tabSize": 2,
+  "editor.wordWrap": "on",
+  "emmet.showExpandedAbbreviation": "never",
+  "files.trimTrailingWhitespace": true,
+  "semi": false,
+  "singleQuote": true
+}
