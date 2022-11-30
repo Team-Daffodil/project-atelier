@@ -1,0 +1,19 @@
+{
+  "name": "project-atelier",
+  "version": "0.0.1",
+  "description": "HackReactor FEC Project",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Team-Daffodil/project-atelier.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Team-Daffodil/project-atelier/issues"
+  },
+  "homepage": "https://github.com/Team-Daffodil/project-atelier#readme",
+  "scripts": {
+    "test": ""
+  }
+}
