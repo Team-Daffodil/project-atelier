@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/Team-Daffodil/project-atelier#readme",
   "dependencies": {
-    "eslint": "^8.28.0",
-    "eslint-config-hackreactor": "github:reactorcore/eslint-config-hackreactor"
+    "eslint": "^8.28.0"
+  },
+  "devDependencies": {
+    "prettier-eslint": "^15.0.1"
   }
 }
