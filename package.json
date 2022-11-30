@@ -1,0 +1,24 @@
+{
+  "name": "project-atelier",
+  "version": "1.0.0",
+  "description": "test nick test nick2",
+  "main": "testlinter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NCsaszar/project-atelier.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NCsaszar/project-atelier/issues"
+  },
+  "homepage": "https://github.com/NCsaszar/project-atelier#readme",
+  "dependencies": {
+    "eslint": "^8.28.0",
+    "eslint-config-hackreactor": "github:reactorcore/eslint-config-hackreactor"
+  }
+}
