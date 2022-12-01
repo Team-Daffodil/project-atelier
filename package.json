@@ -8,7 +8,7 @@
     "react-dev:hot": "npx webpack serve --hot -open",
     "test": "npx jest",
     "test:coverage": "npx jest --coverage",
-    "create-badges": "npx istanbul-badges-readme",
+    "create-badges": "npm run test:coverage && npx istanbul-badges-readme",
     "prepare": "husky install"
   },
   "repository": {
