@@ -1,3 +1,8 @@
 import React from 'react'
+import Questions from './Questions.jsx'
 
-export const App = () => <h1>Hello world React!</h1>
+const App = () => {
+  return <h1>Hello world React!</h1>
+}
+
+export default App

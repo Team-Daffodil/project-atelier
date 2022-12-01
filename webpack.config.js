@@ -5,6 +5,7 @@ const path = require('path')
 // Here, you write different options and tell Webpack what to do
 module.exports = {
   // Path to your entry point. From this file Webpack will begin its work
+  mode: 'development',
   entry: './src/index.js',
 
   // Path and filename of your result bundle.
@@ -13,6 +14,12 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '',
     filename: 'bundle.js',
+  },
+
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000
   },
   devServer: {
     static: {
