@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Team-Daffodil/project-atelier#readme",
   "dependencies": {
+    "axios": "^0.24.0",
     "eslint": "^8.28.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
