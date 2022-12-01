@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "react-dev": "webpack --mode development --watch",
-    "react-dev:hot": "npx webpack serve --hot -open"
+    "react-dev:hot": "npx webpack serve --hot -open",
+    "test": ""
   },
   "repository": {
     "type": "git",
