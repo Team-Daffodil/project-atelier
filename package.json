@@ -8,6 +8,7 @@
     "react-dev:hot": "npx webpack serve --hot -open",
     "test": "npx jest",
     "test:coverage": "npx jest --coverage",
+    "create-badges": "npm run test:coverage && npx istanbul-badges-readme",
     "prepare": "husky install"
   },
   "repository": {
@@ -41,6 +42,7 @@
     "@testing-library/react": "^13.4.0",
     "babel-loader": "^8.2.1",
     "husky": "^8.0.2",
+    "istanbul-badges-readme": "^1.8.4",
     "jest": "^29.3.1",
     "jest-environment-jsdom": "^29.3.1",
     "lint-staged": "^13.0.4",
