@@ -1,6 +1,8 @@
 # Project Atelier
 
-![Project Atelier logo](docs/daff_logo_with_icon.svg "Project Atelier")
+![Project Atelier logo](docs/daff_logo_with_icon.svg 'Project Atelier')
+
+[![CircleCI](https://circleci.com/gh/Team-Daffodil/project-atelier.svg?style=shield&circle-token=92f484b28710e0723c8807019be57e964bcdbfdb)](https://circleci.com/gh/Team-Daffodil/project-atelier)
 
 Project Atelier is a frontend retail web portal for HackReactor's Front End Capstone project.
 
