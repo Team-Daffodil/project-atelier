@@ -1,0 +1,122 @@
+body {
+  background-color: #f1e8d5;
+}
+
+#app {
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px;
+}
+
+/* SHARED BUTTONS GROUP */
+
+.button-helpful {
+  border: none;
+  background-color: #fff0A3;
+  transition: 0.4s;
+}
+
+.button-helpful:hover {
+  transform: scale(1.2);
+}
+
+/*---------------------------------------------*/
+/*------- QUESTIONS AND ANSWERS SECTION -------*/
+/*---------------------------------------------*/
+
+.questions-container {
+  display: flex;
+  flex-direction: column;
+  margin: 25px;
+}
+
+/*------- HEADER CONTAINER -------*/
+
+.questions-header-wrapper {
+  border: 3px solid black;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  background-color: #d3c6bb;
+}
+
+.questions-header {
+  font-size: 14px;
+}
+
+.questions-search {
+  font-weight: bold;
+}
+
+/*------- QUESTIONS CONTAINER -------*/
+
+.questions-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.question-individual-wrapper {
+  border: 3px solid black;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff0a3a6;
+}
+
+.question-individual-question {
+  display: flex;
+  font-weight: bolder;
+  font-size: 14px;
+}
+
+.question-individual-answer {
+  display: flex;
+  font-size: 12px;
+}
+
+/*------- QUESTION BUTTONS CONTAINER -------*/
+
+.question-buttons {
+  border: none;
+  padding: 15px 25px;
+  margin: 10px;
+}
+
+.question-button-more {
+    transition-duration: 0.4s;
+    background-color: #b3b3b3;
+    border: 3px solid #303030;
+    border-radius: 10px;
+}
+
+.question-button-more:hover {
+  background-color: #ff8b59;
+}
+
+.question-button-ask {
+  transition-duration: 0.4s;
+  background-color: #b3b3b3;
+  border: 3px solid #303030;
+  border-radius: 10px;
+}
+
+.question-button-ask:hover {
+  background-color: #ff8b59;
+}
+
+.question-individual-info {
+  display: flex;
+  font-size: 12px;
+}
+
+.img {
+  border: 5px solid black;
+  margin-right: 10px;
+}
+
+.img-answers {
+  display: flex;
+}
+
+.questions-closing {
+  display: flex;
+}
