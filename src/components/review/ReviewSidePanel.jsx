@@ -31,7 +31,6 @@ const ReviewSidePanel = ({ productId }) => {
     })
       .then((resp) => resp.json())
       .then((data) => {
-        console.log('this is my data', data)
         setData(data)
         setTotalRatings(
           Object.values(data.ratings).reduce(
