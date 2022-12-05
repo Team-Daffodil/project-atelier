@@ -19,6 +19,10 @@ body {
   transform: scale(1.2);
 }
 
+.button-load-answers {
+  width: 175px;
+}
+
 /*---------------------------------------------*/
 /*------- QUESTIONS AND ANSWERS SECTION -------*/
 /*---------------------------------------------*/
