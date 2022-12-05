@@ -11,7 +11,7 @@ body {
 
 .button-helpful {
   border: none;
-  background-color: #fff0A3;
+  background-color: #fff0a3;
   transition: 0.4s;
 }
 
@@ -82,10 +82,10 @@ body {
 }
 
 .question-button-more {
-    transition-duration: 0.4s;
-    background-color: #b3b3b3;
-    border: 3px solid #303030;
-    border-radius: 10px;
+  transition-duration: 0.4s;
+  background-color: #b3b3b3;
+  border: 3px solid #303030;
+  border-radius: 10px;
 }
 
 .question-button-more:hover {
@@ -120,3 +120,72 @@ body {
 .questions-closing {
   display: flex;
 }
+
+/*---------------------------------------------*/
+/*------- Overview Info panel -------*/
+/*---------------------------------------------*/
+/*------- InfoPanel CONTAINER -------*/
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  border: 2px black;
+  border-style: solid;
+  height: 50vh;
+  padding: 10px;
+}
+
+.reviews {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.read {
+  text-decoration: underline;
+  position: relative;
+  left: 4px;
+}
+.sizeselector {
+  display: flex;
+  flex-direction: row;
+}
+.favIcon svg {
+  font-size: 26px;
+}
+
+/*------- Description CONTAINER -------*/
+.description-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 2px black;
+  border-style: solid;
+  border-radius: 1em;
+}
+.desc-facts {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+}
+.desc {
+  width: 75%;
+  font-size: 14px;
+  padding: 5px;
+  border-right: 1px solid black;
+}
+.facts {
+  font-size: 14px;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  padding: 3px;
+}
+.fact {
+  display: flex;
+}
+
+/*------- Gallery CONTAINER -------*/
