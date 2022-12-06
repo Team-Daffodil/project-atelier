@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import DateFormatter from '../common/DateFormatter'
 import { maxChars } from '../../lib/review'
 
 const ReviewTile = ({ review }) => {
+  const [isExpanded, setExpanded] = useState(false)
+
+  const buttonText = () => {
+    return isExpanded ? 'Show less' : 'Show more'
+  }
+
+  const handleBodyToggle = (e) => {
+    e.preventDefault()
+    setExpanded(!isExpanded)
+  }
+
   return (
     <section>
       <div>
@@ -15,7 +26,14 @@ const ReviewTile = ({ review }) => {
         <h3>{maxChars(review.summary, 60)}</h3>
       </div>
       <div>
-        <p>{maxChars(review.body, 250)}</p>
+        <p title="review-content">
+          {!isExpanded ? maxChars(review.body, 250) : review.body}
+        </p>
+        {review.body.length > 250 && (
+          <a href="#" onClick={handleBodyToggle}>
+            {buttonText()}
+          </a>
+        )}
       </div>
       {review.photos.length && (
         <ul>
