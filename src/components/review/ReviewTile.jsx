@@ -45,6 +45,12 @@ const ReviewTile = ({ review }) => {
         </ul>
       )}
       {review.recommend && <div>I recommend this product</div>}
+      {review.response && (
+        <div role="note" style={{ backgroundColor: 'lightgray' }}>
+          <p>Reponse:</p>
+          <p>{review.response}</p>
+        </div>
+      )}
       <div>
         <p>
           Helpful? Yes{' '}
