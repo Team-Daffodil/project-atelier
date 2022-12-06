@@ -8,10 +8,10 @@ const App = () => {
     <section id="app">
       <h1>Hello world React!</h1>
       {/* <div className="overview">
-        <div className="gallerycart"> */}
+        <div className="gallerycart">
       <Gallery />
-      {/* <InfoPanel /> */}
-      {/* </div>
+      <InfoPanel />
+      </div>
         <Description />
       </div> */}
       {/* <Questions /> */}
