@@ -124,6 +124,15 @@ body {
 /*---------------------------------------------*/
 /*------- Overview Info panel -------*/
 /*---------------------------------------------*/
+/*------- Overview CONTAINER -------*/
+.overview {
+  display: flex;
+  flex-direction: column;
+}
+.gallerycart {
+  display: flex;
+}
+
 /*------- InfoPanel CONTAINER -------*/
 
 .info-container {
@@ -189,3 +198,169 @@ body {
 }
 
 /*------- Gallery CONTAINER -------*/
+.gallery-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  box-sizing: border-box;
+}
+.left {
+  display: flex;
+  height: 50vh;
+}
+.left_1 {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.img_wrap {
+  display: flex;
+  width: 80px;
+  height: 80px;
+  border: 1px solid gray;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  background: white;
+}
+.img_wrap img {
+  width: 75px;
+  height: 75px;
+  object-fit: contain;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+.imageview {
+  display: flex;
+  margin: 20px;
+  align-items: center;
+  justify-content: center;
+}
+.imageview .btnClose,
+.imageview .btnPrev,
+.imageview .btnNext {
+  position: absolute;
+  cursor: pointer;
+  opacity: 0.6;
+  color: white;
+  z-index: 9999;
+}
+
+.btnNext:hover,
+.btnPrev:hover,
+.btnClose:hover {
+  opacity: 1;
+}
+
+.imageview .btnPrev {
+  top: 50%;
+  transform: translateY(-50%);
+  left: 40px;
+}
+.imageview .btnNext {
+  top: 50%;
+  transform: translateY(-50%);
+  right: 40px;
+}
+.imageview img {
+  width: 500px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.active {
+  border: 2px solid red;
+}
+/*------- Gallery CONTAINER Modal -------*/
+
+.sliderWrap {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+}
+.sliderWrap .btnClose,
+.sliderWrap .btnPrev,
+.sliderWrap .btnNext {
+  position: fixed;
+  cursor: pointer;
+  opacity: 0.6;
+  color: white;
+  z-index: 9999;
+}
+
+.btnNext:hover,
+.btnPrev:hover,
+.btnClose:hover {
+  opacity: 1;
+}
+
+.sliderWrap .btnClose {
+  top: 40px;
+  right: 40px;
+}
+.sliderWrap .btnPrev {
+  top: 50%;
+  transform: translateY(-50%);
+  left: 40px;
+}
+.sliderWrap .btnNext {
+  top: 50%;
+  transform: translateY(-50%);
+  right: 40px;
+}
+
+.fullScreenImage {
+  height: 80%;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fullScreenImage img {
+  max-width: 1000px;
+  max-height: 600px;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.bottom {
+  display: flex;
+  gap: 5px;
+}
+.modalImg_wrap {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  border: 1px solid gray;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  background: white;
+}
+.modalImg_wrap img {
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.active {
+  border: 2px solid red;
+}
