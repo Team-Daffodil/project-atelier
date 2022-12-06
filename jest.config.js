@@ -5,5 +5,4 @@ module.exports = {
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['./jest.setup.js'],
   coverageReporters: ['json', 'json-summary'],
-  globals: { fetch, Response, Request },
 }
