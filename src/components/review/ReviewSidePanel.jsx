@@ -3,6 +3,7 @@ import { ratingAvg } from '../../lib/review'
 import * as dotenv from 'dotenv'
 dotenv.config()
 import axios from 'axios'
+import Bar from './Bar'
 
 const headers = {
   Authorization: process.env.API_TOKEN,
@@ -77,8 +78,9 @@ const ReviewSidePanel = ({ productId }) => {
                 <li key={rating + 'stars'}>
                   <div>{rating} stars</div>
                   <div>
-                    Bar percentage value:{' '}
-                    {parseInt(data.ratings[rating]) / totalRatings}
+                    <Bar
+                      percent={parseInt(data.ratings[rating]) / totalRatings}
+                    />
                   </div>
                 </li>
               )

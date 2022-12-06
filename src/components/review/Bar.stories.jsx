@@ -11,5 +11,5 @@ const Template = (args) => <Bar {...args} />
 
 export const Default = Template.bind({})
 Default.args = {
-  width: 50,
+  percent: 0.5,
 }
