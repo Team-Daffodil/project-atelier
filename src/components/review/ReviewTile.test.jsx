@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import ReviewTile from './ReviewTile'
 
@@ -29,4 +29,31 @@ test('loads and renders ReviewTile', () => {
   render(<ReviewTile review={reviewData} />)
   expect(screen.getByText('Stars: 2')).toBeVisible()
   expect(screen.getByText('(1)')).toBeVisible()
+})
+
+test('review body should expand and contract', async () => {
+  render(<ReviewTile review={reviewData} />)
+  const toggleBtn = screen.getByText('Show more')
+  const reviewContent = screen.getByTitle('review-content')
+
+  // check if toggleBtn is visible with 'Show more'
+  // check if reviewContent is less than 255 characters.
+  expect(toggleBtn).toBeVisible()
+  expect(reviewContent.textContent.length).toBeLessThan(255)
+
+  // fire off a click to toggle to expand
+  fireEvent.click(toggleBtn)
+  await screen.findByText('Show less')
+
+  // Check if toggleBtn has text 'Show less'
+  // check if reviewContent is greater than 300 characters.
+  expect(toggleBtn).toHaveTextContent('Show less')
+  expect(reviewContent.textContent.length).toBeGreaterThan(300)
+
+  // fire off a click to toggle to minimize once again
+  fireEvent.click(toggleBtn)
+  await screen.findByText('Show more')
+
+  expect(toggleBtn).toHaveTextContent('Show more')
+  expect(reviewContent.textContent.length).toBeLessThan(255)
 })
