@@ -57,3 +57,16 @@ test('review body should expand and contract', async () => {
   expect(toggleBtn).toHaveTextContent('Show more')
   expect(reviewContent.textContent.length).toBeLessThan(255)
 })
+
+test('display response when review.response is not null', () => {
+  const { queryByRole } = render(<ReviewTile review={reviewData} />)
+  expect(queryByRole('note')).not.toBeInTheDocument()
+  const newData = {
+    ...reviewData,
+    response: 'This is the response',
+  }
+
+  const { getByRole } = render(<ReviewTile review={newData} />)
+  expect(getByRole('note')).toBeVisible()
+  expect(screen.getByText('This is the response')).toBeVisible()
+})
