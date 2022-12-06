@@ -30,3 +30,10 @@ Default.args = {
     },
   ],
 }
+
+export const WithResponse = Template.bind({})
+WithResponse.args = {
+  ...Default.args,
+  response: `Attigerint ei desiderant ne repugnaret arbitrabar praesertim antedictis id. Re quaestione divisibile si eo indefinite vi. Ha attinet si minimum ut ipsemet percipi impulsu putarim. Ritas majus imo summa nempe mea longa erunt. Praeterea reliquiae aliquando fidelibus positivum usu ibi stabilire. Scripturas ad invenerunt consuetudo solutiones referuntur ii ut. Et im neutrum errores sirenas ii ac vestiri. Voce poni unam ope lus haec unum regi.
+`,
+}
