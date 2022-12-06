@@ -1,5 +1,6 @@
 import React from 'react'
 import DateFormatter from '../common/DateFormatter'
+import { maxChars } from '../../lib/review'
 
 const ReviewTile = ({ review }) => {
   return (
@@ -11,10 +12,10 @@ const ReviewTile = ({ review }) => {
         </div>
       </div>
       <div>
-        <h3>{review.summary}</h3>
+        <h3>{maxChars(review.summary, 60)}</h3>
       </div>
       <div>
-        <p>{review.body}</p>
+        <p>{maxChars(review.body, 250)}</p>
       </div>
       {review.photos.length && (
         <ul>
