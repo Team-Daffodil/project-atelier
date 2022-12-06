@@ -1,5 +1,6 @@
 // Webpack uses this to work with directories
 const path = require('path')
+const Dotenv = require('dotenv-webpack')
 
 // This is the main configuration object.
 // Here, you write different options and tell Webpack what to do
@@ -15,6 +16,7 @@ module.exports = {
     publicPath: '',
     filename: 'bundle.js',
   },
+  plugins: [new Dotenv()],
 
   performance: {
     hints: false,
