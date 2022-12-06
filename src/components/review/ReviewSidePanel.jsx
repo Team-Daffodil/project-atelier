@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { ratingAvg } from '../../lib/review'
+import * as dotenv from 'dotenv'
+dotenv.config()
+import axios from 'axios'
+import Bar from './Bar'
 
 const headers = {
   Authorization: process.env.API_TOKEN,
@@ -17,7 +21,23 @@ const displayChars = (feature) => {
   if (feature === 'Quality') {
     chars = ['Poor', 'Perfect']
   }
-  return chars.map((char) => <span>{char}</span>)
+  return chars.map((char) => <span key={char}>{char}</span>)
+}
+
+const fetchProductData = async (id) => {
+  console.log('API_URL:', process.env.API_URL)
+  let params = new URLSearchParams()
+  params.set('product_id', id)
+
+  return await axios.get(
+    process.env.API_URL + '/reviews/meta?' + params.toString(),
+    {
+      headers: headers,
+    }
+  )
+
+  // TODO: handle error here
+  // https://rapidapi.com/guides/fetch-api-async-await
 }
 
 const ReviewSidePanel = ({ productId }) => {
@@ -25,22 +45,18 @@ const ReviewSidePanel = ({ productId }) => {
   const [totalRatings, setTotalRatings] = useState(0)
 
   useEffect(() => {
-    //
-    fetch(process.env.API_URL + '/reviews/meta?product_id=' + productId, {
-      headers: headers,
-    })
-      .then((resp) => resp.json())
+    fetchProductData(productId)
       .then((data) => {
-        setData(data)
+        setData(data.data)
         setTotalRatings(
-          Object.values(data.ratings).reduce(
+          Object.values(data.data.ratings).reduce(
             (acc, val) => acc + parseInt(val),
             0
           )
         )
       })
       .catch((err) => {
-        console.log('fetch error:', err)
+        console.log('fetch error:', err.response.status)
       })
   }, [])
 
@@ -59,11 +75,12 @@ const ReviewSidePanel = ({ productId }) => {
           <ul>
             {['5', '4', '3', '2', '1'].map((rating) => {
               return (
-                <li>
+                <li key={rating + 'stars'}>
                   <div>{rating} stars</div>
                   <div>
-                    Bar percentage value:{' '}
-                    {parseInt(data.ratings[rating]) / totalRatings}
+                    <Bar
+                      percent={parseInt(data.ratings[rating]) / totalRatings}
+                    />
                   </div>
                 </li>
               )

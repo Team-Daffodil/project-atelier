@@ -7,10 +7,14 @@ const App = () => {
   return (
     <section id="app">
       <h1>Hello world React!</h1>
+      {/* <div className="overview">
+        <div className="gallerycart"> */}
+      <Gallery />
       {/* <InfoPanel /> */}
-      {/* <Description /> */}
+      {/* </div>
+        <Description />
+      </div> */}
       {/* <Questions /> */}
-      {/* <Gallery /> */}
     </section>
   )
 }

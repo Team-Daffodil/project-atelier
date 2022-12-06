@@ -3,6 +3,6 @@ module.exports = {
   collectCoverageFrom: ['src/**/*.{js,jsx}'],
   coverageDirectory: 'coverage',
   testEnvironment: 'jsdom',
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  setupFilesAfterEnv: ['./jest.setup.js'],
   coverageReporters: ['json', 'json-summary'],
 }
