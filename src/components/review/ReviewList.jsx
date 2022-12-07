@@ -42,6 +42,7 @@ const ReviewList = ({ productId }) => {
 
   const handleMoreClick = (e) => {
     e.preventDefault()
+    appendVisible()
   }
 
   return (
@@ -59,9 +60,11 @@ const ReviewList = ({ productId }) => {
         </ul>
       )}
       <div>
-        <a href="#" onClick={handleMoreClick}>
-          More Reviews
-        </a>{' '}
+        {visibleReviews.length < reviews.length && (
+          <a href="#" onClick={handleMoreClick}>
+            More Reviews
+          </a>
+        )}
         <a href="#">Add Review</a>
       </div>
     </section>
