@@ -1,9 +1,13 @@
 import React from 'react'
+import { rest } from 'msw'
+import { setupServer } from 'msw/node'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
+
 import ReviewTile from './ReviewTile'
 
 const reviewData = {
+  reviewId: 1,
   rating: 2,
   summary:
     'This is a long review title that should exceed the maximum 60 characters',
@@ -24,6 +28,27 @@ const reviewData = {
     },
   ],
 }
+
+const server = setupServer(
+  rest.put('*/reviews/:reviewId/helpful', (req, res, ctx) => {
+    const { reviewId } = req.params
+    if (reviewId === '1') {
+      return res(ctx.status(204))
+    }
+    return res(ctx.status(500))
+  }),
+  rest.put('*/reviews/:reviewId/report', (req, res, ctx) => {
+    const { reviewId } = req.params
+    if (reviewId === '1') {
+      return res(ctx.status(204))
+    }
+    return res(ctx.status(500))
+  })
+)
+
+beforeAll(() => server.listen())
+beforeAll(() => server.resetHandlers())
+afterAll(() => server.close())
 
 test('loads and renders ReviewTile', () => {
   render(<ReviewTile review={reviewData} />)
@@ -69,4 +94,19 @@ test('display response when review.response is not null', () => {
   const { getByRole } = render(<ReviewTile review={newData} />)
   expect(getByRole('note')).toBeVisible()
   expect(screen.getByText('This is the response')).toBeVisible()
+})
+
+test('should send a PUT request when "yes" clicked', async () => {
+  const { getByRole } = render(<ReviewTile review={reviewData} />)
+  const yesBtn = getByRole('link', { name: 'Yes' })
+  fireEvent.click(yesBtn)
+  await waitFor(() => screen.getByText('(2)'))
+  expect(yesBtn).toHaveStyle('font-weight: 900')
+})
+
+test('should send a PUT request when "no" clicked', async () => {
+  const { getByRole } = render(<ReviewTile review={reviewData} />)
+  const noBtn = getByRole('link', { name: 'No' })
+  fireEvent.click(noBtn)
+  await waitFor(() => expect(noBtn).toHaveStyle('font-weight: 900'))
 })
