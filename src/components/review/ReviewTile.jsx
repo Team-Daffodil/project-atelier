@@ -27,18 +27,18 @@ const ReviewTile = ({ review }) => {
       if (isHelpful !== null) {
         return
       } else if (resp === 'yes') {
-        const url = process.env.API_URL + `/reviews/${review.reviewId}/helpful`
+        const url = process.env.API_URL + `/reviews/${review.review_id}/helpful`
         axios
-          .put(url, { reviewId: review.reviewId }, { headers: headers })
+          .put(url, { reviewId: review.review_id }, { headers: headers })
           .then((resp) => {
             setHelpful(true)
             e.target.style.fontWeight = '900'
           })
           .catch((err) => console.log('helpful PUT error:', err))
       } else if (resp === 'no') {
-        const url = process.env.API_URL + `/reviews/${review.reviewId}/report`
+        const url = process.env.API_URL + `/reviews/${review.review_id}/report`
         axios
-          .put(url, { reviewId: review.reviewId }, { headers: headers })
+          .put(url, { reviewId: review.review_id }, { headers: headers })
           .then((resp) => {
             setHelpful(false)
             e.target.style.fontWeight = '900'
@@ -53,7 +53,7 @@ const ReviewTile = ({ review }) => {
       <div>
         <div>Stars: {review.rating}</div>
         <div>
-          {review.reviewerName}, <DateFormatter ts={review.date} />
+          {review.reviewer_name}, <DateFormatter ts={review.date} />
         </div>
       </div>
       <div>
