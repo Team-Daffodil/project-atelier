@@ -10,6 +10,7 @@ const Template = (args) => <ReviewTile review={args} />
 
 export const Default = Template.bind({})
 Default.args = {
+  reviewId: 1277480,
   rating: 2,
   summary:
     'This is a long review title that should exceed the maximum 60 characters',
