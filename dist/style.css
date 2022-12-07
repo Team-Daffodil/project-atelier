@@ -160,6 +160,27 @@ body {
   position: relative;
   left: 4px;
 }
+
+.stylethumbnails {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+}
+.thumbnailborder {
+  height: 50px;
+  width: 50px;
+  padding: 3px;
+}
+.selected {
+  border: 1px red;
+  border-style: solid;
+}
+.stylethumbnails img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: 1px grey;
+  border-style: solid;
+}
 .sizeselector {
   display: flex;
   flex-direction: row;
