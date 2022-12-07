@@ -25,7 +25,6 @@ const displayChars = (feature) => {
 }
 
 const fetchProductData = async (id) => {
-  console.log('API_URL:', process.env.API_URL)
   let params = new URLSearchParams()
   params.set('product_id', id)
 

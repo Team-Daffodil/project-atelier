@@ -7,10 +7,10 @@ export const mockData = `
   {
     "review_id": 0,
     "rating": 5,
-    "summary": "Cutest basic shoes ever!",
+    "summary": "Cutest basic shoes ever! You should really buy them! Extra long title to check max chars...",
     "recommend": true,
     "response": null,
-    "body": "They are chucky, but I love chunky! It goes well with everything! They are so great, that I always keep them white! I had to get a half size smaller, but it was just p. perfect. When I mean chunky, I mean it has flat soles and is tall, because they don't make me look like I have big feet. Unlike my vans",
+    "body": "They are chucky, but I love chunky! It goes well with everything! They are so great, that I always keep them white! I had to get a half size smaller, but it was just p. perfect. When I mean chunky, I mean it has flat soles and is tall, because they don't make me look like I have big feet. Unlike my vans. Plus there are really stylish and make me look so cool.",
     "date": "2022-10-21T00:00:00.000Z",
     "reviewer_name": "Britney11",
     "helpfulness": 9,

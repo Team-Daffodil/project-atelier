@@ -10,5 +10,5 @@ const Template = (args) => <ReviewSidePanel {...args} />
 
 export const Default = Template.bind({})
 Default.args = {
-  productId: 37311,
+  productId: 1,
 }
