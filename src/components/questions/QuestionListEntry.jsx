@@ -21,7 +21,7 @@ const helpfulComponent = (count) => {
 const QuestionListEntry = ({ question, answers }) => {
   const [answerCount, setAnswerCount] = useState(4)
   const [showAnswers, setShowAnswers] = useState(false)
-  console.log('QLE: ', answers)
+  console.log('QLE: ', question)
   const showMoreAnswersHandler = () => {
     setShowAnswers(true)
     setAnswerCount(answerCount + 2)
@@ -125,6 +125,7 @@ const QuestionListEntry = ({ question, answers }) => {
         >
           SHOW MORE ANSWERS
         </button>
+        <DateFormatter ts={question.question_date} />
       </li>
     )
   } else if (answers.length >= 3 && showAnswers) {
