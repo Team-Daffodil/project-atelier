@@ -19,12 +19,12 @@ beforeAll(() => server.resetHandlers())
 afterAll(() => server.close())
 
 test('loads and renders ReviewList with a max of 2 reviews showing', async () => {
-  const { getByTitle } = render(<ReviewList productId={1} />)
+  const { getAllByTestId } = render(<ReviewList productId={1} />)
 
   await waitFor(() => {
-    expect(getByTitle('review-list')).toBeVisible()
+    expect(getAllByTestId('review-tile'))
   })
-  expect(getByTitle('review-list').childElementCount).toEqual(2)
+  expect(getAllByTestId('review-tile').length).toEqual(2)
 })
 
 test('loads more 2 more reviews when "More Reviews" button clicked', async () => {
