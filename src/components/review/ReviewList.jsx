@@ -5,7 +5,7 @@ import ReviewTile from './ReviewTile'
 
 const headers = { Authorization: process.env.API_KEY }
 
-const ReviewList = ({ productId }) => {
+const ReviewList = ({ productId, rating }) => {
   const [reviews, setReviews] = useState([])
   const [visibleReviews, setVisibleReviews] = useState([])
   const [sortParam, setSortParam] = useState('relevant')
@@ -31,8 +31,11 @@ const ReviewList = ({ productId }) => {
       .get(process.env.API_URL + '/reviews?' + params.toString(), {
         headers: headers,
       })
-      .then((data) => {
-        setReviews(data.data.results)
+      .then(({ data }) => {
+        let reviews = data.results.filter((review) => {
+          return rating === undefined || review.rating === rating
+        })
+        setReviews(reviews)
       })
       .catch((err) => console.log('err:', err))
   }, [sortParam])

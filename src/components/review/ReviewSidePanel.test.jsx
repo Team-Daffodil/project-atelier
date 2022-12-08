@@ -22,8 +22,8 @@ test('loads and renders side panel with initial GET request', async () => {
   // after loading initial API request
   await waitFor(() => {
     expect(screen.getByText('3.00')).toBeVisible() // overall rating
-    expect(screen.getByText('99% of reviews recommended this product')) // overall recommended
   })
+  expect(screen.getByText('99% of reviews recommended this product')) // overall recommended
 })
 
 test('handles GET request errors', async () => {
