@@ -20,7 +20,6 @@ const QuestionList = () => {
   const onScrollHandler = (event) => {
     let e = event.nativeEvent.target
     let scrollSum = Math.floor(e.scrollTop + e.offsetHeight)
-    console.log('IS THIS WORKING', e.scrollTop, e.offsetHeight)
     if (scrollSum >= e.scrollHeight - 10) {
       setQuestionCount(questionCount + 2)
     }
@@ -30,10 +29,10 @@ const QuestionList = () => {
       .get(
         'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe' +
           '/qa/questions' +
-          '?product_id=37325&count=100',
+          '?product_id=37325&count=40',
         {
           headers: {
-            Authorization: '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',
+            Authorization: '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',
           },
         }
       )
@@ -49,9 +48,14 @@ const QuestionList = () => {
       let tempArray = []
       for (var key in data[i].answers) {
         tempArray.push(data[i].answers[key])
+        tempArray.sort((a, b) => {
+          return b.helpfulness - a.helpfulness
+        })
       }
       ansQ.push(tempArray)
     }
+    console.log('BEFORE SORT: ', ansQ)
+
     console.log(
       'ARRAY OF ARRAYS OF ANSWERS EACH SUBARRAY CONTAINS ANSWER FOR QUESTION: ',
       ansQ

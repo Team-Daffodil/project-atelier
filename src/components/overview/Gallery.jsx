@@ -73,6 +73,7 @@ export default function Gallery() {
       }
     }
   }
+
   const mnextImg = () => {
     slideNumber === images.length
       ? setSlideNumber(images.length - 1)
@@ -87,6 +88,7 @@ export default function Gallery() {
       }
     }
   }
+
   const prevImg = () => {
     slideNumber === 0 ? setSlideNumber(0) : setSlideNumber(slideNumber - 1)
     setImg(images[slideNumber - 1])

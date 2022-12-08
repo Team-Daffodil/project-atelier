@@ -6,17 +6,9 @@ import { setupServer } from 'msw/node'
 import { render, screen, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import ReviewSidePanel from './ReviewSidePanel'
-import { mockData } from '../../../sampleData/review_meta'
+import { handlers } from '../../lib/apiMockHandlers'
 
-const server = setupServer(
-  rest.get(process.env.API_URL + '/reviews/meta', (req, res, ctx) => {
-    const productId = req.url.searchParams.get('product_id')
-    if (productId === '1') {
-      return res(ctx.json(JSON.parse(mockData)))
-    }
-    return res(ctx.status(301))
-  })
-)
+const server = setupServer(...handlers)
 
 beforeAll(() => server.listen())
 beforeAll(() => server.resetHandlers())

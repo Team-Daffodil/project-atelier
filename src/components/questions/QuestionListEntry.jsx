@@ -26,14 +26,13 @@ const QuestionListEntry = ({ question, answers }) => {
     setShowAnswers(true)
     setAnswerCount(answerCount + 2)
   }
-  const loadPhotos = () =>
-    answers[0].photos.map((img, i) => (
-      <div
-        className="img"
-        style={{ backgroundImage: 'url(' + img + ')' }}
-        key={i}
-      ></div>
-    ))
+  const loadPhotos = (photos) => {
+    console.log(photos)
+    return photos.map((img, i) => {
+      console.log('IMAGE MAPPING: ', img)
+      return <img className="img" src={img} key={i}></img>
+    })
+  }
 
   if (answers.length < 3) {
     return (
@@ -74,7 +73,9 @@ const QuestionListEntry = ({ question, answers }) => {
               : helpfulComponent(0)}
           </div>
         </div>
-        <ul className="img-answers">{answers[0] ? loadPhotos() : null}</ul>
+        <ul className="img-answers">
+          {answers[0] ? loadPhotos(answers[0].photos) : null}
+        </ul>
       </li>
     )
   } else if (answers.length >= 3 && !showAnswers) {
@@ -115,7 +116,9 @@ const QuestionListEntry = ({ question, answers }) => {
               : helpfulComponent(0)}
           </div>
         </div>
-        <ul className="img-answers">{answers[0] ? loadPhotos() : null}</ul>
+        <ul className="img-answers">
+          {answers[0] ? loadPhotos(answers[0].photos) : null}
+        </ul>
         <button
           className="button-load-answers"
           onClick={showMoreAnswersHandler}
@@ -150,7 +153,7 @@ const QuestionListEntry = ({ question, answers }) => {
                     <div className="answer-name"> {ele.answerer_name}</div>
                     {DateFormatter(ele.date)}
                     <ul className="img-answers">
-                      {answers[0] ? loadPhotos() : null}
+                      {ele.photos.length !== 0 ? loadPhotos(ele.photos) : null}
                     </ul>
                     {helpfulComponent(ele.helpfulness)}
                   </div>

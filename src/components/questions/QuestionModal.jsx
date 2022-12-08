@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
-const QuestionModal = ({ show, handleClose }) => {
+const QuestionModal = ({ show, handleClose, children }) => {
   let toggleClass = show ? 'modal display-block' : 'display-none'
   let headers = { Authorization: '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' }
   // axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions', {})
@@ -24,6 +24,7 @@ const QuestionModal = ({ show, handleClose }) => {
       )
       .then((response) => console.log(response))
   }
+
   return (
     <div className={toggleClass}>
       <form className="modal-main" onSubmit={onSubmitHandler}>
@@ -46,7 +47,7 @@ const QuestionModal = ({ show, handleClose }) => {
         <input type="submit"></input>
       </form>
       <button className="button-close-question-modal" onClick={handleClose}>
-        Close
+        close
       </button>
     </div>
   )

@@ -1,9 +1,16 @@
 import React, { useState } from 'react'
 import DateFormatter from '../common/DateFormatter'
 import { maxChars } from '../../lib/review'
+import axios from 'axios'
+
+const headers = {
+  Authorization: process.env.API_TOKEN,
+  ContentType: 'application/json',
+}
 
 const ReviewTile = ({ review }) => {
   const [isExpanded, setExpanded] = useState(false)
+  const [isHelpful, setHelpful] = useState(null)
 
   const buttonText = () => {
     return isExpanded ? 'Show less' : 'Show more'
@@ -14,12 +21,39 @@ const ReviewTile = ({ review }) => {
     setExpanded(!isExpanded)
   }
 
+  const handleHelpfulnessClick = (resp) => {
+    return (e) => {
+      e.preventDefault()
+      if (isHelpful !== null) {
+        return
+      } else if (resp === 'yes') {
+        const url = process.env.API_URL + `/reviews/${review.review_id}/helpful`
+        axios
+          .put(url, { reviewId: review.review_id }, { headers: headers })
+          .then((resp) => {
+            setHelpful(true)
+            e.target.style.fontWeight = '900'
+          })
+          .catch((err) => console.log('helpful PUT error:', err))
+      } else if (resp === 'no') {
+        const url = process.env.API_URL + `/reviews/${review.review_id}/report`
+        axios
+          .put(url, { reviewId: review.review_id }, { headers: headers })
+          .then((resp) => {
+            setHelpful(false)
+            e.target.style.fontWeight = '900'
+          })
+          .catch((err) => console.log('PUT report err:', err))
+      }
+    }
+  }
+
   return (
     <section>
       <div>
         <div>Stars: {review.rating}</div>
         <div>
-          {review.reviewerName}, <DateFormatter ts={review.date} />
+          {review.reviewer_name}, <DateFormatter ts={review.date} />
         </div>
       </div>
       <div>
@@ -53,9 +87,19 @@ const ReviewTile = ({ review }) => {
       )}
       <div>
         <p>
-          Helpful? Yes{' '}
-          {review.helpfulness > 0 && <span>({review.helpfulness})</span>} |
-          Report
+          Helpful?{' '}
+          <a href="#" onClick={handleHelpfulnessClick('yes')}>
+            Yes
+          </a>{' '}
+          {review.helpfulness > 0 && (
+            <span id="helpfulness-count">
+              ({isHelpful ? review.helpfulness + 1 : review.helpfulness})
+            </span>
+          )}{' '}
+          |{' '}
+          <a href="#" onClick={handleHelpfulnessClick('no')}>
+            No
+          </a>
         </p>
       </div>
     </section>
