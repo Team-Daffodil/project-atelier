@@ -7,12 +7,18 @@ const apiUrl = process.env.API_URL
 export const handlers = [
   rest.get(apiUrl + '/reviews', (req, res, ctx) => {
     const productId = req.url.searchParams.get('product_id')
-    const sort = req.url.searchParams.get('sort')
-    const data = JSON.parse(mockReviewsData)
+    const sort = req.url.searchParams.get('sort') || 'relevant'
+    let data = JSON.parse(mockReviewsData)
     if (productId === '1') {
-      // if (sort === 'newest') {
-      //   data =
-      // }
+      if (sort === 'newest') {
+        data.results = data.results.sort((a, b) => {
+          return new Date(b.date) - new Date(a.date)
+        })
+      } else if (sort === 'helpful') {
+        data.results = data.results.sort(
+          (a, b) => b.helpfulness - a.helpfulness
+        )
+      }
       return res(ctx.json(data))
     }
     return res(ctx.status(500))
