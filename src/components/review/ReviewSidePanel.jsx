@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { ratingAvg } from '../../lib/review'
-import * as dotenv from 'dotenv'
-dotenv.config()
 import axios from 'axios'
 import Bar from './Bar'
 
@@ -39,7 +37,7 @@ const fetchProductData = async (id) => {
   // https://rapidapi.com/guides/fetch-api-async-await
 }
 
-const ReviewSidePanel = ({ productId }) => {
+const ReviewSidePanel = ({ productId, handleRatingChange }) => {
   const [data, setData] = useState({})
   const [totalRatings, setTotalRatings] = useState(0)
 
@@ -59,6 +57,13 @@ const ReviewSidePanel = ({ productId }) => {
       })
   }, [])
 
+  const handleRatingClick = (val) => {
+    return (e) => {
+      e.preventDefault()
+      handleRatingChange(val)
+    }
+  }
+
   return (
     <section>
       <h3>Ratings & Reviews</h3>
@@ -75,7 +80,11 @@ const ReviewSidePanel = ({ productId }) => {
             {['5', '4', '3', '2', '1'].map((rating) => {
               return (
                 <li key={rating + 'stars'}>
-                  <div>{rating} stars</div>
+                  <div>
+                    <a href="#" onClick={handleRatingClick(rating)}>
+                      {rating} stars
+                    </a>
+                  </div>
                   <div>
                     <Bar
                       percent={parseInt(data.ratings[rating]) / totalRatings}
