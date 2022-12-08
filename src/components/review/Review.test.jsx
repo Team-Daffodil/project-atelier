@@ -25,14 +25,12 @@ test('loads Review component', async () => {
 })
 
 test('filters by Star rating when clicking various ratings', async () => {
-  const {
-    getByRole,
-    getAllByTestId: queryAllByTestId,
-    getByText,
-  } = render(<Review productId={1} />)
+  const { getByRole, queryAllByTestId, getByText } = render(
+    <Review productId={1} />
+  )
 
   await waitFor(() => {
-    expect(queryAllByTestId('review-tile')).toBeTruthy()
+    expect(queryAllByTestId('review-tile')).toHaveLength(2)
   })
 
   // There is 1 '2 star' review
@@ -48,18 +46,16 @@ test('filters by Star rating when clicking various ratings', async () => {
   fireEvent.click(fourStarBtn)
   await waitForElementToBeRemoved(() => getByText('Defective shoe'))
 
-  expect(getByText(/0 reviews/)).toBeInTheDocument()
+  expect(queryAllByTestId('review-tile')).toHaveLength(0)
 })
 
 test('toggles star rating on and off if user clicks the same Star rating', async () => {
-  const {
-    getByRole,
-    getAllByTestId: queryAllByTestId,
-    getByText,
-  } = render(<Review productId={1} />)
+  const { getByRole, queryAllByTestId, getByText } = render(
+    <Review productId={1} />
+  )
 
   await waitFor(() => {
-    expect(queryAllByTestId('review-tile')).toBeTruthy()
+    expect(queryAllByTestId('review-tile')).toHaveLength(2)
   })
 
   const twoStarBtn = getByRole('link', { name: '2 stars' })
