@@ -38,10 +38,10 @@ const ReviewList = ({ productId, rating }) => {
         setReviews(reviews)
       })
       .catch((err) => console.log('err:', err))
-  }, [sortParam])
+  }, [sortParam, rating])
 
   useEffect(() => {
-    appendVisible()
+    setVisibleReviews(reviews.slice(0, 2))
   }, [reviews])
 
   const handleMoreClick = (e) => {

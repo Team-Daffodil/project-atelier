@@ -1,11 +1,5 @@
 import React from 'react'
-import {
-  render,
-  screen,
-  within,
-  waitFor,
-  fireEvent,
-} from '@testing-library/react'
+import { render, waitFor, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { setupServer } from 'msw/node'
 import { handlers } from '../../lib/apiMockHandlers'
