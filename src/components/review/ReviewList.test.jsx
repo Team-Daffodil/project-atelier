@@ -52,3 +52,30 @@ test('"More Reviews" button disappears when all reviews have been loaded', async
   fireEvent.click(moreBtn)
   await expect(moreBtn).not.toBeVisible()
 })
+
+// test when newest is clicked
+test('Reviews display by newest order when "newest" is selected', async () => {
+  const { getByLabelText, getByTitle, getByText } = render(
+    <ReviewList productId={1} />
+  )
+
+  const newestOption = getByLabelText('newest')
+  fireEvent.click(newestOption)
+  await waitFor(() =>
+    expect(getByTitle('review-list').childElementCount).toEqual(2)
+  )
+  expect(getByText('October 22, 2022')).toBeVisible()
+})
+
+test('Reviews display by most helpful order when "helpful" is selected', async () => {
+  const { getByLabelText, getByTitle, getByText } = render(
+    <ReviewList productId={1} />
+  )
+
+  const helpfulOption = getByLabelText('helpful')
+  fireEvent.click(helpfulOption)
+  await waitFor(() =>
+    expect(getByTitle('review-list').childElementCount).toEqual(2)
+  )
+  expect(getByText('(101)')).toBeVisible()
+})
