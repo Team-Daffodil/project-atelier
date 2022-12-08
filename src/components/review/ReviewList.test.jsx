@@ -64,7 +64,7 @@ test('Reviews display by newest order when "newest" is selected', async () => {
   await waitFor(() =>
     expect(getByTitle('review-list').childElementCount).toEqual(2)
   )
-  expect(getByText('October 22, 2022')).toBeVisible()
+  expect(getByText('DOCA278,')).toBeVisible()
 })
 
 test('Reviews display by most helpful order when "helpful" is selected', async () => {
