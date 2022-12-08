@@ -11,4 +11,5 @@ const Template = (args) => <ReviewList {...args} />
 export const Default = Template.bind({})
 Default.args = {
   productId: 1,
+  rating: undefined,
 }

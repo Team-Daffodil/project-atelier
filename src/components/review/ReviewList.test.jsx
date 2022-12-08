@@ -79,3 +79,15 @@ test('Reviews display by most helpful order when "helpful" is selected', async (
   )
   expect(getByText('(101)')).toBeVisible()
 })
+
+test('Reviews filters by rating', async () => {
+  // Only 1 '2 Star' rating
+  let { getAllByTestId, getByText } = render(
+    <ReviewList productId={1} rating={2} />
+  )
+  await waitFor(() => {
+    expect(getAllByTestId('review-tile').length).toEqual(1)
+  })
+
+  expect(getByText('midcc,')).toBeVisible()
+})
