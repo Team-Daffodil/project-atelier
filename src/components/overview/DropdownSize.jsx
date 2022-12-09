@@ -4,12 +4,24 @@ import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
+import { useState, useEffect } from 'react'
 
-export default function DropdownSize() {
+export default function DropdownSize({
+  getSkuInfo,
+  sizeSelected,
+  setSizeSelected,
+}) {
   const [value, setvalue] = React.useState('')
 
   const handleChange = (event) => {
     setvalue(event.target.value)
+    setSizeSelected(event.target.value)
+  }
+
+  let qty = getSkuInfo()
+  let qtyArray = []
+  for (const s in qty) {
+    qtyArray.push(s)
   }
 
   return (
@@ -23,10 +35,13 @@ export default function DropdownSize() {
           label="Select a size"
           onChange={handleChange}
         >
-          <MenuItem value={'Small'}>Small</MenuItem>
-          <MenuItem value={'Medium'}>Medium</MenuItem>
-          <MenuItem value={'Large'}>Large</MenuItem>
-          <MenuItem value={'XL'}>XL</MenuItem>
+          {qtyArray.map((size) => {
+            return (
+              <MenuItem key={Math.random() * 1000} value={size}>
+                {size}
+              </MenuItem>
+            )
+          })}
         </Select>
       </FormControl>
     </Box>
