@@ -16,8 +16,11 @@ beforeAll(() => server.listen())
 beforeAll(() => server.resetHandlers())
 afterAll(() => server.close())
 
+const handleSetReviewData = jest.fn()
 test('loads Review component', async () => {
-  const { getAllByTestId } = render(<Review productId={1} />)
+  const { getAllByTestId } = render(
+    <Review productId={1} handleSetReviewData={handleSetReviewData} />
+  )
   await waitFor(() => {
     expect(getAllByTestId('review-tile')).toBeTruthy()
   })
@@ -26,7 +29,7 @@ test('loads Review component', async () => {
 
 test('filters by Star rating when clicking various ratings', async () => {
   const { getByRole, queryAllByTestId, getByText } = render(
-    <Review productId={1} />
+    <Review productId={1} handleSetReviewData={handleSetReviewData} />
   )
 
   await waitFor(() => {
@@ -51,7 +54,7 @@ test('filters by Star rating when clicking various ratings', async () => {
 
 test('toggles star rating on and off if user clicks the same Star rating', async () => {
   const { getByRole, queryAllByTestId, getByText } = render(
-    <Review productId={1} />
+    <Review productId={1} handleSetReviewData={handleSetReviewData} />
   )
 
   await waitFor(() => {
