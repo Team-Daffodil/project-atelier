@@ -3,12 +3,12 @@ import { useEffect } from 'react'
 import axios from 'axios'
 import ReviewTile from './ReviewTile'
 
-const headers = { Authorization: process.env.API_KEY }
+const headers = { Authorization: process.env.API_TOKEN }
 
 const elemHeight = 800
 const scrollDelta = 10
 
-const ReviewList = ({ productId, rating }) => {
+const ReviewList = ({ productId, rating, handleSetReviewsTotal }) => {
   const [reviews, setReviews] = useState([])
   const [visibleReviews, setVisibleReviews] = useState([])
   const [sortParam, setSortParam] = useState('relevant')
@@ -26,7 +26,7 @@ const ReviewList = ({ productId, rating }) => {
     let params = new URLSearchParams({
       sort: sortParam,
       count: 1000,
-      page: 0,
+      page: 1,
     })
     params.set('product_id', productId)
 
@@ -39,6 +39,7 @@ const ReviewList = ({ productId, rating }) => {
           return rating === undefined || review.rating === rating
         })
         setReviews(reviews)
+        handleSetReviewsTotal(reviews.length)
       })
       .catch((err) => console.log('err:', err))
   }, [sortParam, rating])
