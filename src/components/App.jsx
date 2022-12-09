@@ -11,8 +11,8 @@ const App = () => {
   return (
     <section id="app">
       <h1>Hello world React!</h1>
-      <OverviewWidget />
-      {/* <Questions /> */}
+      {/* <OverviewWidget /> */}
+      <Questions />
     </section>
   )
 }

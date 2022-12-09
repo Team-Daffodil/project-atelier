@@ -15,9 +15,6 @@ export default function InfoPanel({
   setSelectedStyle,
 }) {
   const [value, setValue] = useState(2)
-  const [sizeSelected, setSizeSelected] = useState('')
-  const [qtyText, setqtyText] = useState('Select Qty')
-
   const getDefaultStyle = () => {
     if (styles.length > 0) {
       let defaultStyle = styles.filter((el) => el['default?'] === true)
@@ -30,31 +27,6 @@ export default function InfoPanel({
       return Number(style.style_id) === Number(id)
     })
     setSelectedStyle(newSelect)
-  }
-
-  const getSkuInfo = () => {
-    let result = []
-    if (selectedStyle.length > 0) {
-      let style = selectedStyle[0].skus
-      let options = Object.keys(style)
-
-      if (options.length > 0) {
-        options.forEach((option) => {
-          let quantity = style[option].quantity
-          let size = style[option].size
-          result.push({ id: option, quantity: quantity, size: size })
-        })
-      }
-      let quantities = {}
-      for (let i = 0; i < result.length; i++) {
-        if (!quantities[result[i].size]) {
-          quantities[result[i].size] = result[i].quantity
-        } else {
-          quantities[result[i].size] += result[i].quantity
-        }
-      }
-      return quantities
-    }
   }
 
   useEffect(() => {
@@ -79,8 +51,8 @@ export default function InfoPanel({
           <h1>{product.name}</h1>
           <div>
             {selectedStyle[0].sale_price
-              ? '$' + selectedStyle[0].sale_price
-              : '$' + selectedStyle[0].original_price}
+              ? selectedStyle[0].sale_price
+              : selectedStyle[0].original_price}
           </div>
         </div>
         <div className="style">
@@ -105,19 +77,11 @@ export default function InfoPanel({
           </div>
         </div>
         <div className="sizeselector">
-          <DropdownSize
-            getSkuInfo={getSkuInfo}
-            setSizeSelected={setSizeSelected}
-          />
-          <DropdownQty
-            getSkuInfo={getSkuInfo}
-            sizeSelected={sizeSelected}
-            qtyText={qtyText}
-            setqtyText={setqtyText}
-          />
+          <DropdownSize />
+          <DropdownQty />
         </div>
         <div className="cart">
-          <Addtocart qtyText={qtyText} />
+          <Addtocart />
         </div>
       </div>
     )

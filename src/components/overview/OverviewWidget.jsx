@@ -45,9 +45,9 @@ export default function OverviewWidget() {
   }, [])
   return (
     <>
-      {/* <div className="overview"> */}
-      {/* <div className="gallerycart"> */}
-      {/* <Gallery /> */}
+      {/* <div className="overview">
+        <div className="gallerycart">
+          <Gallery /> */}
       <InfoPanel
         fetchStyles={fetchStyles}
         product={product}
@@ -57,7 +57,7 @@ export default function OverviewWidget() {
         setSelectedStyle={setSelectedStyle}
       />
       {/* </div> */}
-      {/* <Description product={product} /> */}
+      <Description product={product} />
       {/* </div> */}
     </>
   )
