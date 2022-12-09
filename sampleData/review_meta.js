@@ -14,19 +14,19 @@ export const mockData = `{
   "characteristics": {
     "Fit": {
       "id": 125031,
-      "value": "3.1259640102827763"
+      "value": "0"
     },
     "Length": {
       "id": 125032,
-      "value": "3.1741293532338308"
+      "value": "1.5"
     },
     "Comfort": {
       "id": 125033,
-      "value": "3.2613333333333333"
+      "value": "2.5"
     },
     "Quality": {
       "id": 125034,
-      "value": "3.2841530054644809"
+      "value": "5"
     }
   }
 }`

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { ratingAvg } from '../../lib/review'
 import axios from 'axios'
 import Bar from './Bar'
+import FactorBar from './FactorBar'
 
 const headers = {
   Authorization: process.env.API_TOKEN,
@@ -12,14 +13,6 @@ const recommended = (rec) => {
   return Math.round(
     (parseInt(rec.true) / (parseInt(rec.true) + parseInt(rec.false))) * 100
   )
-}
-
-const displayChars = (feature) => {
-  let chars = ['Too small', 'Perfect', 'Too big']
-  if (feature === 'Quality') {
-    chars = ['Poor', 'Perfect']
-  }
-  return chars.map((char) => <span key={char}>{char}</span>)
 }
 
 const fetchProductData = async (id) => {
@@ -100,8 +93,10 @@ const ReviewSidePanel = ({ productId, handleRatingChange }) => {
                 return (
                   <li key={key}>
                     <label>{key}</label>
-                    <div>Bar value: {data.characteristics[key].value}</div>
-                    <div>{displayChars(key)}</div>
+                    <FactorBar
+                      feature={key}
+                      num={data.characteristics[key].value}
+                    />
                   </li>
                 )
               })}
