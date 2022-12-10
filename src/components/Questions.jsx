@@ -21,7 +21,7 @@ const Questions = () => {
     setFilter(e.nativeEvent.target.value)
   }
   const answerModalHandler = () => {
-    setQuestionModal(true)
+    setAnswerModal(true)
   }
   // c366465b6f6f186dbab8efe90b774b5288e447b8
   return (
