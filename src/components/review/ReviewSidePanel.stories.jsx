@@ -6,7 +6,9 @@ export default {
   title: 'ReviewSidePanel',
 }
 
-const Template = (args) => <ReviewSidePanel {...args} />
+const Template = (args) => (
+  <ReviewSidePanel {...args} handleSetRating={() => {}} />
+)
 
 export const Default = Template.bind({})
 Default.args = {

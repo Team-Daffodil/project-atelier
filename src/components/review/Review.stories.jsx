@@ -6,7 +6,7 @@ export default {
   title: 'Review',
 }
 
-const Template = (args) => <Review {...args} />
+const Template = (args) => <Review {...args} handleSetReviewData={() => {}} />
 
 export const Default = Template.bind({})
 Default.args = {
