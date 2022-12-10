@@ -1,6 +1,5 @@
 import React from 'react'
 import ReviewSidePanel from './ReviewSidePanel'
-import '@testing-library/jest-dom'
 
 export default {
   component: ReviewSidePanel,
