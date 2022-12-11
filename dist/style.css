@@ -38,6 +38,33 @@ body {
   height: 30px;
 }
 
+.related-container {
+  display: flex;
+  justify-content: space-around;
+
+}
+.related-card {
+  width: 225px;
+  height: 375px;
+  margin-right: 20px;
+  background-color: #d3c6bb;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+.related-card-image {
+  width: 225px;
+  height: 250px;
+  object-fit: cover
+}
+.related-card-info {
+  display: flex;
+  flex-direction: column;
+  width: 225px;
+  height: 125px;
+  align-items: baseline;
+  margin-left: 5px;
+}
+
 
 /*---------------------------------------------*/
 /*------- QUESTIONS AND ANSWERS SECTION -------*/
