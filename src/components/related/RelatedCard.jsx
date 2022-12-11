@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-let headers = { Authorization: process.env.REACT_APP_API_TOKEN }
+let headers = { Authorization: process.env.API_TOKEN }
 
 const RelatedCard = ({ productId }) => {
   const [styles, setStyles] = useState({})
@@ -17,7 +17,7 @@ const RelatedCard = ({ productId }) => {
   }
   const getProductInfo = (id) => {
     axios
-      .get(process.env.REACT_APP_API_URL + `/products/${id}/styles`, {
+      .get(process.env.API_URL + `/products/${id}/styles`, {
         headers,
       })
       .then((item) => {
@@ -31,7 +31,7 @@ const RelatedCard = ({ productId }) => {
         })
       })
     axios
-      .get(process.env.REACT_APP_API_URL + `/products/${id}`, {
+      .get(process.env.API_URL + `/products/${id}`, {
         headers,
       })
       .then((item) => {
