@@ -38,6 +38,55 @@ body {
   height: 30px;
 }
 
+.button-related-left {
+  position: absolute;
+  height: 20px;
+  top: 50%;
+  left: 5%
+}
+.button-related-right {
+  position: absolute;
+  height: 20px;
+  top: 50%;
+  right: 5%
+}
+
+.related-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+}
+.related-header {
+  margin-left: 50px;
+  font-size: 36px;
+  font-family: 600;
+}
+.related-carousel {
+  display: flex;
+  justify-content: space-around;
+}
+.related-card {
+  width: 225px;
+  height: 375px;
+  background-color: #d3c6bb;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+.related-card-image {
+  width: 225px;
+  height: 250px;
+  object-fit: cover
+}
+.related-card-info {
+  display: flex;
+  flex-direction: column;
+  width: 225px;
+  height: 125px;
+  align-items: baseline;
+  margin-left: 5px;
+}
+
 
 /*---------------------------------------------*/
 /*------- QUESTIONS AND ANSWERS SECTION -------*/

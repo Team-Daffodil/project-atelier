@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import Questions from './Questions.jsx'
+import RelatedProducts from './related/RelatedProducts.jsx'
 import axios from 'axios'
 import OverviewWidget from './overview/OverviewWidget'
 import Review from './review/Review'
@@ -30,6 +31,7 @@ const App = () => {
       <h1>Hello world React!</h1>
       {/* <p>AppState: {Object.keys(appState)}</p>
       <OverviewWidget /> */}
+      <RelatedProducts />
       <Questions />
       {/* <Review
         productId={appState.productId}
