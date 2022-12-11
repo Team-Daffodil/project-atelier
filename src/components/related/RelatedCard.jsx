@@ -7,6 +7,14 @@ const RelatedCard = ({ productId }) => {
   const [styles, setStyles] = useState({})
   const [product, setProduct] = useState({})
   console.log('anything', productId)
+  const salePrice = () => {
+    return (
+      <div>
+        Sale: {styles.sale}{' '}
+        <span style={{ textDecoration: 'line-through' }}>{styles.price}</span>
+      </div>
+    )
+  }
   const getProductInfo = (id) => {
     axios
       .get(process.env.REACT_APP_API_URL + `/products/${id}/styles`, {
@@ -46,7 +54,7 @@ const RelatedCard = ({ productId }) => {
       <div className="related-card-info">
         <div>{product.category}</div>
         <div>{product.name}</div>
-        <div>{styles.sale ? styles.sale : styles.price}</div>
+        <div>{styles.sale ? salePrice() : styles.price}</div>
       </div>
     </div>
   )
