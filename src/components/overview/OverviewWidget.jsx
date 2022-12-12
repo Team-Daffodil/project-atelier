@@ -5,7 +5,7 @@ import Description from './Description.jsx'
 import Gallery from './Gallery.jsx'
 import axios from 'axios'
 
-export default function OverviewWidget() {
+export default function OverviewWidget({ appState, setAppState }) {
   const api = process.env.API_URL
   const fetchheaders = {
     Authorization: process.env.API_TOKEN,
@@ -15,7 +15,7 @@ export default function OverviewWidget() {
   const [selectedStyle, setSelectedStyle] = useState([])
 
   const fetchItem = async () => {
-    const item = await axios.get(process.env.API_URL + 'products/37315', {
+    const item = await axios.get(process.env.API_URL + '/products/37315', {
       headers: fetchheaders,
     })
     setItem(item.data)
@@ -23,7 +23,7 @@ export default function OverviewWidget() {
   }
 
   const fetchStyles = async (id) => {
-    const styles = await axios.get(`${api}products/${id}/styles`, {
+    const styles = await axios.get(`${api}/products/${id}/styles`, {
       headers: fetchheaders,
     })
     setAllStyles(styles.data.results)
@@ -41,6 +41,8 @@ export default function OverviewWidget() {
       })
     })
   }, [])
+
+  console.log(appState)
   if (item.id && styles.length > 0 && selectedStyle.length > 0) {
     return (
       <>
@@ -49,6 +51,8 @@ export default function OverviewWidget() {
           <Gallery selectedStyle={selectedStyle} />
 
           <InfoPanel
+            setAppState={setAppState}
+            appState={appState}
             fetchStyles={fetchStyles}
             item={item}
             styles={styles}

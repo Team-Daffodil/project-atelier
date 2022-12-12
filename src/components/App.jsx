@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import Questions from './Questions.jsx'
 import RelatedProducts from './related/RelatedProducts.jsx'
 import axios from 'axios'
-import OverviewWidget from './overview/OverviewWidget'
+import OverviewWidget from './overview/OverviewWidget.jsx'
 import Review from './review/Review'
 
 const fetchheaders = {
