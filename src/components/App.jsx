@@ -33,10 +33,10 @@ const App = () => {
       <OverviewWidget /> */}
       <RelatedProducts />
       <Questions />
-      {/* <Review
+      <Review
         productId={appState.productId}
         handleSetReviewData={handleSetReviewData}
-      /> */}
+      />
     </section>
   )
 }
