@@ -12,10 +12,13 @@ export default function InfoPanel({
   setAllStyles,
   selectedStyle,
   setSelectedStyle,
+  appState,
+  setAppState,
 }) {
   const [value, setValue] = useState(2)
   const [sizeSelected, setSizeSelected] = useState('')
   const [qtyText, setqtyText] = useState('Select Qty')
+  const [panelIndex, setPanelIndex] = useState(0)
 
   const getDefaultStyle = () => {
     if (styles.length > 0) {
@@ -23,12 +26,13 @@ export default function InfoPanel({
       setSelectedStyle(defaultStyle)
     }
   }
-  const handlePicClick = (e) => {
+  const handlePicClick = (e, i) => {
     let id = e.target.id
     let newSelect = styles.filter((style) => {
       return Number(style.style_id) === Number(id)
     })
     setSelectedStyle(newSelect)
+    setPanelIndex(i)
   }
 
   const getSkuInfo = () => {
@@ -52,7 +56,7 @@ export default function InfoPanel({
           quantities[result[i].size] += result[i].quantity
         }
       }
-      return quantities
+      return { quantities: quantities, sku: result }
     }
   }
 
@@ -71,7 +75,10 @@ export default function InfoPanel({
               setValue(newValue)
             }}
           />
-          <div className="read">Read all reviews (25)</div>
+          <div>{appState.rating}</div>
+          <a href="#review-section" className="read">
+            Read all reviews ({appState.totalReviews})
+          </a>
         </div>
         <div className="itemInfo">
           <h4>{item.category}</h4>
@@ -93,10 +100,11 @@ export default function InfoPanel({
               return (
                 <div className="thumbnailborder" key={thumbnail}>
                   <img
+                    className={i === panelIndex ? ' selected' : null}
                     id={style.style_id}
                     src={thumbnail}
                     key={thumbnail}
-                    onClick={(e) => handlePicClick(e)}
+                    onClick={(e) => handlePicClick(e, i)}
                   />
                 </div>
               )
@@ -116,7 +124,15 @@ export default function InfoPanel({
           />
         </div>
         <div className="cart">
-          <Addtocart qtyText={qtyText} />
+          <Addtocart
+            qtyText={qtyText}
+            name={item.name}
+            style={selectedStyle[0]}
+            sizeSelected={sizeSelected}
+            getSkuInfo={getSkuInfo}
+            appState={appState}
+            setAppState={setAppState}
+          />
         </div>
       </div>
     )

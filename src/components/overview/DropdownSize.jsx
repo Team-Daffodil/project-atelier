@@ -20,7 +20,7 @@ export default function DropdownSize({
 
   let qty = getSkuInfo()
   let qtyArray = []
-  for (const s in qty) {
+  for (const s in qty.quantities) {
     qtyArray.push(s)
   }
 

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import Questions from './Questions.jsx'
 import RelatedProducts from './related/RelatedProducts.jsx'
 import axios from 'axios'
-import OverviewWidget from './overview/OverviewWidget'
+import OverviewWidget from './overview/OverviewWidget.jsx'
 import Review from './review/Review'
 
 const fetchheaders = {
@@ -29,14 +29,14 @@ const App = () => {
   return (
     <section id="app">
       <h1>Hello world React!</h1>
-      {/* <p>AppState: {Object.keys(appState)}</p>
-      <OverviewWidget /> */}
-      <RelatedProducts />
-      <Questions />
-      {/* <Review
+      {/* <p>AppState: {Object.keys(appState)}</p> */}
+      <OverviewWidget appState={appState} />
+      {/* <RelatedProducts />
+      <Questions /> */}
+      <Review
         productId={appState.productId}
         handleSetReviewData={handleSetReviewData}
-      /> */}
+      />
     </section>
   )
 }
