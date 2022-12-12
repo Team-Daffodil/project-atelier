@@ -5,12 +5,21 @@ import { totalPrice } from '../../lib/cart'
 const checkCouponCode = (code) => {
   return new Promise((resolve, reject) => {
     const codes = process.env.VALID_COUPONS.split(',')
-    if (codes.includes(code)) {
-      return resolve(code)
-    }
+    codes.forEach((line) => {
+      if (line.startsWith(code)) {
+        let [code, discount] = line.split(':')
+        discount = parseInt(discount) / 100
+        return resolve({ code, discount })
+      }
+    })
     return reject('unknown code')
   })
 }
+
+const totalDiscounts = (promoCodes) => {
+  return promoCodes.reduce((acc, promo) => (acc += promo.discount), 0)
+}
+
 const OrderSummary = ({ items }) => {
   const [promoCodes, setPromoCodes] = useState([])
   const [promoInput, setPromoInput] = useState('')
@@ -22,12 +31,22 @@ const OrderSummary = ({ items }) => {
 
   const handlePromoSubmit = (e) => {
     e.preventDefault()
-    checkCouponCode(promoInput)
+    const promo = promoInput.toLowerCase()
+    for (let i = 0; i < promoCodes.length; i++) {
+      if (promoCodes[i].code === promo) {
+        setBadPromoCode(
+          `Coupon code ${promo.toUpperCase()} has already been added`
+        )
+        return
+      }
+    }
+
+    checkCouponCode(promo)
       .then((code) => {
         setPromoCodes(promoCodes.concat(code))
       })
       .catch((err) => {
-        setBadPromoCode(promoInput)
+        setBadPromoCode(`Coupon coee ${promo.toUpperCase()} is unknown`)
       })
   }
 
@@ -42,7 +61,7 @@ const OrderSummary = ({ items }) => {
         <tbody>
           <tr>
             <td>{items.length} ITEMS</td>
-            <td>${totalPrice(items)}</td>
+            <td>${totalPrice(items).toFixed(2)}</td>
           </tr>
           <tr>
             <td>DELIVERY</td>
@@ -54,23 +73,30 @@ const OrderSummary = ({ items }) => {
           </tr>
           {promoCodes.map((promo) => {
             return (
-              <tr key={promo}>
-                <td>{promo.toUpperCase()}</td>
-                <td>-</td>
+              <tr key={promo.code}>
+                <td>{promo.code.toUpperCase()}</td>
+                <td>-{(promo.discount * totalPrice(items)).toFixed(2)}</td>
               </tr>
             )
           })}
           <tr>
             <td>Total</td>
-            <td>${totalPrice(items)}</td>
+            <td>
+              $
+              {Math.max(
+                totalPrice(items) -
+                  totalPrice(items) * totalDiscounts(promoCodes),
+                0
+              ).toFixed(2)}
+            </td>
           </tr>
         </tbody>
       </table>
       <div>
-        <form>
+        <form onSubmit={handlePromoSubmit}>
           {badPromoCode && (
             <div role="alert">
-              <span>Coupon code {badPromoCode} is unknown</span>
+              <span>{badPromoCode}</span>
             </div>
           )}
           <label htmlFor="promo-input">Promo code</label>
@@ -81,11 +107,7 @@ const OrderSummary = ({ items }) => {
             value={promoInput}
             onChange={handlePromoInput}
           />
-          {promoInput !== '' && (
-            <button onSubmit={handlePromoSubmit} type="submit">
-              Add Promo code
-            </button>
-          )}
+          {promoInput !== '' && <button type="submit">Add Promo code</button>}
         </form>
       </div>
     </div>
