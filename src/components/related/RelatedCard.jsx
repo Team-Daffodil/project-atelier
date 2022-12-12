@@ -6,7 +6,6 @@ let headers = { Authorization: process.env.API_TOKEN }
 const RelatedCard = ({ productId }) => {
   const [styles, setStyles] = useState({})
   const [product, setProduct] = useState({})
-  console.log('anything', productId)
   const salePrice = () => {
     return (
       <div>
@@ -22,7 +21,6 @@ const RelatedCard = ({ productId }) => {
       })
       .then((item) => {
         let curItem = item.data.results[0]
-        console.log('PRODUCT STYLES: ', curItem)
         setStyles({
           ...styles,
           sale: curItem.sale_price,
@@ -35,7 +33,6 @@ const RelatedCard = ({ productId }) => {
         headers,
       })
       .then((item) => {
-        console.log('PRODUCT MAIN: ', item.data)
         setProduct({
           ...product,
           category: item.data.category,

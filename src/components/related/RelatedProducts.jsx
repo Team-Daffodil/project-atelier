@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import RelatedCard from './RelatedCard.jsx'
-console.log('DOTENV URL', process.env.API_URL)
+console.log('DOTENV URL', process.env.API_URL, process.env.API_TOKEN)
 
 let headers = { Authorization: process.env.API_TOKEN }
 const RelatedProducts = () => {
@@ -36,7 +36,7 @@ const RelatedProducts = () => {
 
   useEffect(() => {
     axios
-      .get(process.env.API_URL + '/products/37325/related', {
+      .get(process.env.API_URL + '/products/37317/related', {
         headers,
       })
       .then((response) => {

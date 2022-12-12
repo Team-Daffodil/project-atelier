@@ -504,3 +504,13 @@ body {
 .active {
   border: 2px solid red;
 }
+
+
+
+
+
+
+.ratings-reviews-container {
+  display: flex;
+  align-items: center;
+}

@@ -30,13 +30,13 @@ const App = () => {
     <section id="app">
       <h1>Hello world React!</h1>
       {/* <p>AppState: {Object.keys(appState)}</p>
-      <OverviewWidget /> */}
+      <OverviewWidget />
       <RelatedProducts />
-      <Questions />
-      {/* <Review
+      <Questions /> */}
+      <Review
         productId={appState.productId}
         handleSetReviewData={handleSetReviewData}
-      /> */}
+      />
     </section>
   )
 }
