@@ -7,8 +7,7 @@ import Addtocart from './Addtocart.jsx'
 import axios from 'axios'
 
 export default function InfoPanel({
-  fetchStyles,
-  product,
+  item,
   styles,
   setAllStyles,
   selectedStyle,
@@ -61,7 +60,7 @@ export default function InfoPanel({
     getDefaultStyle()
   }, [styles])
 
-  if (product.id && styles.length > 0 && selectedStyle.length > 0) {
+  if (item.id && styles.length > 0 && selectedStyle.length > 0) {
     return (
       <div className="info-container">
         <div className="reviews">
@@ -74,9 +73,9 @@ export default function InfoPanel({
           />
           <div className="read">Read all reviews (25)</div>
         </div>
-        <div className="productInfo">
-          <h4>{product.category}</h4>
-          <h1>{product.name}</h1>
+        <div className="itemInfo">
+          <h4>{item.category}</h4>
+          <h1>{item.name}</h1>
           <div>
             {selectedStyle[0].sale_price
               ? '$' + selectedStyle[0].sale_price
