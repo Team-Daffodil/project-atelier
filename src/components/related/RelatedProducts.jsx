@@ -8,20 +8,35 @@ const RelatedProducts = () => {
   const [relatedID, setRelatedID] = useState([])
   const [related, setRelated] = useState([])
   const [curIndex, setCurIndex] = useState(2)
-
+  const carouselButtons = () => (
+    <div>
+      <button className="button-related-left" onClick={carouselChangeHandler}>
+        LEFT
+      </button>
+      <button className="button-related-right" onClick={carouselChangeHandler}>
+        RIGHT
+      </button>
+    </div>
+  )
   const carouselChangeHandler = (e) => {
     console.log('CAROUSEL direction: ', e.nativeEvent.target.className)
-    if (e.nativeEvent.target.className === 'button-related-left') {
+    if (
+      (e.nativeEvent.target.className === 'button-related-left') &
+      (curIndex > 2)
+    ) {
       setCurIndex(curIndex - 1)
     }
-    if (e.nativeEvent.target.className === 'button-related-right') {
+    if (
+      (e.nativeEvent.target.className === 'button-related-right') &
+      (curIndex <= relatedID.length - 4)
+    ) {
       setCurIndex(curIndex + 1)
     }
   }
 
   useEffect(() => {
     axios
-      .get(process.env.API_URL + '/products/37317/related', {
+      .get(process.env.API_URL + '/products/37325/related', {
         headers,
       })
       .then((response) => {
@@ -33,15 +48,7 @@ const RelatedProducts = () => {
     console.log(relatedID)
     return (
       <section className="related-container">
-        <button className="button-related-left" onClick={carouselChangeHandler}>
-          LEFT
-        </button>
-        <button
-          className="button-related-right"
-          onClick={carouselChangeHandler}
-        >
-          RIGHT
-        </button>
+        {relatedID.length > 5 ? carouselButtons() : null}
         <div className="related-header">Related Products</div>
         <div className="related-carousel">
           {relatedID &&
