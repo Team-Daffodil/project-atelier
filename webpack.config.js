@@ -17,7 +17,9 @@ module.exports = {
     filename: 'bundle.js',
   },
   plugins: [new Dotenv()],
-
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   performance: {
     hints: false,
     maxEntrypointSize: 512000,

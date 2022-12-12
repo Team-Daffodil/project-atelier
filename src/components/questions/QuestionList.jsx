@@ -2,22 +2,40 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import QuestionListEntry from './QuestionListEntry.jsx'
 
-// import * as dotenv from 'dotenv'
-// dotenv.config()
+const QuestionList = ({ filter, answerModalHandler }) => {
+  const [data, setData] = useState([]) // product data array
+  const [moreQs, setMoreQs] = useState(false) // bool toggle to show more than 4 questions
+  const [questionCount, setQuestionCount] = useState(4)
+  const [showQuestionForm, setShowQuestionForm] = useState(false) // toggle ? modal
+  const [showAnswerForm, setShowAnswerForm] = useState(false) // toggle Ans modal
+  const [showModal, setShowModal] = useState(false)
 
-const QuestionList = () => {
-  const [data, setData] = useState([])
+  const questionWrapperStyle = { overflowY: 'scroll', height: '666px' }
+  const showMoreQuestionsHandler = (event) => {
+    setMoreQs(!moreQs)
+  }
+  const onScrollHandler = (event) => {
+    let e = event.nativeEvent.target
+    let scrollSum = Math.floor(e.scrollTop + e.offsetHeight)
+    if (scrollSum >= e.scrollHeight - 10) {
+      setQuestionCount(questionCount + 2)
+    }
+  }
   useEffect(() => {
-    fetch(
-      'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe' +
-        '/qa/questions' +
-        '?product_id=37314',
-      { headers: { Authorization: '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' } }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setData(data.results)
-        console.log('INITIAL QUESTIONS DATA: ', data.results)
+    axios
+      .get(
+        process.env.REACT_APP_API_URL +
+          '/qa/questions' +
+          '?product_id=37325&count=40',
+        {
+          headers: {
+            Authorization: process.env.REACT_APP_API_TOKEN,
+          },
+        }
+      )
+      .then((response) => {
+        setData(response.data.results)
+        // console.log('INITIAL QUESTIONS DATA: ', response.data.results)
       })
   }, [])
 
@@ -27,29 +45,117 @@ const QuestionList = () => {
       let tempArray = []
       for (var key in data[i].answers) {
         tempArray.push(data[i].answers[key])
+        tempArray.sort((a, b) => {
+          return b.helpfulness - a.helpfulness
+        })
       }
       ansQ.push(tempArray)
     }
-    console.log(
-      'ARRAY OF ARRAYS OF ANSWERS EACH SUBARRAY CONTAINS ANSWER FOR QUESTION: ',
-      ansQ
-    )
 
+    if ((filter.length >= 3) & (data.length > 4)) {
+      return (
+        <div className="questions-wrapper">
+          {data &&
+            data
+              .filter((filtered) => {
+                console.log('SEARCH FILTER: ', filtered.question_body)
+                return filtered.question_body.toLowerCase().includes(filter)
+              })
+              .map((ele, i) => {
+                if (i < 4) {
+                  return (
+                    <QuestionListEntry
+                      question={ele}
+                      key={i}
+                      answers={ansQ[i]}
+                      answerModalHandler={answerModalHandler}
+                    />
+                  )
+                }
+              })}
+          <button
+            className="button-more-questions"
+            onClick={showMoreQuestionsHandler}
+          >
+            MORE QUESTIONS
+          </button>
+        </div>
+      )
+    }
+    if ((data.length < 4) & (data.length > 0)) {
+      // if there are less than 4 questions
+      return (
+        <div className="questions-wrapper">
+          {data &&
+            data.map((ele, i) => {
+              return (
+                <QuestionListEntry
+                  question={ele}
+                  key={i}
+                  answers={ansQ[i]}
+                  answerModalHandler={answerModalHandler}
+                />
+              )
+            })}
+        </div>
+      )
+    } else if ((data.length > 4) & !moreQs) {
+      // if there are more than 4 questions
+      return (
+        <div className="questions-wrapper">
+          {data &&
+            data.map((ele, i) => {
+              if (i < 4) {
+                return (
+                  <QuestionListEntry
+                    question={ele}
+                    key={i}
+                    answers={ansQ[i]}
+                    answerModalHandler={answerModalHandler}
+                  />
+                )
+              }
+            })}
+          <button
+            className="button-more-questions"
+            onClick={showMoreQuestionsHandler}
+          >
+            MORE QUESTIONS
+          </button>
+        </div>
+      )
+    } else if ((data.length > 4) & moreQs) {
+      // render more than 4 questions after button click
+      return (
+        <div
+          className="questions-wrapper"
+          style={questionWrapperStyle}
+          onScroll={onScrollHandler}
+        >
+          {data &&
+            data.map((ele, i) => {
+              if (i < questionCount + 2) {
+                return (
+                  <QuestionListEntry
+                    question={ele}
+                    key={i}
+                    answers={ansQ[i]}
+                    answerModalHandler={answerModalHandler}
+                  />
+                )
+              }
+            })}
+        </div>
+      )
+    }
+  } else if (data.length === 0) {
     return (
       <div className="questions-wrapper">
-        {data &&
-          data.map((ele, i) => {
-            console.log('QUESTION: ', ele)
-            return <QuestionListEntry question={ele} key={i} answer={ansQ[i]} />
-          })}
+        <div>
+          NO QUESTIONS ABOUT THIS PRODUCT YET. ASK A QUESTION IF YOU HAVE ONE!
+        </div>
       </div>
     )
-  } else {
-    <div className="questions-wrapper">
-      <div>
-        NO QUESTIONS ABOUT THIS PRODUCT YET. ASK A QUESTION IF YOU HAVE ONE!
-      </div>
-    </div>
   }
 }
 

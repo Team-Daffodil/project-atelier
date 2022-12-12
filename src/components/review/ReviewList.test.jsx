@@ -12,8 +12,13 @@ beforeAll(() => server.listen())
 beforeAll(() => server.resetHandlers())
 afterAll(() => server.close())
 
+const args = {
+  productId: 1,
+  handleSetReviewsTotal: jest.fn(),
+}
+
 test('loads and renders ReviewList with a max of 2 reviews showing', async () => {
-  const { getAllByTestId } = render(<ReviewList productId={1} />)
+  const { getAllByTestId } = render(<ReviewList {...args} />)
 
   await waitFor(() => {
     expect(getAllByTestId('review-tile'))
@@ -22,7 +27,7 @@ test('loads and renders ReviewList with a max of 2 reviews showing', async () =>
 })
 
 test('loads more 2 more reviews when "More Reviews" button clicked', async () => {
-  const { getByTitle, getByRole } = render(<ReviewList productId={1} />)
+  const { getByTitle, getByRole } = render(<ReviewList {...args} />)
 
   await waitFor(() => {
     expect(getByTitle('review-list')).toBeVisible()
@@ -33,7 +38,7 @@ test('loads more 2 more reviews when "More Reviews" button clicked', async () =>
 })
 
 test('"More Reviews" button disappears when all reviews have been loaded', async () => {
-  const { getByTitle, getByRole } = render(<ReviewList productId={1} />)
+  const { getByTitle, getByRole } = render(<ReviewList {...args} />)
 
   await waitFor(() => {
     expect(getByTitle('review-list')).toBeVisible()
@@ -50,7 +55,7 @@ test('"More Reviews" button disappears when all reviews have been loaded', async
 // test when newest is clicked
 test('Reviews display by newest order when "newest" is selected', async () => {
   const { getByLabelText, getByTitle, getByText } = render(
-    <ReviewList productId={1} />
+    <ReviewList {...args} />
   )
 
   const newestOption = getByLabelText('newest')
@@ -63,7 +68,7 @@ test('Reviews display by newest order when "newest" is selected', async () => {
 
 test('Reviews display by most helpful order when "helpful" is selected', async () => {
   const { getByLabelText, getByTitle, getByText } = render(
-    <ReviewList productId={1} />
+    <ReviewList {...args} />
   )
 
   const helpfulOption = getByLabelText('helpful')
@@ -76,9 +81,8 @@ test('Reviews display by most helpful order when "helpful" is selected', async (
 
 test('Reviews filters by rating', async () => {
   // Only 1 '2 Star' rating
-  let { getAllByTestId, getByText } = render(
-    <ReviewList productId={1} rating={2} />
-  )
+  args.rating = 2
+  let { getAllByTestId, getByText } = render(<ReviewList {...args} />)
   await waitFor(() => {
     expect(getAllByTestId('review-tile').length).toEqual(1)
   })

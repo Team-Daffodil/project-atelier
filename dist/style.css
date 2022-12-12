@@ -6,12 +6,24 @@ body {
   font-family: 'Poppins', sans-serif;
   font-size: 22px;
 }
+*::-webkit-scrollbar {
+  width: 12px;
+}
 
+*::-webkit-scrollbar-track {
+  background: orange;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(0, 0, 0);
+  border-radius: 20px;
+  border: 3px solid rgb(255, 211, 130);
+}
 /* SHARED BUTTONS GROUP */
 
 .button-helpful {
   border: none;
-  background-color: #fff0a3;
+  background-color: #ffeea3;
   transition: 0.4s;
 }
 
@@ -20,12 +32,100 @@ body {
 }
 
 .button-load-answers {
+  border: none;
+  background-color: #7b7b7b;
   width: 175px;
+  height: 30px;
 }
+
+.button-related-left {
+  position: absolute;
+  height: 20px;
+  top: 50%;
+  left: 5%
+}
+.button-related-right {
+  position: absolute;
+  height: 20px;
+  top: 50%;
+  right: 5%
+}
+
+.related-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+}
+.related-header {
+  margin-left: 50px;
+  font-size: 36px;
+  font-family: 600;
+}
+.related-carousel {
+  display: flex;
+  justify-content: space-around;
+}
+.related-card {
+  width: 225px;
+  height: 375px;
+  background-color: #d3c6bb;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+.related-card-image {
+  width: 225px;
+  height: 250px;
+  object-fit: cover
+}
+.related-card-info {
+  display: flex;
+  flex-direction: column;
+  width: 225px;
+  height: 125px;
+  align-items: baseline;
+  margin-left: 5px;
+}
+
 
 /*---------------------------------------------*/
 /*------- QUESTIONS AND ANSWERS SECTION -------*/
 /*---------------------------------------------*/
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width:100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+.modal-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  position:fixed;
+  background: white;
+  width: 50%;
+  height: 200px;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+}
+
+.button-close-question-modal {
+  position: absolute;
+  top: 40%;
+  right: 25%;
+}
+
+
+.display-block {
+  display: block;
+}
+
+.display-none {
+  display: none;
+}
 
 .questions-container {
   display: flex;
@@ -68,13 +168,25 @@ body {
 
 .question-individual-question {
   display: flex;
+  flex-direction: column;
   font-weight: bolder;
   font-size: 14px;
+}
+
+.question-user {
+  display: flex;
+  font-weight: 300;
+  margin-left: 25px;
+}
+
+.question-body {
+  display: flex;
 }
 
 .question-individual-answer {
   display: flex;
   font-size: 12px;
+
 }
 
 /*------- QUESTION BUTTONS CONTAINER -------*/
@@ -113,8 +225,11 @@ body {
 }
 
 .img {
-  border: 5px solid black;
+  border: 1px solid black;
   margin-right: 10px;
+  width: 60px;
+  height: 60px;
+  object-fit: fill;
 }
 
 .img-answers {
@@ -388,57 +503,4 @@ body {
 
 .active {
   border: 2px solid red;
-}
-/*------- Dropdown styling -------*/
-.dropdown {
-  position: relative;
-  border: grey solid 1px;
-  border-radius: 0.3em;
-}
-.displayQty {
-  height: 100%;
-  width: 50px;
-  font-size: large;
-  background: transparent;
-  border: none;
-}
-.displayQty1 {
-  height: 100%;
-  width: 75px;
-  background: transparent;
-  border: none;
-}
-
-.menu {
-  position: absolute;
-
-  list-style-type: none;
-  margin: 5px 0;
-  padding: 0;
-
-  border: 1px solid grey;
-  width: 150px;
-}
-
-.menu > li {
-  margin: 0;
-  background-color: white;
-}
-
-.menu > li:hover {
-  background-color: lightgray;
-}
-
-.menu > li > button {
-  width: 100%;
-  height: 100%;
-  text-align: left;
-
-  background: none;
-  color: inherit;
-  border: none;
-  padding: 5px;
-  margin: 0;
-  font: inherit;
-  cursor: pointer;
 }

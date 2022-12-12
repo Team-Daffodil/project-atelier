@@ -30,7 +30,11 @@ const fetchProductData = async (id) => {
   // https://rapidapi.com/guides/fetch-api-async-await
 }
 
-const ReviewSidePanel = ({ productId, handleRatingChange }) => {
+const ReviewSidePanel = ({
+  productId,
+  handleRatingChange,
+  handleSetRating,
+}) => {
   const [data, setData] = useState({})
   const [totalRatings, setTotalRatings] = useState(0)
 
@@ -56,6 +60,13 @@ const ReviewSidePanel = ({ productId, handleRatingChange }) => {
       handleRatingChange(val)
     }
   }
+
+  useEffect(() => {
+    if (totalRatings === 0 || data === undefined) {
+      return
+    }
+    handleSetRating(ratingAvg(data.ratings, totalRatings))
+  }, [totalRatings, data])
 
   return (
     <section>
