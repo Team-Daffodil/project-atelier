@@ -58,30 +58,17 @@ export default function Gallery({ selectedStyle }) {
 
   const prevImg = () => {
     slideNumber === 0 ? setSlideNumber(0) : setSlideNumber(slideNumber - 1)
-    setImg(images[slideNumber - 1].url)
-    if (slidePos[slideNumber - 1]) {
-      slidePos[slideNumber - 1].classList.add('active')
-      for (var j = 0; j < images.length; j++) {
-        if (slideNumber - 1 !== j) {
-          slidePos[j].classList.remove('active')
-        }
-      }
+    if (images[slideNumber - 1]) {
+      setImg(images[slideNumber - 1].url)
     }
   }
 
   const nextImg = () => {
-    slideNumber === images.length
+    slideNumber === images.length - 1
       ? setSlideNumber(images.length - 1)
       : setSlideNumber(slideNumber + 1)
-    setImg(images[slideNumber + 1].url)
-
-    if (slidePos[slideNumber + 1]) {
-      slidePos[slideNumber + 1].classList.add('active')
-      for (var j = 0; j < slidePos.length; j++) {
-        if (slideNumber + 1 !== j) {
-          slidePos[j].classList.remove('active')
-        }
-      }
+    if (images[slideNumber + 1]) {
+      setImg(images[slideNumber + 1].url)
     }
   }
 

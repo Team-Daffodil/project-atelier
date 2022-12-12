@@ -45,34 +45,7 @@ export default function DropdownSize({
     return a
   }
   let qty = getSkuInfo()
-  let qtyToDisplay = qty[sizeSelected]
-
-  // return (
-  //   <Box sx={{ width: 100 }}>
-  //     <FormControl fullWidth>
-  //       <InputLabel id="demo-simple-select-label">
-  //         {!qtyToDisplay ? '-' : null}
-  //       </InputLabel>
-  //       <Select
-  //         labelId="demo-simple-select-label"
-  //         id="demo-simple-select"
-  //         value={value}
-  //         label="Select a qty"
-  //         onChange={handleChange}
-  //       >
-  //         {qtyToDisplay
-  //           ? qtyCreator(qtyToDisplay).map((num) => {
-  //               return (
-  //                 <MenuItem key={num * Math.random()} value={num}>
-  //                   {num}
-  //                 </MenuItem>
-  //               )
-  //             })
-  //           : null}
-  //       </Select>
-  //     </FormControl>
-  //   </Box>
-  // )
+  let qtyToDisplay = qty.quantities[sizeSelected]
   return (
     <div className="dropdown">
       {!qtyToDisplay ? (
