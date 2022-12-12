@@ -13,7 +13,7 @@ const fetchheaders = {
 const PRODUCT_ID = 37311
 
 const App = () => {
-  const [appState, setAppState] = useState({ productId: PRODUCT_ID })
+  const [appState, setAppState] = useState({ productId: PRODUCT_ID, cart: [] })
 
   const handleSetReviewData = (reviewData) => {
     setAppState({
