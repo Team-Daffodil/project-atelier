@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 module.exports = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
@@ -10,6 +12,10 @@ module.exports = {
     builder: 'webpack5',
   },
   staticDirs: ['../public'],
+  env: (config) => ({
+    ...config,
+    VALID_COUPONS: process.env.VALID_COUPONS,
+  }),
   webpackFinal: async (config, { configType }) => {
     config.resolve = {
       ...config.resolve,
