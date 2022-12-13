@@ -47,7 +47,7 @@ export default function OverviewWidget({ appState, setAppState }) {
     return (
       <>
         <div className="overview">
-          <div className="gallerycart">
+          {/* <div className="gallerycart">
             <Gallery selectedStyle={selectedStyle} />
 
             <InfoPanel
@@ -60,8 +60,8 @@ export default function OverviewWidget({ appState, setAppState }) {
               selectedStyle={selectedStyle}
               setSelectedStyle={setSelectedStyle}
             />
-          </div>
-          {/* <Description product={product} /> */}
+          </div> */}
+          <Description item={item} />
         </div>
       </>
     )

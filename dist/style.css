@@ -339,6 +339,33 @@ body {
 .fact {
   display: flex;
 }
+.buttonwrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.sharebtns {
+  display: flex;
+  width: 12%;
+  justify-content: space-evenly;
+}
+.sharebtns i {
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: inline-block;
+  vertical-align: middle;
+  width: 24px;
+  height: 24px;
+}
+.twitback {
+  background-image: url(https://m.media-amazon.com/images/G/01/share-icons/twitter-circular.svg);
+}
+.fbback {
+  background-image: url(https://m.media-amazon.com/images/G/01/share-icons/facebook-circular.svg);
+}
+.pinback {
+  background-image: url(https://m.media-amazon.com/images/G/01/share-icons/pinterest-circular.svg);
+}
 
 /*------- Gallery CONTAINER -------*/
 .gallery-container {
