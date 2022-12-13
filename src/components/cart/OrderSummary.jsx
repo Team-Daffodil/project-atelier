@@ -20,7 +20,7 @@ const totalDiscounts = (promoCodes) => {
   return promoCodes.reduce((acc, promo) => (acc += promo.discount), 0)
 }
 
-const OrderSummary = ({ items }) => {
+const OrderSummary = ({ items, setCartValueHandler }) => {
   const [promoCodes, setPromoCodes] = useState([])
   const [promoInput, setPromoInput] = useState('')
   const [badPromoCode, setBadPromoCode] = useState(null)
@@ -50,8 +50,19 @@ const OrderSummary = ({ items }) => {
       })
   }
 
+  const totalCartValue = () => {
+    return Math.max(
+      Math.round(
+        (totalPrice(items) - totalPrice(items) * totalDiscounts(promoCodes)) *
+          100
+      ) / 100,
+      0
+    )
+  }
+
   useEffect(() => {
     setBadPromoCode(null)
+    setCartValueHandler(totalCartValue())
   }, [promoCodes])
 
   return (
@@ -81,14 +92,7 @@ const OrderSummary = ({ items }) => {
           })}
           <tr>
             <td>Total</td>
-            <td>
-              $
-              {Math.max(
-                totalPrice(items) -
-                  totalPrice(items) * totalDiscounts(promoCodes),
-                0
-              ).toFixed(2)}
-            </td>
+            <td>${totalCartValue().toFixed(2)}</td>
           </tr>
         </tbody>
       </table>

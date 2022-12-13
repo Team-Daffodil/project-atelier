@@ -7,7 +7,7 @@
     "react-dev": "webpack --mode development --watch",
     "react-dev:hot": "npx webpack serve --hot -open",
     "test": "npx jest --setupFiles dotenv/config",
-    "test:coverage": "npx jest --coverage",
+    "test:coverage": "npx jest --coverage --setupFiles dotenv/config",
     "create-badges": "npm run test:coverage && npx istanbul-badges-readme",
     "prepare": "husky install",
     "storybook": "start-storybook -p 6006",
