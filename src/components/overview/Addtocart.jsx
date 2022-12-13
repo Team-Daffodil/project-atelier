@@ -37,16 +37,8 @@ export default function Addtocart({
     quantity: Number(qtyText),
   }
 
-  // console.log(qtyText)
-  // console.log(name)
-  // console.log(sizeSelected)
-  // console.log(style.photos[0].url)
-  // console.log(info)
-  // console.log(sku)
-  console.log(product)
-
   const addCart = () => {
-    // appState.cart.push(product)
+    appState.cart.push(product)
     // setAppState(...appState, appState.cart.push(product))
   }
 
