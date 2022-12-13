@@ -259,6 +259,7 @@ body {
   border-style: solid;
   height: 50vh;
   padding: 10px;
+  margin-left: auto;
 }
 
 .reviews {
@@ -342,19 +343,27 @@ body {
 /*------- Gallery CONTAINER -------*/
 .gallery-container {
   max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  margin: 0;
+  display: flex;
   box-sizing: border-box;
 }
-.left {
+.imageview {
   display: flex;
-  height: 50vh;
+  flex-wrap: wrap;
+  margin: 20px;
+  width: 100%;
+  justify-content: center;
 }
+
 .left_1 {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 100px;
+  margin-right: auto;
+}
+.left_2 {
+  width: 100%;
 }
 .img_wrap {
   display: flex;
@@ -375,20 +384,14 @@ body {
   -webkit-user-select: none;
   -ms-user-select: none;
 }
-.imageview {
-  display: flex;
-  margin: 20px;
-  align-items: center;
-  justify-content: center;
-}
-.imageview .btnClose,
-.imageview .btnPrev,
-.imageview .btnNext {
-  position: absolute;
+
+.imageview > .btnPrev,
+.imageview > .btnNext {
+  /* position: absolute; */
   cursor: pointer;
   opacity: 0.6;
   color: white;
-  z-index: 9999;
+  /* z-index: 9999; */
 }
 
 .btnNext:hover,
@@ -398,14 +401,14 @@ body {
 }
 
 .imageview .btnPrev {
-  top: 50%;
+  /* top: 50%;
   transform: translateY(-50%);
-  left: 40px;
+  left: 40px; */
 }
 .imageview .btnNext {
-  top: 50%;
+  /* top: 50%;
   transform: translateY(-50%);
-  right: 40px;
+  right: 40px; */
 }
 .imageview img {
   width: 500px;

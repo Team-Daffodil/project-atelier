@@ -46,23 +46,23 @@ export default function OverviewWidget({ appState, setAppState }) {
   if (item.id && styles.length > 0 && selectedStyle.length > 0) {
     return (
       <>
-        {/* <div className="overview"> */}
-        <div className="gallerycart">
-          <Gallery selectedStyle={selectedStyle} />
+        <div className="overview">
+          <div className="gallerycart">
+            <Gallery selectedStyle={selectedStyle} />
 
-          <InfoPanel
-            setAppState={setAppState}
-            appState={appState}
-            fetchStyles={fetchStyles}
-            item={item}
-            styles={styles}
-            setAllStyles={setAllStyles}
-            selectedStyle={selectedStyle}
-            setSelectedStyle={setSelectedStyle}
-          />
+            <InfoPanel
+              setAppState={setAppState}
+              appState={appState}
+              fetchStyles={fetchStyles}
+              item={item}
+              styles={styles}
+              setAllStyles={setAllStyles}
+              selectedStyle={selectedStyle}
+              setSelectedStyle={setSelectedStyle}
+            />
+          </div>
+          {/* <Description product={product} /> */}
         </div>
-        {/* <Description product={product} /> */}
-        {/* </div> */}
       </>
     )
   } else {
