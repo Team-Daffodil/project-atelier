@@ -15,10 +15,9 @@ export default function Gallery({ selectedStyle }) {
   const [mslideNumber, setmSlideNumber] = useState(0)
   const [img, setImg] = useState(images[0].url)
   const [modalImg, setModalImg] = useState(images[0])
-  const [slidePos, setSlidePos] = useState([])
-  const [mslidePos, setmSlidePos] = useState([])
   const [start, setStart] = useState(0)
   const [end, setEnd] = useState(7)
+  const [subIndx, setSubIndx] = useState(0)
 
   const modalHoverHandler = (imageUrl, i) => {
     setModalImg(imageUrl)
@@ -27,7 +26,12 @@ export default function Gallery({ selectedStyle }) {
 
   const hoverHandler = (imageUrl, i) => {
     setImg(imageUrl)
-    setSlideNumber(i)
+    setSubIndx(i)
+    if (start >= 7) {
+      setSlideNumber(i + 7)
+    } else {
+      setSlideNumber(i)
+    }
   }
 
   const onClickModal = (event) => {
@@ -58,8 +62,20 @@ export default function Gallery({ selectedStyle }) {
 
   const prevImg = () => {
     slideNumber === 0 ? setSlideNumber(0) : setSlideNumber(slideNumber - 1)
+    if (start >= 7) {
+      setSubIndx(slideNumber - 7 - 1)
+    } else {
+      setSubIndx(subIndx - 1)
+    }
     if (images[slideNumber - 1]) {
-      setImg(images[slideNumber - 1].url)
+      if (subIndx - 1 < 0) {
+        setStart(start - 7)
+        setEnd(end - 7)
+        setImg(images[slideNumber - 1].url)
+        setSubIndx(slideNumber - 1)
+      } else {
+        setImg(images[slideNumber - 1].url)
+      }
     }
   }
 
@@ -67,14 +83,26 @@ export default function Gallery({ selectedStyle }) {
     slideNumber === images.length - 1
       ? setSlideNumber(images.length - 1)
       : setSlideNumber(slideNumber + 1)
+    if (start >= 7) {
+      setSubIndx(slideNumber - 7 + 1)
+    } else {
+      setSubIndx(subIndx + 1)
+    }
     if (images[slideNumber + 1]) {
-      setImg(images[slideNumber + 1].url)
+      if (slideNumber + 1 >= end) {
+        setStart(start + 7)
+        setEnd(end + 7)
+        setImg(images[slideNumber + 1].url)
+      } else {
+        setImg(images[slideNumber + 1].url)
+      }
     }
   }
 
   const moreHandler = () => {
     setStart(start + 7)
     setEnd(end + 7)
+    setSubIndx(0)
   }
   const backHandler = () => {
     setStart(start - 7)
@@ -86,6 +114,10 @@ export default function Gallery({ selectedStyle }) {
     setImg(selectedStyle[0].photos[0].url)
   }, [selectedStyle])
 
+  console.log('subIndex', subIndx)
+  console.log('slidenumber', slideNumber)
+  console.log('start', start)
+  console.log('end', end)
   if (images.length > 0) {
     return (
       <>
@@ -134,65 +166,60 @@ export default function Gallery({ selectedStyle }) {
             </div>
           </div>
         )}
-        <div className="gallery-container">
-          <div className="left">
-            <div className="left_1">
-              {start >= 7 ? (
-                <button onClick={() => backHandler()}>Back</button>
-              ) : null}
-              {images.slice(start, end).map((image, i) => {
-                return (
-                  <div
-                    className={
-                      i === slideNumber ? 'img_wrap active' : 'img_wrap'
-                    }
-                    key={images[i].url}
-                    onMouseOver={() => {
-                      hoverHandler(image.thumbnail_url, i)
-                    }}
-                  >
-                    <img src={image.thumbnail_url} alt="" />
-                  </div>
-                )
-              })}
-              {images.slice(start, end).length >= 7 ? (
-                <button onClick={() => moreHandler()}>More</button>
-              ) : null}
-            </div>
-            <div className="imageview">
-              {/* {slideNumber !== 0 ? (
-                <FontAwesomeIcon
-                  icon={faCircleChevronLeft}
-                  className="btnPrev"
-                  onClick={prevImg}
-                />
-              ) : null}
-              {slideNumber !== images.length - 1 ? (
-                <FontAwesomeIcon
-                  icon={faCircleChevronRight}
-                  className="btnNext"
-                  onClick={nextImg}
-                />
-              ) : null} */}
-              <div className="left_2" onClick={() => onClickModal()}>
-                <ReactImageMagnify
-                  {...{
-                    smallImage: {
-                      alt: 'Products',
-                      isFluidWidth: true,
-                      src: img,
-                    },
-                    largeImage: {
-                      src: img,
-                      width: 1200,
-                      height: 1800,
-                    },
-                  }}
-                />
+        <div className="left_1">
+          {start >= 7 ? (
+            <button onClick={() => backHandler()}>Back</button>
+          ) : null}
+          {images.slice(start, end).map((image, i) => {
+            return (
+              <div
+                className={i === subIndx ? 'img_wrap active' : 'img_wrap'}
+                key={images[i].url}
+                onMouseOver={() => {
+                  hoverHandler(image.url, i)
+                }}
+              >
+                <img src={image.thumbnail_url} alt="" />
               </div>
+            )
+          })}
+          {images.slice(start, end).length >= 7 ? (
+            <button onClick={() => moreHandler()}>More</button>
+          ) : null}
+        </div>
+        <div className="gallery-container">
+          <div className="imageview">
+            <div className="left_2" onClick={() => onClickModal()}>
+              <ReactImageMagnify
+                {...{
+                  smallImage: {
+                    alt: 'Products',
+                    isFluidWidth: true,
+                    src: img,
+                  },
+                  largeImage: {
+                    src: img,
+                    width: 1200,
+                    height: 1800,
+                  },
+                }}
+              />
             </div>
+            {slideNumber !== 0 ? (
+              <FontAwesomeIcon
+                icon={faCircleChevronLeft}
+                className="btnPrev"
+                onClick={prevImg}
+              />
+            ) : null}
+            {slideNumber !== images.length - 1 ? (
+              <FontAwesomeIcon
+                icon={faCircleChevronRight}
+                className="btnNext"
+                onClick={nextImg}
+              />
+            ) : null}
           </div>
-          <div className="right"></div>
         </div>
       </>
     )
