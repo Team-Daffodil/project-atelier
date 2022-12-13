@@ -1,16 +1,15 @@
 import React from 'react'
 import { mockData } from '../../../sampleData/cartItems'
-import OrderSummary from './OrderSummary'
+import CartDetails from './CartDetails'
 
 export default {
-  component: OrderSummary,
-  title: 'OrderSummary',
+  component: CartDetails,
+  title: 'CartDetails',
 }
 
-const Template = (args) => <OrderSummary {...args} />
+const Template = (args) => <CartDetails {...args} />
 
 export const Default = Template.bind({})
 Default.args = {
   items: mockData,
-  setCartValueHandler: () => {},
 }
