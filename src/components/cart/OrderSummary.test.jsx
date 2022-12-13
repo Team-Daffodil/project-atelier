@@ -5,15 +5,18 @@ import { mockData } from '../../../sampleData/cartItems'
 
 import OrderSummary from './OrderSummary'
 
+const args = {
+  items: mockData,
+  setCartValueHandler: jest.fn(),
+}
+
 test('renders Order summary and prints out proper total', () => {
-  const { queryAllByText } = render(<OrderSummary items={mockData} />)
+  const { queryAllByText } = render(<OrderSummary {...args} />)
   expect(queryAllByText('$130.00')).toHaveLength(2)
 })
 
 test('when valid coupon code is applied, total gets readjusted accordingly', async () => {
-  const { getByLabelText, getByText } = render(
-    <OrderSummary items={mockData} />
-  )
+  const { getByLabelText, getByText } = render(<OrderSummary {...args} />)
   const promoInput = getByLabelText('Promo code')
   await fireEvent.change(promoInput, { target: { value: 'take5' } })
   await expect(getByText('Add Promo code')).toBeVisible()
@@ -26,7 +29,7 @@ test('when valid coupon code is applied, total gets readjusted accordingly', asy
 
 test('when invalid coupon code is applied, error message is displayed', async () => {
   const { getByLabelText, getByText, getByRole } = render(
-    <OrderSummary items={mockData} />
+    <OrderSummary {...args} />
   )
   const promoInput = getByLabelText('Promo code')
   await fireEvent.change(promoInput, { target: { value: 'badpromocode' } })
@@ -41,7 +44,7 @@ test('when invalid coupon code is applied, error message is displayed', async ()
 test('can not add same coupon code more than once', async () => {
   //
   const { getByLabelText, getByText, getByRole } = render(
-    <OrderSummary items={mockData} />
+    <OrderSummary {...args} />
   )
   const promoInput = getByLabelText('Promo code')
   await fireEvent.change(promoInput, { target: { value: 'take5' } })

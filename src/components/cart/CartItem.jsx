@@ -1,12 +1,23 @@
 import React, { useState } from 'react'
 
-const CartItem = ({ item }) => {
+const CartItem = ({ item, updateCartItemsHandler }) => {
   const [quantity, setQuantity] = useState(parseInt(item.quantity))
   const { product } = item
 
   const handleSelectChange = (e) => {
     e.preventDefault()
-    setQuantity(parseInt(e.target.value))
+    const newQty = parseInt(e.target.value)
+    setQuantity(newQty)
+    let updatedItem = {
+      product: product,
+      quantity: newQty,
+    }
+    updateCartItemsHandler('CHANGE_QUANTITY', updatedItem)
+  }
+
+  const handleDeleteItem = (e) => {
+    e.preventDefault()
+    updateCartItemsHandler('DELETE', { product: product })
   }
 
   const renderOptions = (qty) => {
@@ -41,7 +52,12 @@ const CartItem = ({ item }) => {
         </div>
       </div>
       <div>
-        <span>x and heart button</span>
+        <span>
+          <a href="#" onClick={handleDeleteItem}>
+            x
+          </a>{' '}
+          and heart button
+        </span>
       </div>
     </div>
   )
