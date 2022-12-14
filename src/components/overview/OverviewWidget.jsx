@@ -41,7 +41,6 @@ export default function OverviewWidget({ appState, setAppState }) {
       })
     })
   }, [])
-  console.log(open)
 
   if (item.id && styles.length > 0 && selectedStyle.length > 0) {
     return (
