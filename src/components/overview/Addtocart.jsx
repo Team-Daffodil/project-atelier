@@ -42,7 +42,6 @@ export default function Addtocart({
   const addCart = () => {
     appState.cart.push(product)
   }
-  console.log(sizeSelected)
   return (
     <>
       {sizeSelected === '' ? (
