@@ -114,10 +114,6 @@ export default function Gallery({ selectedStyle }) {
     setImg(selectedStyle[0].photos[0].url)
   }, [selectedStyle])
 
-  console.log('subIndex', subIndx)
-  console.log('slidenumber', slideNumber)
-  console.log('start', start)
-  console.log('end', end)
   if (images.length > 0) {
     return (
       <>

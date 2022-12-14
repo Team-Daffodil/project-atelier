@@ -10,6 +10,9 @@ export default function DropdownSize({
   getSkuInfo,
   sizeSelected,
   setSizeSelected,
+  open,
+  setOpen,
+  sizeDropdownText,
 }) {
   const [value, setvalue] = React.useState('')
 
@@ -18,21 +21,45 @@ export default function DropdownSize({
     setSizeSelected(event.target.value)
   }
 
+  const handleClose = () => {
+    setOpen(false)
+  }
+
+  const handleOpen = () => {
+    setOpen(true)
+  }
+
   let qty = getSkuInfo()
+  let uArray = []
   let qtyArray = []
   for (const s in qty.quantities) {
-    qtyArray.push(s)
+    uArray.push(s)
+  }
+  if (Number(uArray[0]) !== NaN) {
+    for (const s in uArray) {
+      qtyArray.push(Number(uArray[s]))
+    }
+    qtyArray.sort(function (a, b) {
+      return a - b
+    })
+  } else {
+    uArray.forEach((s) => qtyArray.push(s))
   }
 
   return (
     <Box sx={{ minWidth: 200 }}>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Select a size</InputLabel>
+        <InputLabel id="demo-simple-select-label">
+          {sizeDropdownText}
+        </InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={value}
           label="Select a size"
+          open={open}
+          onClose={handleClose}
+          onOpen={handleOpen}
           onChange={handleChange}
         >
           {qtyArray.map((size) => {

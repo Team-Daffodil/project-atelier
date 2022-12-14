@@ -60,8 +60,6 @@ export default function DropdownSize({
       {open ? (
         <ul className="menu">
           {qtyCreator(qtyToDisplay).map((num, i) => {
-            // i === 0 ? setqtyText('1') : null
-
             return (
               <li className="menu-item" key={Math.random() * num}>
                 <button

@@ -10,6 +10,8 @@ export default function Addtocart({
   getSkuInfo,
   setAppState,
   appState,
+  setOpen,
+  setSizeDropdownText,
 }) {
   let info = getSkuInfo()
 
@@ -39,13 +41,19 @@ export default function Addtocart({
 
   const addCart = () => {
     appState.cart.push(product)
-    // setAppState(...appState, appState.cart.push(product))
   }
-
+  console.log(sizeSelected)
   return (
     <>
-      {qtyText === 'Select Size' ? (
-        <Button variant="outlined" size="large" disabled={true}>
+      {sizeSelected === '' ? (
+        <Button
+          variant="outlined"
+          size="large"
+          onClick={() => {
+            setOpen(true)
+            setSizeDropdownText('Please select a size')
+          }}
+        >
           Add to Cart
         </Button>
       ) : (
