@@ -13,7 +13,7 @@ export default function Gallery({ selectedStyle }) {
   const [openModal, setOpenModal] = useState(false)
   const [slideNumber, setSlideNumber] = useState(0)
   const [mslideNumber, setmSlideNumber] = useState(0)
-  const [img, setImg] = useState(images[0].url)
+  const [img, setImg] = useState(images[slideNumber].url)
   const [modalImg, setModalImg] = useState(images[0])
   const [start, setStart] = useState(0)
   const [end, setEnd] = useState(7)
@@ -83,6 +83,9 @@ export default function Gallery({ selectedStyle }) {
     slideNumber === images.length - 1
       ? setSlideNumber(images.length - 1)
       : setSlideNumber(slideNumber + 1)
+    console.log('start and end', start, end)
+    console.log(slideNumber, 'slidenumber')
+    console.log(subIndx)
     if (start >= 7) {
       setSubIndx(slideNumber - 7 + 1)
     } else {
@@ -92,6 +95,7 @@ export default function Gallery({ selectedStyle }) {
       if (slideNumber + 1 >= end) {
         setStart(start + 7)
         setEnd(end + 7)
+        setSubIndx(0)
         setImg(images[slideNumber + 1].url)
       } else {
         setImg(images[slideNumber + 1].url)
@@ -111,7 +115,7 @@ export default function Gallery({ selectedStyle }) {
 
   useEffect(() => {
     setImages(selectedStyle[0].photos)
-    setImg(selectedStyle[0].photos[0].url)
+    setImg(selectedStyle[0].photos[slideNumber].url)
   }, [selectedStyle])
 
   if (images.length > 0) {
@@ -138,8 +142,22 @@ export default function Gallery({ selectedStyle }) {
                 onClick={mnextImg}
               />
             ) : null}
-            <div className="fullScreenImage">
-              <img src={modalImg} alt="" />
+            <div
+              className="fullScreenImage"
+              onMouseMove={(e) => {
+                const x = e.clientX - e.target.offsetLeft
+                const y = e.clientY - e.target.offsetTop
+                let ModalImg = document.getElementById('ModalImg')
+                ModalImg.style.transformOrigin = `${x}px ${y}px`
+                ModalImg.style.transform = 'scale(2)'
+              }}
+              onMouseLeave={() => {
+                let ModalImg = document.getElementById('ModalImg')
+                ModalImg.style.transformOrigin = 'center'
+                ModalImg.style.transform = 'scale(1)'
+              }}
+            >
+              <img src={modalImg} id="ModalImg" alt="" />
             </div>
             <div className="bottom">
               {images.map((image, i) => {
@@ -152,7 +170,7 @@ export default function Gallery({ selectedStyle }) {
                     }
                     key={images[i].url}
                     onMouseOver={(e) => {
-                      modalHoverHandler(image.thumbnail_url, i)
+                      modalHoverHandler(image.url, i)
                     }}
                   >
                     <img src={image.thumbnail_url} alt="" />

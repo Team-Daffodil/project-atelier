@@ -66,8 +66,6 @@ export default function InfoPanel({
     getDefaultStyle()
   }, [styles])
 
-  console.log(open)
-
   if (item.id && styles.length > 0 && selectedStyle.length > 0) {
     return (
       <div className="info-container">
