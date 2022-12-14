@@ -17,8 +17,10 @@ export default function InfoPanel({
 }) {
   const [value, setValue] = useState(2)
   const [sizeSelected, setSizeSelected] = useState('')
-  const [qtyText, setqtyText] = useState('Select Qty')
+  const [qtyText, setqtyText] = useState('1')
   const [panelIndex, setPanelIndex] = useState(0)
+  const [open, setOpen] = React.useState(false)
+  const [sizeDropdownText, setSizeDropdownText] = useState('Select a size')
 
   const getDefaultStyle = () => {
     if (styles.length > 0) {
@@ -63,6 +65,8 @@ export default function InfoPanel({
   useEffect(() => {
     getDefaultStyle()
   }, [styles])
+
+  console.log(open)
 
   if (item.id && styles.length > 0 && selectedStyle.length > 0) {
     return (
@@ -113,6 +117,9 @@ export default function InfoPanel({
         </div>
         <div className="sizeselector">
           <DropdownSize
+            sizeDropdownText={sizeDropdownText}
+            open={open}
+            setOpen={setOpen}
             getSkuInfo={getSkuInfo}
             setSizeSelected={setSizeSelected}
           />
@@ -125,6 +132,8 @@ export default function InfoPanel({
         </div>
         <div className="cart">
           <Addtocart
+            setSizeDropdownText={setSizeDropdownText}
+            setOpen={setOpen}
             qtyText={qtyText}
             name={item.name}
             style={selectedStyle[0]}

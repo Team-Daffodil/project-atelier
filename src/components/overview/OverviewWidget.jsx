@@ -41,13 +41,13 @@ export default function OverviewWidget({ appState, setAppState }) {
       })
     })
   }, [])
+  console.log(open)
 
-  console.log(appState)
   if (item.id && styles.length > 0 && selectedStyle.length > 0) {
     return (
       <>
         <div className="overview">
-          {/* <div className="gallerycart">
+          <div className="gallerycart">
             <Gallery selectedStyle={selectedStyle} />
 
             <InfoPanel
@@ -60,7 +60,7 @@ export default function OverviewWidget({ appState, setAppState }) {
               selectedStyle={selectedStyle}
               setSelectedStyle={setSelectedStyle}
             />
-          </div> */}
+          </div>
           <Description item={item} />
         </div>
       </>
