@@ -19,3 +19,10 @@ test('can navigate between pages', async () => {
   await fireEvent.click(getByRole('link', { name: 'Payment' }))
   await expect(getByText('Payment Information')).toBeVisible()
 })
+
+test('removing item will change quantity', async () => {
+  const { getByText, getByRole } = render(<Cart appState={appState} />)
+  const deleteItem = getByRole('link', { name: 'x' })
+  await fireEvent.click(deleteItem)
+  await expect(getByText('Total (0 items)')).toBeVisible()
+})

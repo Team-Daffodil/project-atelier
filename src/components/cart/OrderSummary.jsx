@@ -20,7 +20,7 @@ const totalDiscounts = (promoCodes) => {
   return promoCodes.reduce((acc, promo) => (acc += promo.discount), 0)
 }
 
-const OrderSummary = ({ items, setCartValueHandler }) => {
+const OrderSummary = ({ items }) => {
   const [promoCodes, setPromoCodes] = useState([])
   const [promoInput, setPromoInput] = useState('')
   const [badPromoCode, setBadPromoCode] = useState(null)
@@ -62,7 +62,7 @@ const OrderSummary = ({ items, setCartValueHandler }) => {
 
   useEffect(() => {
     setBadPromoCode(null)
-    setCartValueHandler(totalCartValue())
+    // setCartValueHandler(totalCartValue())
   }, [promoCodes])
 
   return (

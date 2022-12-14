@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import CartDetails from './CartDetails'
+import Delivery from './Delivery'
+import OrderSummary from './OrderSummary'
+import Payment from './Payment'
 
 const LoadingPage = () => {
   return <p>Loading...</p>
-}
-
-const Delivery = () => {
-  return <div>Delivery Page</div>
-}
-
-const Payment = () => {
-  return <div>Payment Information</div>
 }
 
 const Confirmation = () => {
@@ -21,15 +16,52 @@ const Cart = ({ appState }) => {
   const [active, setActive] = useState(LoadingPage)
   const [cart, setCart] = useState(appState.cart)
 
+  const updateCartItemsHandler = (action, updatedItem) => {
+    if (action === 'DELETE') {
+      const newItems = cart.filter(
+        (item) => item.product.sku !== updatedItem.product.sku
+      )
+      setCart(newItems)
+    } else if (action === 'CHANGE_QUANTITY') {
+      const newItems = cart.map((item) => {
+        if (item.product.sku === updatedItem.product.sku) {
+          return updatedItem
+        } else {
+          return item
+        }
+      })
+      setCart(newItems)
+    }
+  }
+
   useEffect(() => {
-    setActive(<CartDetails items={cart} />)
+    setActive(
+      <CartDetails
+        items={cart}
+        updateCartItemsHandler={updateCartItemsHandler}
+      />
+    )
   }, [])
+
+  useEffect(() => {
+    setActive(
+      <CartDetails
+        items={cart}
+        updateCartItemsHandler={updateCartItemsHandler}
+      />
+    )
+  }, [cart])
 
   const switchPage = (page) => {
     return (e) => {
       e.preventDefault()
       if (page === 'cart') {
-        setActive(<CartDetails items={cart} />)
+        setActive(
+          <CartDetails
+            items={cart}
+            updateCartItemsHandler={updateCartItemsHandler}
+          />
+        )
       } else if (page === 'delivery') {
         setActive(<Delivery />)
       } else if (page === 'payment') {
@@ -69,6 +101,7 @@ const Cart = ({ appState }) => {
         </ul>
       </nav>
       {active}
+      <OrderSummary items={cart} />
     </div>
   )
 }
