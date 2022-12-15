@@ -29,10 +29,10 @@ const App = () => {
   return (
     <section id="app">
       <h1>Hello world React!</h1>
-      {/* <p>AppState: {Object.keys(appState)}</p>
+      <p>AppState: {Object.keys(appState)}</p>
       <OverviewWidget />
       <RelatedProducts />
-      <Questions /> */}
+      <Questions />
       <Review
         productId={appState.productId}
         handleSetReviewData={handleSetReviewData}
