@@ -42,10 +42,12 @@ export default function Addtocart({
   const addCart = () => {
     appState.cart.push(product)
   }
+
   return (
     <>
       {sizeSelected === '' ? (
         <Button
+          data-testid="cart-button"
           variant="outlined"
           size="large"
           onClick={() => {

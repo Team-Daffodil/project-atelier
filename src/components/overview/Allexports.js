@@ -1,0 +1,6 @@
+export { default as Addtocart } from './Addtocart.jsx'
+export { default as Description } from './Description.jsx'
+export { default as DropdownQty } from './DropdownQty.jsx'
+export { default as DropdownSize } from './DropdownSize.jsx'
+export { default as Gallery } from './Gallery.jsx'
+export { default as InfoPanel } from './InfoPanel.jsx'
