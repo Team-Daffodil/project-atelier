@@ -83,9 +83,6 @@ export default function Gallery({ selectedStyle }) {
     slideNumber === images.length - 1
       ? setSlideNumber(images.length - 1)
       : setSlideNumber(slideNumber + 1)
-    console.log('start and end', start, end)
-    console.log(slideNumber, 'slidenumber')
-    console.log(subIndx)
     if (start >= 7) {
       setSubIndx(slideNumber - 7 + 1)
     } else {
@@ -149,7 +146,7 @@ export default function Gallery({ selectedStyle }) {
                 const y = e.clientY - e.target.offsetTop
                 let ModalImg = document.getElementById('ModalImg')
                 ModalImg.style.transformOrigin = `${x}px ${y}px`
-                ModalImg.style.transform = 'scale(2)'
+                ModalImg.style.transform = 'scale(2.5)'
               }}
               onMouseLeave={() => {
                 let ModalImg = document.getElementById('ModalImg')
@@ -182,7 +179,9 @@ export default function Gallery({ selectedStyle }) {
         )}
         <div className="left_1">
           {start >= 7 ? (
-            <button onClick={() => backHandler()}>Back</button>
+            <button className="morebtn" onClick={() => backHandler()}>
+              Back
+            </button>
           ) : null}
           {images.slice(start, end).map((image, i) => {
             return (
@@ -198,7 +197,9 @@ export default function Gallery({ selectedStyle }) {
             )
           })}
           {images.slice(start, end).length >= 7 ? (
-            <button onClick={() => moreHandler()}>More</button>
+            <button className="morebtn" onClick={() => moreHandler()}>
+              More
+            </button>
           ) : null}
         </div>
         <div className="gallery-container">
@@ -208,8 +209,9 @@ export default function Gallery({ selectedStyle }) {
                 {...{
                   smallImage: {
                     alt: 'Products',
-                    isFluidWidth: true,
                     src: img,
+                    width: 500,
+                    height: 500,
                   },
                   largeImage: {
                     src: img,
@@ -219,20 +221,22 @@ export default function Gallery({ selectedStyle }) {
                 }}
               />
             </div>
-            {slideNumber !== 0 ? (
-              <FontAwesomeIcon
-                icon={faCircleChevronLeft}
-                className="btnPrev"
-                onClick={prevImg}
-              />
-            ) : null}
-            {slideNumber !== images.length - 1 ? (
-              <FontAwesomeIcon
-                icon={faCircleChevronRight}
-                className="btnNext"
-                onClick={nextImg}
-              />
-            ) : null}
+            <div className="arrowbtns">
+              {slideNumber !== 0 ? (
+                <FontAwesomeIcon
+                  icon={faCircleChevronLeft}
+                  className="bp"
+                  onClick={prevImg}
+                />
+              ) : null}
+              {slideNumber !== images.length - 1 ? (
+                <FontAwesomeIcon
+                  icon={faCircleChevronRight}
+                  className="bn"
+                  onClick={nextImg}
+                />
+              ) : null}
+            </div>
           </div>
         </div>
       </>
