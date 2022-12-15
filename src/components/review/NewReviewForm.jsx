@@ -1,6 +1,9 @@
 import React from 'react'
 import { Field, Form, Formik, useFormik } from 'formik'
 import * as Yup from 'yup'
+import axios from 'axios'
+
+const headers = { Authorization: process.env.API_TOKEN }
 
 const renderCharacteristics = (char, id) => {
   return (
@@ -32,22 +35,32 @@ const NewReviewForm = ({ productInfo }) => {
   }
 
   const handleSubmit = async (values) => {
-    let formValues = values
+    let formValues = { characteristics: {} }
     Object.keys(formValues.characteristics).map((key) => {
       let n = parseInt(formValues.characteristics[key])
       formValues.characteristics[key] = n
     })
-    console.log('submitted:', formValues)
-  }
-
-  const handleChange = (e) => {
-    console.log('changing:', e)
+    formValues['product_id'] = parseInt(productInfo.product_id)
+    formValues.rating = parseInt(values.rating)
+    formValues.recommend = values.recommend === 'Yes' ? true : false
+    formValues.name = 'abc123'
+    formValues.email = 'fake@fake.com'
+    formValues.photos = []
+    formValues.body = values.body
+    formValues.summary = values.summary
+    axios
+      .post(process.env.API_URL + '/reviews', formValues, { headers: headers })
+      .then((data) => console.log('success:', data))
+      .catch((err) => console.log(err))
   }
 
   const validationSchema = Yup.object({
     rating: Yup.string().required('Rating is required'),
-    recommended: Yup.string().required('Choose Yes or No'),
-    body: Yup.string().required('Review is required'),
+    recommend: Yup.string().required('Choose Yes or No'),
+    body: Yup.string()
+      .min(60, 'review has to be a minimum of 60 characters')
+      .max(1000, 'review is too long')
+      .required('Review is required'),
     summary: Yup.string().required('Summary is required'),
     terms: Yup.bool().oneOf([true], 'You must accept the terms and conditions'),
   })
@@ -61,7 +74,7 @@ const NewReviewForm = ({ productInfo }) => {
         validationSchema={validationSchema}
       >
         {(props) => (
-          <Form onChange={handleChange}>
+          <Form>
             <div>
               <h3>Your overall rating</h3>
               <label htmlFor="rating">
@@ -72,11 +85,11 @@ const NewReviewForm = ({ productInfo }) => {
             <div>
               <h3>Would you recommend this product?</h3>
               <label>
-                <Field type="radio" name="recommended" value="Yes" />
+                <Field type="radio" name="recommend" value="Yes" />
                 Yes
               </label>
               <label>
-                <Field type="radio" name="recommended" value="No" />
+                <Field type="radio" name="recommend" value="No" />
                 No
               </label>
               {props.errors.recommended && (
