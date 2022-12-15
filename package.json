@@ -11,7 +11,9 @@
     "create-badges": "npm run test:coverage && npx istanbul-badges-readme",
     "prepare": "husky install",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "build": "webpack",
+    "build:production": "NODE_ENV=production webpack"
   },
   "repository": {
     "type": "git",
