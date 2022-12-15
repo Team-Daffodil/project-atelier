@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import QuestionListEntry from './QuestionListEntry.jsx'
 
-const QuestionList = ({ filter, answerModalHandler }) => {
+const QuestionList = ({ filter, answerModalHandler, questionModalHandler }) => {
   const [data, setData] = useState([]) // product data array
   const [moreQs, setMoreQs] = useState(false) // bool toggle to show more than 4 questions
   const [questionCount, setQuestionCount] = useState(4)
@@ -24,12 +24,10 @@ const QuestionList = ({ filter, answerModalHandler }) => {
   useEffect(() => {
     axios
       .get(
-        process.env.REACT_APP_API_URL +
-          '/qa/questions' +
-          '?product_id=37325&count=40',
+        process.env.API_URL + '/qa/questions' + '?product_id=37325&count=40',
         {
           headers: {
-            Authorization: process.env.REACT_APP_API_TOKEN,
+            Authorization: process.env.API_TOKEN,
           },
         }
       )
@@ -73,12 +71,23 @@ const QuestionList = ({ filter, answerModalHandler }) => {
                   )
                 }
               })}
-          <button
-            className="button-more-questions"
-            onClick={showMoreQuestionsHandler}
-          >
-            MORE QUESTIONS
-          </button>
+          <div className="questions-closing">
+            <button
+              className="button-more-questions question-buttons"
+              onClick={showMoreQuestionsHandler}
+            >
+              MORE QUESTIONS
+            </button>
+
+            <button
+              className="question-button-ask question-buttons"
+              onClick={() => {
+                questionModalHandler()
+              }}
+            >
+              ASK A QUESTION
+            </button>
+          </div>
         </div>
       )
     }
@@ -116,12 +125,23 @@ const QuestionList = ({ filter, answerModalHandler }) => {
                 )
               }
             })}
-          <button
-            className="button-more-questions"
-            onClick={showMoreQuestionsHandler}
-          >
-            MORE QUESTIONS
-          </button>
+          <div className="questions-closing">
+            <button
+              className="button-more-questions question-buttons"
+              onClick={showMoreQuestionsHandler}
+            >
+              MORE QUESTIONS
+            </button>
+
+            <button
+              className="question-button-ask question-buttons"
+              onClick={() => {
+                questionModalHandler()
+              }}
+            >
+              ASK A QUESTION
+            </button>
+          </div>
         </div>
       )
     } else if ((data.length > 4) & moreQs) {
@@ -145,6 +165,16 @@ const QuestionList = ({ filter, answerModalHandler }) => {
                 )
               }
             })}
+          <div className="questions-closing">
+            <button
+              className="question-button-ask question-buttons"
+              onClick={() => {
+                questionModalHandler()
+              }}
+            >
+              ASK A QUESTION
+            </button>
+          </div>
         </div>
       )
     }

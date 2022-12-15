@@ -6,6 +6,11 @@ body {
   font-family: 'Poppins', sans-serif;
   font-size: 22px;
 }
+
+p, span {
+  font-size: 12px;
+}
+
 *::-webkit-scrollbar {
   width: 12px;
 }
@@ -23,7 +28,7 @@ body {
 
 .button-helpful {
   border: none;
-  background-color: #ffeea3;
+  background-color: #fff0a354;
   transition: 0.4s;
 }
 
@@ -33,22 +38,65 @@ body {
 
 .button-load-answers {
   border: none;
-  background-color: #7b7b7b;
+  background-color: #b3b3b3;
+  border: 2px solid black;
+  border-radius: 7.5px;
   width: 175px;
   height: 30px;
+}
+.button-load-answers:hover {
+  background-color: #ff8b59;
 }
 
 .button-related-left {
   position: absolute;
-  height: 20px;
+  height: 40px;
+  width: 20px;
   top: 50%;
-  left: 5%;
+  left: 2%;
+  border-radius: 5px;
+  background-color: #7b7b7b;
 }
 .button-related-right {
   position: absolute;
-  height: 20px;
+  height: 40px;
+  width: 20px;
+  border-radius: 5px;
+  background-color: #7b7b7b;
   top: 50%;
-  right: 5%;
+  right: 2%;
+
+}
+.button-outfit-left {
+  position: absolute;
+  height: 40px;
+  width: 20px;
+  top: 50%;
+  left: 2%;
+  border-radius: 5px;
+  background-color: #7b7b7b;
+}
+.button-outfit-right {
+  position: absolute;
+  height: 40px;
+  width: 20px;
+  top: 50%;
+  right: 2%;
+  border-radius: 5px;
+  background-color: #7b7b7b;
+}
+
+.related-arrows {
+  position: relative;
+  top: 50%;
+  transform: translateY(200px);
+  z-index: 10;
+}
+.outfit-arrows {
+  position: relative;
+  top: 50%;
+  transform: translateY(200px);
+  z-index: 10;
 }
 
 .related-container {
@@ -65,12 +113,22 @@ body {
   display: flex;
   justify-content: space-around;
 }
+
 .related-card {
   width: 225px;
   height: 375px;
+  position: relative;
   background-color: #d3c6bb;
   border: 1px solid black;
   border-radius: 3px;
+}
+.button-add-outfit {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  right: 0;
+  background-color: #7b7b7b71;
+  border-radius: 10px;
 }
 .related-card-image {
   width: 225px;
@@ -80,10 +138,72 @@ body {
 .related-card-info {
   display: flex;
   flex-direction: column;
+  font-size: 12px;
   width: 225px;
   height: 125px;
   align-items: baseline;
   margin-left: 5px;
+}
+.outfit-carousel {
+  display: flex;
+  justify-content: space-around;
+}
+.outfit-card {
+  width: 225px;
+  height: 375px;
+  background-color: #d3c6bb;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+.outfit-card-image {
+  width: 225px;
+  height: 250px;
+  object-fit: cover
+}
+.outfit-card-info {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  width: 225px;
+  height: 125px;
+  align-items: baseline;
+  margin-left: 5px;
+}
+
+.rating {
+  display: flex;
+  position: relative;
+  width: 100px;
+  height: 20px;
+}
+.flower-merge {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+.flower-q1 {
+  clip-path: polygon(0 0, 50% 0, 50% 50%, 0 50%);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.flower-q2 {
+  clip-path: polygon(50% 0, 100% 0, 100% 50%, 50% 50%);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.flower-q4 {
+  clip-path: polygon(50% 50%, 100% 50%, 100% 100%, 50% 100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.flower-q3 {
+  clip-path: polygon(0 50%, 50% 50%, 50% 100%, 0 100%);
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 /*---------------------------------------------*/
@@ -156,11 +276,11 @@ body {
 }
 
 .question-individual-wrapper {
-  border: 3px solid black;
-  border-radius: 5px;
+  border: 2px solid black;
+  border-radius: 4px;
   display: flex;
   flex-direction: column;
-  background-color: #fff0a3a6;
+  background-color: #fff0a354;
 }
 
 .question-individual-question {
@@ -172,6 +292,7 @@ body {
 
 .question-user {
   display: flex;
+  align-items: center;
   font-weight: 300;
   margin-left: 25px;
 }
@@ -182,7 +303,17 @@ body {
 
 .question-individual-answer {
   display: flex;
+  flex-direction: column;
   font-size: 12px;
+}
+.answer {
+  display: flex;
+}
+.answer-info {
+  display: flex;
+  align-items: center;
+  font-weight: 300;
+  margin-left: 5px;
 }
 
 /*------- QUESTION BUTTONS CONTAINER -------*/
@@ -659,4 +790,14 @@ body {
 
 .active {
   border: 3px solid rgb(255, 187, 0);
+}
+
+
+
+
+
+
+.ratings-reviews-container {
+  display: flex;
+  align-items: center;
 }

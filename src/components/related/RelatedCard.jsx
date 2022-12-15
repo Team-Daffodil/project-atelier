@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { ratingAvg } from '../../lib/review'
+import QuarterRating from '../common/QuarterRating.jsx'
+import AddOutfit from '../common/AddOutfit.jsx'
 
 let headers = { Authorization: process.env.API_TOKEN }
-
-const RelatedCard = ({ productId }) => {
+let ESLINTBULLSHIT = 'product_id'
+const RelatedCard = ({ productId, addToOutfitHandler }) => {
   const [styles, setStyles] = useState({})
   const [product, setProduct] = useState({})
-  console.log('anything', productId)
+  const [rating, setRating] = useState(null)
   const salePrice = () => {
     return (
       <div>
@@ -22,7 +25,6 @@ const RelatedCard = ({ productId }) => {
       })
       .then((item) => {
         let curItem = item.data.results[0]
-        console.log('PRODUCT STYLES: ', curItem)
         setStyles({
           ...styles,
           sale: curItem.sale_price,
@@ -35,7 +37,6 @@ const RelatedCard = ({ productId }) => {
         headers,
       })
       .then((item) => {
-        console.log('PRODUCT MAIN: ', item.data)
         setProduct({
           ...product,
           category: item.data.category,
@@ -43,21 +44,35 @@ const RelatedCard = ({ productId }) => {
           slogan: item.data.slogan,
         })
       })
+    axios
+      .get(process.env.API_URL + '/reviews/meta', { params: {'product_id': id},
+        headers,
+      })
+      .then((item) => {
+        setRating(ratingAvg(item.data.ratings))
+
+      })
   }
+
   useEffect(() => {
     getProductInfo(productId)
   }, [])
 
-  return (
-    <div className="related-card">
-      <img className="related-card-image" src={styles.image}></img>
-      <div className="related-card-info">
-        <div>{product.category}</div>
-        <div>{product.name}</div>
-        <div>{styles.sale ? salePrice() : styles.price}</div>
+  if (rating) {
+    return (
+      <div className="related-card" id={productId}>
+        <AddOutfit product={product} styles={styles} rating={rating} productId={productId} addToOutfitHandler={addToOutfitHandler}/>
+        <img className="related-card-image" src={styles.image}></img>
+        <div className="related-card-info">
+          <div>{product.category}</div>
+          <div>{product.name}</div>
+          <div>{styles.sale ? salePrice() : styles.price}</div>
+          <QuarterRating rating={rating} key={productId}/>
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
+
 }
 
 export default RelatedCard

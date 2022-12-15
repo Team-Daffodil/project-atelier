@@ -23,6 +23,9 @@ const Questions = () => {
   const answerModalHandler = () => {
     setAnswerModal(true)
   }
+  const questionModalHandler = () => {
+    setQuestionModal(true)
+  }
   // c366465b6f6f186dbab8efe90b774b5288e447b8
   return (
     <section className="questions-container">
@@ -31,20 +34,11 @@ const Questions = () => {
         <SearchQuestion onSearchHandler={onSearchHandler} />
       </h1>
 
-      <QuestionList filter={filter} answerModalHandler={answerModalHandler} />
+      <QuestionList filter={filter} answerModalHandler={answerModalHandler} questionModalHandler={questionModalHandler}/>
       <QuestionModal show={questionModal} handleClose={closeQuestionForm} />
       <AnswerModal show={answerModal} handleClose={closeAnswerForm} />
 
-      <div className="questions-closing">
-        <button
-          className="question-button-ask question-buttons"
-          onClick={() => {
-            setQuestionModal(true)
-          }}
-        >
-          ASK A QUESTION
-        </button>
-      </div>
+
     </section>
   )
 }

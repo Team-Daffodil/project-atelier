@@ -5,25 +5,47 @@ import RelatedProducts from './related/RelatedProducts.jsx'
 import axios from 'axios'
 import OverviewWidget from './overview/OverviewWidget.jsx'
 import Review from './review/Review'
+import Outfit from './related/Outfit.jsx'
 
 const fetchheaders = {
   Authorization: process.env.API_TOKEN,
 }
 
 let PRODUCT_ID = 37311
-if (window !== undefined) {
-  let segs = window.location.href.split('/')
-  PRODUCT_ID = segs[segs.length - 1]
-}
+// if (window !== undefined) {
+//   let segs = window.location.href.split('/')
+//   PRODUCT_ID = segs[segs.length - 1]
+// }
 
 const App = () => {
-  const [appState, setAppState] = useState({ productId: PRODUCT_ID, cart: [] })
-
+  const [appState, setAppState] = useState({ productId: PRODUCT_ID })
+  const [outfit, setOutfit] = useState([])
   const handleSetReviewData = (reviewData) => {
     setAppState({
       ...appState,
       ...reviewData,
     })
+  }
+  const deleteOutfit = (id) => {
+    console.log('SOMETHING')
+    setOutfit(outfit.filter(item => {
+      if (item.id !== id) {return item}
+    }))
+  }
+  const addToOutfitHandler = (event, product, styles, rating, productId) => {
+    console.log(event.nativeEvent)
+    console.log('ADD TO OUTFIT: ', product, styles, rating)
+    let tempObj = {}
+    tempObj.category = product.category
+    tempObj.name = product.name
+    tempObj.sale = styles.sale
+    tempObj.price = styles.price
+    tempObj.image = styles.image
+    tempObj.rating = rating
+    tempObj.id = productId
+    tempObj.added = true;
+    setOutfit([...outfit, tempObj])
+
   }
 
   useEffect(() => {
@@ -34,7 +56,9 @@ const App = () => {
     <section id="app">
       <h1>SearchBarPlaceholder</h1>
       <OverviewWidget appState={appState} />
-      <RelatedProducts />
+
+      <RelatedProducts addToOutfitHandler={addToOutfitHandler}/>
+      <Outfit outfit={outfit} deleteOutfit={deleteOutfit}/>
       <Questions />
       <Review
         productId={appState.productId}

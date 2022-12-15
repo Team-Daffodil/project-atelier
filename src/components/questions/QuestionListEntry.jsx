@@ -75,11 +75,6 @@ const QuestionListEntry = ({ question, answers, answerModalHandler }) => {
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <div>{question.asker_name}</div>
           &nbsp;
-          <div>
-            {answers[0]
-              ? helpfulComponent(answers[0].helpfulness)
-              : helpfulComponent(0)}
-          </div>
           {addAnswer()}
         </div>
         <ul className="img-answers">
@@ -103,7 +98,6 @@ const QuestionListEntry = ({ question, answers, answerModalHandler }) => {
             </div>
             {addAnswer()}
           </div>
-
           <div className="question-user">
             <div>from {question.asker_name}</div>
             <div style={{ marginLeft: '5px', marginRight: '5px' }}>on </div>
@@ -112,25 +106,62 @@ const QuestionListEntry = ({ question, answers, answerModalHandler }) => {
         </div>
 
         <div className="question-individual-answer-wrapper">
-          <div className="question-individual-answer">
-            <b style={{ fontSize: '13px', marginRight: '5px' }}>A:</b>
-            {answers.length ? answers[1].body : null}
+          <div className="question-individual-answer" >
+            <div className="answer">
+              <b>A:</b>
+              <div
+                className="answer-body"
+                style={{ marginLeft: '5px', marginRight: '5px' }}
+              >
+                {' '}
+                {answers[0].body}{' '}
+              </div>
+              {helpfulComponent(answers[0].helpfulness)}
+              <div>&nbsp;Report</div>
+            </div>
+            <div className="answer-info">
+              <div
+                className="answer-name"
+                style={{ marginLeft: '15px', marginRight: '5px' }}
+              >
+                {' '}
+                from {answers[0].answerer_name} on
+              </div>
+              <DateFormatter ts={answers[0].date} />
+            </div>
+            <ul className="img-answers">
+              {answers[0].photos.length !== 0 ? loadPhotos(answers[0].photos) : null}
+            </ul>
           </div>
-          <div className="question-individual-answer"></div>
+          <div className="question-individual-answer" >
+            <div className="answer">
+              <b>A:</b>
+              <div
+                className="answer-body"
+                style={{ marginLeft: '5px', marginRight: '5px' }}
+              >
+                {' '}
+                {answers[1].body}{' '}
+              </div>
+              {helpfulComponent(answers[1].helpfulness)}
+              <div>&nbsp;Report</div>
+            </div>
+            <div className="answer-info">
+              <div
+                className="answer-name"
+                style={{ marginLeft: '15px', marginRight: '5px' }}
+              >
+                {' '}
+                from {answers[1].answerer_name} on
+              </div>
+              <DateFormatter ts={answers[1].date} />
+            </div>
+            <ul className="img-answers">
+              {answers[1].photos.length !== 0 ? loadPhotos(answers[1].photos) : null}
+            </ul>
+          </div>
         </div>
 
-        <div className="question-individual-info">
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
-          <div>
-            {answers[0]
-              ? helpfulComponent(answers[0].helpfulness)
-              : helpfulComponent(0)}
-          </div>
-          {addAnswer()}
-        </div>
-        <ul className="img-answers">
-          {answers[0] ? loadPhotos(answers[0].photos) : null}
-        </ul>
         <button
           className="button-load-answers"
           onClick={showMoreAnswersHandler}
@@ -154,7 +185,9 @@ const QuestionListEntry = ({ question, answers, answerModalHandler }) => {
           </div>
 
           <div className="question-user">
-            <div>{question.asker_name}</div>
+            <div style={{ marginLeft: '5px', marginRight: '5px' }}>
+              {question.asker_name}
+            </div>
             <DateFormatter ts={question.question_date} />
           </div>
         </div>
@@ -167,15 +200,31 @@ const QuestionListEntry = ({ question, answers, answerModalHandler }) => {
               if (i <= answerCount) {
                 return (
                   <div className="question-individual-answer" key={i}>
-                    <b>A:</b>
-                    <div className="answer-body"> {ele.body} </div>
-                    <div className="answer-name"> {ele.answerer_name}</div>
-                    <DateFormatter ts={ele.date} />
+                    <div className="answer">
+                      <b>A:</b>
+                      <div
+                        className="answer-body"
+                        style={{ marginLeft: '5px', marginRight: '5px' }}
+                      >
+                        {' '}
+                        {ele.body}{' '}
+                      </div>
+                      {helpfulComponent(ele.helpfulness)}
+                      <div>&nbsp;Report</div>
+                    </div>
+                    <div className="answer-info">
+                      <div
+                        className="answer-name"
+                        style={{ marginLeft: '15px', marginRight: '5px' }}
+                      >
+                        {' '}
+                        from {ele.answerer_name} on
+                      </div>
+                      <DateFormatter ts={ele.date} />
+                    </div>
                     <ul className="img-answers">
                       {ele.photos.length !== 0 ? loadPhotos(ele.photos) : null}
                     </ul>
-                    {helpfulComponent(ele.helpfulness)}
-                    {addAnswer()}
                   </div>
                 )
               }
