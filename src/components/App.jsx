@@ -12,10 +12,10 @@ const fetchheaders = {
 }
 
 let PRODUCT_ID = 37311
-if (window !== undefined) {
-  let segs = window.location.href.split('/')
-  PRODUCT_ID = segs[segs.length - 1]
-}
+// if (window !== undefined) {
+//   let segs = window.location.href.split('/')
+//   PRODUCT_ID = segs[segs.length - 1]
+// }
 
 const App = () => {
   const [appState, setAppState] = useState({ productId: PRODUCT_ID })
