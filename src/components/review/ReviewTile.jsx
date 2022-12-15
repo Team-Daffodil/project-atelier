@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import DateFormatter from '../common/DateFormatter'
 import { maxChars } from '../../lib/review'
 import axios from 'axios'
+import ImageThumbs from '../common/ImageThumbs'
 
 const headers = {
   Authorization: process.env.API_TOKEN,
@@ -70,13 +71,7 @@ const ReviewTile = ({ review }) => {
         )}
       </div>
       {review.photos.length && (
-        <ul>
-          {review.photos.map((photo, i) => (
-            <li key={i}>
-              <a href={photo.url}>Photo {i}</a>
-            </li>
-          ))}
-        </ul>
+        <ImageThumbs photos={review.photos.map((photo) => photo.url)} />
       )}
       {review.recommend && <div>I recommend this product</div>}
       {review.response && (
