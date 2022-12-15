@@ -8,53 +8,36 @@ import {
   faCircleXmark,
 } from '@fortawesome/free-solid-svg-icons'
 
-export default function Gallery() {
-  const images = [
-    '/images/img1.jpg',
-    '/images/img2.jpg',
-    '/images/img3.jpg',
-    '/images/img4.jpg',
-    '/images/img5.jpg',
-  ]
-
+export default function Gallery({ selectedStyle }) {
+  const [images, setImages] = useState(selectedStyle[0].photos)
   const [openModal, setOpenModal] = useState(false)
   const [slideNumber, setSlideNumber] = useState(0)
-  const [img, setImg] = useState(images[0])
+  const [mslideNumber, setmSlideNumber] = useState(0)
+  const [img, setImg] = useState(images[slideNumber].url)
   const [modalImg, setModalImg] = useState(images[0])
-  const [slidePos, setSlidePos] = useState([])
-  const [mslidePos, setmSlidePos] = useState([])
+  const [start, setStart] = useState(0)
+  const [end, setEnd] = useState(7)
+  const [subIndx, setSubIndx] = useState(0)
 
-  const modalHoverHandler = (image, i) => {
-    setModalImg(image)
-    setSlideNumber(i)
-
-    if (mslidePos[i]) {
-      mslidePos[i].classList.add('active')
-      for (var j = 0; j < mslidePos.length; j++) {
-        if (i !== j) {
-          mslidePos[j].classList.remove('active')
-        }
-      }
-    }
+  const modalHoverHandler = (imageUrl, i) => {
+    setModalImg(imageUrl)
+    setmSlideNumber(i)
   }
 
-  const hoverHandler = (image, i) => {
-    setImg(image)
-    setSlideNumber(i)
-
-    if (slidePos[i]) {
-      slidePos[i].classList.add('active')
-      for (var j = 0; j < slidePos.length; j++) {
-        if (i !== j) {
-          slidePos[j].classList.remove('active')
-        }
-      }
+  const hoverHandler = (imageUrl, i) => {
+    setImg(imageUrl)
+    setSubIndx(i)
+    if (start >= 7) {
+      setSlideNumber(i + 7)
+    } else {
+      setSlideNumber(i)
     }
   }
 
   const onClickModal = (event) => {
     setOpenModal(true)
     setModalImg(img)
+    setmSlideNumber(slideNumber)
   }
 
   const handleCloseModal = () => {
@@ -62,172 +45,173 @@ export default function Gallery() {
   }
 
   const mprevImg = () => {
-    slideNumber === 0 ? setSlideNumber(0) : setSlideNumber(slideNumber - 1)
-    setModalImg(images[slideNumber - 1])
-    if (mslidePos[slideNumber - 1]) {
-      mslidePos[slideNumber - 1].classList.add('active')
-      for (var j = 0; j < images.length; j++) {
-        if (slideNumber !== j) {
-          mslidePos[j].classList.remove('active')
-        }
-      }
+    mslideNumber === 0 ? setmSlideNumber(0) : setmSlideNumber(mslideNumber - 1)
+    if (images[mslideNumber - 1]) {
+      setModalImg(images[mslideNumber - 1].url)
     }
   }
 
   const mnextImg = () => {
-    slideNumber === images.length
-      ? setSlideNumber(images.length - 1)
-      : setSlideNumber(slideNumber + 1)
-    setModalImg(images[slideNumber + 1])
-    if (mslidePos[slideNumber + 1]) {
-      mslidePos[slideNumber + 1].classList.add('active')
-      for (var j = 0; j < images.length; j++) {
-        if (slideNumber !== j) {
-          mslidePos[j].classList.remove('active')
-        }
-      }
+    mslideNumber === images.length - 1
+      ? setmSlideNumber(images.length - 1)
+      : setmSlideNumber(mslideNumber + 1)
+    if (images[mslideNumber + 1]) {
+      setModalImg(images[mslideNumber + 1].url)
     }
   }
 
   const prevImg = () => {
     slideNumber === 0 ? setSlideNumber(0) : setSlideNumber(slideNumber - 1)
-    setImg(images[slideNumber - 1])
-    if (slidePos[slideNumber - 1]) {
-      slidePos[slideNumber - 1].classList.add('active')
-      for (var j = 0; j < images.length; j++) {
-        if (slideNumber - 1 !== j) {
-          slidePos[j].classList.remove('active')
-        }
+    if (start >= 7) {
+      setSubIndx(slideNumber - 7 - 1)
+    } else {
+      setSubIndx(subIndx - 1)
+    }
+    if (images[slideNumber - 1]) {
+      if (subIndx - 1 < 0) {
+        setStart(start - 7)
+        setEnd(end - 7)
+        setImg(images[slideNumber - 1].url)
+        setSubIndx(slideNumber - 1)
+      } else {
+        setImg(images[slideNumber - 1].url)
       }
     }
   }
 
   const nextImg = () => {
-    slideNumber === images.length
+    slideNumber === images.length - 1
       ? setSlideNumber(images.length - 1)
       : setSlideNumber(slideNumber + 1)
-    setImg(images[slideNumber + 1])
-
-    if (slidePos[slideNumber + 1]) {
-      slidePos[slideNumber + 1].classList.add('active')
-      for (var j = 0; j < slidePos.length; j++) {
-        if (slideNumber + 1 !== j) {
-          slidePos[j].classList.remove('active')
-        }
+    if (start >= 7) {
+      setSubIndx(slideNumber - 7 + 1)
+    } else {
+      setSubIndx(subIndx + 1)
+    }
+    if (images[slideNumber + 1]) {
+      if (slideNumber + 1 >= end) {
+        setStart(start + 7)
+        setEnd(end + 7)
+        setSubIndx(0)
+        setImg(images[slideNumber + 1].url)
+      } else {
+        setImg(images[slideNumber + 1].url)
       }
     }
   }
 
-  const refs = useRef([])
-  refs.current = []
-
-  const addRefs = (el) => {
-    if (el && !refs.current.includes(el)) {
-      refs.current.push(el)
-    }
+  const moreHandler = () => {
+    setStart(start + 7)
+    setEnd(end + 7)
+    setSubIndx(0)
   }
-
-  const mrefs = useRef([])
-  mrefs.current = []
-
-  const addMRefs = (el) => {
-    if (el && !mrefs.current.includes(el)) {
-      mrefs.current.push(el)
-    }
+  const backHandler = () => {
+    setStart(start - 7)
+    setEnd(end - 7)
   }
 
   useEffect(() => {
-    setSlidePos(refs.current)
-    setmSlidePos(mrefs.current)
-  }, [])
+    setImages(selectedStyle[0].photos)
+    setImg(selectedStyle[0].photos[slideNumber].url)
+  }, [selectedStyle])
 
-  return (
-    <>
-      {openModal && (
-        <div className="sliderWrap">
-          <FontAwesomeIcon
-            icon={faCircleXmark}
-            className="btnClose"
-            onClick={handleCloseModal}
-          />
-          {slideNumber !== 0 ? (
+  if (images.length > 0) {
+    return (
+      <>
+        {openModal && (
+          <div className="sliderWrap">
             <FontAwesomeIcon
-              icon={faCircleChevronLeft}
-              className="btnPrev"
-              onClick={mprevImg}
+              icon={faCircleXmark}
+              className="btnClose"
+              onClick={handleCloseModal}
             />
-          ) : null}
-          {slideNumber !== images.length - 1 ? (
-            <FontAwesomeIcon
-              icon={faCircleChevronRight}
-              className="btnNext"
-              onClick={mnextImg}
-            />
-          ) : null}
-          <div className="fullScreenImage">
-            <img src={modalImg} alt="" />
-          </div>
-          <div className="bottom">
-            {images.map((image, i) => {
-              return (
-                <div
-                  className={
-                    i === slideNumber ? 'modalImg_wrap active' : 'modalImg_wrap'
-                  }
-                  ref={addMRefs}
-                  key={images[i]}
-                  onMouseOver={(e) => {
-                    modalHoverHandler(image, i)
-                  }}
-                >
-                  <img src={image} alt="" />
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      )}
-      <div className="gallery-container">
-        <div className="left">
-          <div className="left_1">
-            {images.map((image, i) => {
-              return (
-                <div
-                  className={i === 0 ? 'img_wrap active' : 'img_wrap'}
-                  ref={addRefs}
-                  key={images[i]}
-                  onMouseOver={() => {
-                    hoverHandler(image, i)
-                  }}
-                >
-                  <img src={image} alt="" />
-                </div>
-              )
-            })}
-            <button>More</button>
-          </div>
-          <div className="imageview">
-            {/* {slideNumber !== 0 ? (
+            {mslideNumber !== 0 ? (
               <FontAwesomeIcon
                 icon={faCircleChevronLeft}
                 className="btnPrev"
-                onClick={prevImg}
+                onClick={mprevImg}
               />
             ) : null}
-            {slideNumber !== images.length - 1 ? (
+            {mslideNumber !== images.length - 1 ? (
               <FontAwesomeIcon
                 icon={faCircleChevronRight}
                 className="btnNext"
-                onClick={nextImg}
+                onClick={mnextImg}
               />
-            ) : null} */}
+            ) : null}
+            <div
+              className="fullScreenImage"
+              onMouseMove={(e) => {
+                const x = e.clientX - e.target.offsetLeft
+                const y = e.clientY - e.target.offsetTop
+                let ModalImg = document.getElementById('ModalImg')
+                ModalImg.style.transformOrigin = `${x}px ${y}px`
+                ModalImg.style.transform = 'scale(2.5)'
+              }}
+              onMouseLeave={() => {
+                let ModalImg = document.getElementById('ModalImg')
+                ModalImg.style.transformOrigin = 'center'
+                ModalImg.style.transform = 'scale(1)'
+              }}
+            >
+              <img src={modalImg} id="ModalImg" alt="" />
+            </div>
+            <div className="bottom">
+              {images.map((image, i) => {
+                return (
+                  <div
+                    className={
+                      i === mslideNumber
+                        ? 'modalImg_wrap active'
+                        : 'modalImg_wrap'
+                    }
+                    key={images[i].url}
+                    onMouseOver={(e) => {
+                      modalHoverHandler(image.url, i)
+                    }}
+                  >
+                    <img src={image.thumbnail_url} alt="" />
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        )}
+        <div className="left_1">
+          {start >= 7 ? (
+            <button className="morebtn" onClick={() => backHandler()}>
+              Back
+            </button>
+          ) : null}
+          {images.slice(start, end).map((image, i) => {
+            return (
+              <div
+                className={i === subIndx ? 'img_wrap active' : 'img_wrap'}
+                key={images[i].url}
+                onMouseOver={() => {
+                  hoverHandler(image.url, i)
+                }}
+              >
+                <img src={image.thumbnail_url} alt="" />
+              </div>
+            )
+          })}
+          {images.slice(start, end).length >= 7 ? (
+            <button className="morebtn" onClick={() => moreHandler()}>
+              More
+            </button>
+          ) : null}
+        </div>
+        <div className="gallery-container">
+          <div className="imageview">
             <div className="left_2" onClick={() => onClickModal()}>
               <ReactImageMagnify
                 {...{
                   smallImage: {
                     alt: 'Products',
-                    isFluidWidth: true,
                     src: img,
+                    width: 500,
+                    height: 500,
                   },
                   largeImage: {
                     src: img,
@@ -237,10 +221,27 @@ export default function Gallery() {
                 }}
               />
             </div>
+            <div className="arrowbtns">
+              {slideNumber !== 0 ? (
+                <FontAwesomeIcon
+                  icon={faCircleChevronLeft}
+                  className="bp"
+                  onClick={prevImg}
+                />
+              ) : null}
+              {slideNumber !== images.length - 1 ? (
+                <FontAwesomeIcon
+                  icon={faCircleChevronRight}
+                  className="bn"
+                  onClick={nextImg}
+                />
+              ) : null}
+            </div>
           </div>
         </div>
-        <div className="right"></div>
-      </div>
-    </>
-  )
+      </>
+    )
+  } else {
+    return <div>Loading</div>
+  }
 }

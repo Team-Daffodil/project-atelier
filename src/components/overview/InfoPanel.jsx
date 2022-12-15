@@ -7,16 +7,20 @@ import Addtocart from './Addtocart.jsx'
 import axios from 'axios'
 
 export default function InfoPanel({
-  fetchStyles,
-  product,
+  item,
   styles,
   setAllStyles,
   selectedStyle,
   setSelectedStyle,
+  appState,
+  setAppState,
 }) {
   const [value, setValue] = useState(2)
   const [sizeSelected, setSizeSelected] = useState('')
-  const [qtyText, setqtyText] = useState('Select Qty')
+  const [qtyText, setqtyText] = useState('1')
+  const [panelIndex, setPanelIndex] = useState(0)
+  const [open, setOpen] = React.useState(false)
+  const [sizeDropdownText, setSizeDropdownText] = useState('Select a size')
 
   const getDefaultStyle = () => {
     if (styles.length > 0) {
@@ -24,12 +28,13 @@ export default function InfoPanel({
       setSelectedStyle(defaultStyle)
     }
   }
-  const handlePicClick = (e) => {
+  const handlePicClick = (e, i) => {
     let id = e.target.id
     let newSelect = styles.filter((style) => {
       return Number(style.style_id) === Number(id)
     })
     setSelectedStyle(newSelect)
+    setPanelIndex(i)
   }
 
   const getSkuInfo = () => {
@@ -53,7 +58,7 @@ export default function InfoPanel({
           quantities[result[i].size] += result[i].quantity
         }
       }
-      return quantities
+      return { quantities: quantities, sku: result }
     }
   }
 
@@ -61,7 +66,7 @@ export default function InfoPanel({
     getDefaultStyle()
   }, [styles])
 
-  if (product.id && styles.length > 0 && selectedStyle.length > 0) {
+  if (item.id && styles.length > 0 && selectedStyle.length > 0) {
     return (
       <div className="info-container">
         <div className="reviews">
@@ -72,11 +77,14 @@ export default function InfoPanel({
               setValue(newValue)
             }}
           />
-          <div className="read">Read all reviews (25)</div>
+          <div>{appState.rating}</div>
+          <a href="#review-section" className="read">
+            Read all reviews ({appState.totalReviews})
+          </a>
         </div>
-        <div className="productInfo">
-          <h4>{product.category}</h4>
-          <h1>{product.name}</h1>
+        <div className="itemInfo">
+          <h4>{item.category}</h4>
+          <h1>{item.name}</h1>
           <div>
             {selectedStyle[0].sale_price
               ? '$' + selectedStyle[0].sale_price
@@ -94,10 +102,11 @@ export default function InfoPanel({
               return (
                 <div className="thumbnailborder" key={thumbnail}>
                   <img
+                    className={i === panelIndex ? ' selected' : null}
                     id={style.style_id}
                     src={thumbnail}
                     key={thumbnail}
-                    onClick={(e) => handlePicClick(e)}
+                    onClick={(e) => handlePicClick(e, i)}
                   />
                 </div>
               )
@@ -106,6 +115,9 @@ export default function InfoPanel({
         </div>
         <div className="sizeselector">
           <DropdownSize
+            sizeDropdownText={sizeDropdownText}
+            open={open}
+            setOpen={setOpen}
             getSkuInfo={getSkuInfo}
             setSizeSelected={setSizeSelected}
           />
@@ -117,7 +129,17 @@ export default function InfoPanel({
           />
         </div>
         <div className="cart">
-          <Addtocart qtyText={qtyText} />
+          <Addtocart
+            setSizeDropdownText={setSizeDropdownText}
+            setOpen={setOpen}
+            qtyText={qtyText}
+            name={item.name}
+            style={selectedStyle[0]}
+            sizeSelected={sizeSelected}
+            getSkuInfo={getSkuInfo}
+            appState={appState}
+            setAppState={setAppState}
+          />
         </div>
       </div>
     )

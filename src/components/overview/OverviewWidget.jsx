@@ -5,60 +5,66 @@ import Description from './Description.jsx'
 import Gallery from './Gallery.jsx'
 import axios from 'axios'
 
-export default function OverviewWidget() {
+export default function OverviewWidget({ appState, setAppState }) {
   const api = process.env.API_URL
   const fetchheaders = {
     Authorization: process.env.API_TOKEN,
   }
-  const [product, setProduct] = useState([])
+  const [item, setItem] = useState([])
   const [styles, setAllStyles] = useState([])
   const [selectedStyle, setSelectedStyle] = useState([])
 
-  const fetchProducts = () => {
-    return axios
-      .get(process.env.API_URL + 'products/37311', { headers: fetchheaders })
-      .then((data) => {
-        setProduct(data.data)
-        return data.data
-      })
-      .catch((err) => {
-        console.log('Error getting products', err)
-      })
+  const fetchItem = async () => {
+    const item = await axios.get(process.env.API_URL + '/products/37315', {
+      headers: fetchheaders,
+    })
+    setItem(item.data)
+    return item.data
   }
 
-  const fetchStyles = (id) => {
-    return axios
-      .get(`${api}products/${id}/styles`, {
-        headers: fetchheaders,
-      })
-      .then((data) => {
-        // return data.data.results
-        setAllStyles(data.data.results)
-      })
-      .catch((err) => console.log(err))
+  const fetchStyles = async (id) => {
+    const styles = await axios.get(`${api}/products/${id}/styles`, {
+      headers: fetchheaders,
+    })
+    setAllStyles(styles.data.results)
+    return styles.data.results
+  }
+  const getDefaultStyle = (data) => {
+    let defaultStyle = data.filter((el) => el['default?'] === true)
+    setSelectedStyle(defaultStyle)
   }
 
   useEffect(() => {
-    fetchProducts().then((data) => {
-      fetchStyles(data.id)
+    fetchItem().then((data) => {
+      fetchStyles(data.id).then((data) => {
+        getDefaultStyle(data)
+      })
     })
   }, [])
-  return (
-    <>
-      {/* <div className="overview"> */}
-      {/* <div className="gallerycart"> */}
-      {/* <Gallery /> */}
-      <InfoPanel
-        fetchStyles={fetchStyles}
-        product={product}
-        styles={styles}
-        setAllStyles={setAllStyles}
-        selectedStyle={selectedStyle}
-        setSelectedStyle={setSelectedStyle}
-      />
-      {/* </div> */}
-      {/* <Description product={product} /> */}
-      {/* </div> */}
-    </>
-  )
+
+  if (item.id && styles.length > 0 && selectedStyle.length > 0) {
+    return (
+      <>
+        <div className="overview">
+          <div className="gallerycart">
+            <Gallery selectedStyle={selectedStyle} />
+
+            <InfoPanel
+              setAppState={setAppState}
+              appState={appState}
+              fetchStyles={fetchStyles}
+              item={item}
+              styles={styles}
+              setAllStyles={setAllStyles}
+              selectedStyle={selectedStyle}
+              setSelectedStyle={setSelectedStyle}
+            />
+          </div>
+          <Description item={item} />
+        </div>
+      </>
+    )
+  } else {
+    return <div>Loading...</div>
+  }
 }

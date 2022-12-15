@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import Questions from './Questions.jsx'
 import RelatedProducts from './related/RelatedProducts.jsx'
 import axios from 'axios'
-import OverviewWidget from './overview/OverviewWidget'
+import OverviewWidget from './overview/OverviewWidget.jsx'
 import Review from './review/Review'
 import Outfit from './related/Outfit.jsx'
 
@@ -11,7 +11,11 @@ const fetchheaders = {
   Authorization: process.env.API_TOKEN,
 }
 
-const PRODUCT_ID = 37311
+let PRODUCT_ID = 37311
+if (window !== undefined) {
+  let segs = window.location.href.split('/')
+  PRODUCT_ID = segs[segs.length - 1]
+}
 
 const App = () => {
   const [appState, setAppState] = useState({ productId: PRODUCT_ID })
@@ -50,9 +54,9 @@ const App = () => {
 
   return (
     <section id="app">
-      <h1>Hello world React!</h1>
-      <p>AppState: {Object.keys(appState)}</p>
-      <OverviewWidget />
+      <h1>SearchBarPlaceholder</h1>
+      <OverviewWidget appState={appState} />
+
       <RelatedProducts addToOutfitHandler={addToOutfitHandler}/>
       <Outfit outfit={outfit} deleteOutfit={deleteOutfit}/>
       <Questions />

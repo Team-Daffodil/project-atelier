@@ -103,7 +103,6 @@ p, span {
   display: flex;
   flex-direction: column;
   position: relative;
-
 }
 .related-header {
   margin-left: 50px;
@@ -134,7 +133,7 @@ p, span {
 .related-card-image {
   width: 225px;
   height: 250px;
-  object-fit: cover
+  object-fit: cover;
 }
 .related-card-info {
   display: flex;
@@ -214,7 +213,7 @@ p, span {
   position: fixed;
   top: 0;
   left: 0;
-  width:100%;
+  width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
 }
@@ -222,13 +221,13 @@ p, span {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  position:fixed;
+  position: fixed;
   background: white;
   width: 50%;
   height: 200px;
-  top:50%;
-  left:50%;
-  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .button-close-question-modal {
@@ -236,7 +235,6 @@ p, span {
   top: 40%;
   right: 25%;
 }
-
 
 .display-block {
   display: block;
@@ -376,9 +374,12 @@ p, span {
 .overview {
   display: flex;
   flex-direction: column;
+  box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.1),
+    3px 3px 2px rgba(0, 0, 0, 0.1);
 }
 .gallerycart {
   display: flex;
+  padding: 10px;
 }
 
 /*------- InfoPanel CONTAINER -------*/
@@ -387,11 +388,12 @@ p, span {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-evenly;
-  border: 2px black;
-  border-style: solid;
+  justify-content: space-between;
   height: 50vh;
   padding: 10px;
+  box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.1),
+    3px 3px 5px rgba(0, 0, 0, 0.1);
+  margin-left: auto;
 }
 
 .reviews {
@@ -410,20 +412,29 @@ p, span {
   grid-template-columns: auto auto auto auto;
 }
 .thumbnailborder {
-  height: 50px;
-  width: 50px;
-  padding: 3px;
+  height: 35px;
+  width: 35px;
 }
 .selected {
   border: 1px red;
   border-style: solid;
 }
 .stylethumbnails img {
-  height: 50px;
-  width: 50px;
+  height: 35px;
+  width: 35px;
   border-radius: 50%;
   border: 1px grey;
   border-style: solid;
+  transition: all 0.1s ease;
+  transform: scale(1);
+}
+.stylethumbnails .selected {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  border: 2px orange;
+  border-style: solid;
+  transform: scale(1.2);
 }
 .sizeselector {
   display: flex;
@@ -433,14 +444,68 @@ p, span {
   font-size: 26px;
 }
 
+.dropdown {
+  position: relative;
+}
+.displayQty,
+.displayQty1 {
+  width: 75px;
+  height: 100%;
+  font-size: initial;
+  color: #5e5c5c;
+  border: 1px solid grey;
+  border-radius: 0.23em;
+  background: transparent;
+}
+.displayQty1:hover {
+  border: 1px black solid;
+  transform: scale(1.01);
+}
+
+.menu {
+  position: absolute;
+  list-style-type: none;
+  margin: 0 0;
+  padding: 0;
+  border: 1px solid grey;
+  border-radius: 0.3em;
+  width: 75px;
+  background: white;
+  overflow: auto;
+  height: 100px;
+}
+
+.menu > li {
+  margin: 0;
+}
+
+.menu > li:hover {
+  background-color: lightgray;
+}
+
+.menu > li > button {
+  width: 100%;
+  height: 100%;
+  text-align: left;
+
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 5px;
+  margin: 0;
+  font: initial;
+  cursor: pointer;
+}
+
 /*------- Description CONTAINER -------*/
 .description-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  border: 2px black;
-  border-style: solid;
+  box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.1),
+    3px 3px 5px rgba(0, 0, 0, 0.1);
   border-radius: 1em;
+  padding: 10px;
 }
 .desc-facts {
   display: flex;
@@ -465,23 +530,74 @@ p, span {
 .fact {
   display: flex;
 }
+.buttonwrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.sharebtns {
+  display: flex;
+  width: 12%;
+  justify-content: space-evenly;
+}
+.sharebtns i {
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: inline-block;
+  vertical-align: middle;
+  width: 24px;
+  height: 24px;
+}
+.twitback {
+  background-image: url(https://m.media-amazon.com/images/G/01/share-icons/twitter-circular.svg);
+}
+.fbback {
+  background-image: url(https://m.media-amazon.com/images/G/01/share-icons/facebook-circular.svg);
+}
+.pinback {
+  background-image: url(https://m.media-amazon.com/images/G/01/share-icons/pinterest-circular.svg);
+}
+.fb,
+.pin,
+.twitter {
+  transition: all 0.3s ease;
+  transform: scale(1);
+}
+
+.fb:hover,
+.pin:hover,
+.twitter:hover {
+  transform: scale(1.2) perspective(1px);
+}
 
 /*------- Gallery CONTAINER -------*/
 .gallery-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  box-sizing: border-box;
-}
-.left {
+  margin: 0;
   display: flex;
-  height: 50vh;
+  align-items: flex-start;
+  width: 1100px;
+  box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.1),
+    3px 3px 5px rgba(0, 0, 0, 0.1);
 }
+
+.imageview {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin: 20px;
+  width: 100%;
+  justify-content: center;
+}
+
 .left_1 {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 100px;
+  margin-right: 0;
+}
+.left_2 {
+  width: 100%;
 }
 .img_wrap {
   display: flex;
@@ -491,32 +607,60 @@ p, span {
   cursor: pointer;
   justify-content: center;
   align-items: center;
-  background: white;
 }
 .img_wrap img {
-  width: 75px;
-  height: 75px;
-  object-fit: contain;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
   user-select: none;
   -moz-user-select: none;
   -webkit-user-drag: none;
   -webkit-user-select: none;
   -ms-user-select: none;
 }
-.imageview {
-  display: flex;
-  margin: 20px;
-  align-items: center;
-  justify-content: center;
-}
-.imageview .btnClose,
-.imageview .btnPrev,
-.imageview .btnNext {
-  position: absolute;
+.imageview > .btnPrev,
+.imageview > .btnNext {
   cursor: pointer;
   opacity: 0.6;
-  color: white;
-  z-index: 9999;
+  color: rgb(237 181 78);
+  padding: 10px;
+}
+.arrowbtns {
+  display: flex;
+  cursor: pointer;
+  opacity: 0.6;
+  color: rgb(237 181 78);
+  padding: 10px;
+  justify-content: space-between;
+  width: 250px;
+}
+.bn {
+  cursor: pointer;
+  opacity: 0.6;
+  color: rgb(237 181 78);
+  transition: all 0.1s ease;
+  transform: scale(1);
+}
+.bn:hover {
+  opacity: 1;
+  transform: scale(1.2) perspective(1px);
+  border: 1px black solid;
+  border-radius: 1em;
+}
+.bp {
+  cursor: pointer;
+  opacity: 0.6;
+  color: rgb(237 181 78);
+  transition: all 0.3s ease;
+  transform: scale(1);
+  transition: all 0.1s ease;
+  transform: scale(1);
+}
+.bp:hover {
+  opacity: 1;
+  transform: scale(1.2) perspective(1px);
+  border: 1px black solid;
+  border-radius: 1em;
 }
 
 .btnNext:hover,
@@ -526,14 +670,14 @@ p, span {
 }
 
 .imageview .btnPrev {
-  top: 50%;
+  /* top: 50%;
   transform: translateY(-50%);
-  left: 40px;
+  left: 40px; */
 }
 .imageview .btnNext {
-  top: 50%;
+  /* top: 50%;
   transform: translateY(-50%);
-  right: 40px;
+  right: 40px; */
 }
 .imageview img {
   width: 500px;
@@ -542,7 +686,17 @@ p, span {
 }
 
 .active {
-  border: 2px solid red;
+  border: 3px solid orange;
+}
+
+.morebtn {
+  background: transparent;
+  border: solid 1px orange;
+  border-radius: 1em;
+  opacity: 0.6;
+}
+.morebtn:hover {
+  opacity: 1;
 }
 /*------- Gallery CONTAINER Modal -------*/
 
@@ -567,7 +721,7 @@ p, span {
   position: fixed;
   cursor: pointer;
   opacity: 0.6;
-  color: white;
+  color: rgb(237 181 78);
   z-index: 9999;
 }
 
@@ -593,21 +747,23 @@ p, span {
 }
 
 .fullScreenImage {
-  height: 80%;
-  width: 80%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  box-shadow: 3px 3px 4px 10px rgb(0 0 0 / 60%);
+  height: 800px;
+  width: 1400px;
+  overflow: hidden;
 }
-.fullScreenImage img {
-  max-width: 1000px;
-  max-height: 600px;
-  -webkit-user-select: none;
-  user-select: none;
+.fullScreenImage > img {
+  transform-origin: center;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  transition: transform 0.6s;
 }
+
 .bottom {
   display: flex;
   gap: 5px;
+  padding: 15px;
 }
 .modalImg_wrap {
   display: flex;
@@ -617,21 +773,23 @@ p, span {
   cursor: pointer;
   justify-content: center;
   align-items: center;
-  background: white;
+  background: transparent;
+  border-radius: 1em;
 }
 .modalImg_wrap img {
-  width: 35px;
-  height: 35px;
-  object-fit: contain;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
   user-select: none;
   -moz-user-select: none;
   -webkit-user-drag: none;
   -webkit-user-select: none;
   -ms-user-select: none;
+  border-radius: 1em;
 }
 
 .active {
-  border: 2px solid red;
+  border: 3px solid rgb(255, 187, 0);
 }
 
 
