@@ -5,6 +5,7 @@ import RelatedProducts from './related/RelatedProducts.jsx'
 import axios from 'axios'
 import OverviewWidget from './overview/OverviewWidget'
 import Review from './review/Review'
+import Outfit from './related/Outfit.jsx'
 
 const fetchheaders = {
   Authorization: process.env.API_TOKEN,
@@ -14,12 +15,33 @@ const PRODUCT_ID = 37311
 
 const App = () => {
   const [appState, setAppState] = useState({ productId: PRODUCT_ID })
-
+  const [outfit, setOutfit] = useState([])
   const handleSetReviewData = (reviewData) => {
     setAppState({
       ...appState,
       ...reviewData,
     })
+  }
+  const deleteOutfit = (id) => {
+    console.log('SOMETHING')
+    setOutfit(outfit.filter(item => {
+      if (item.id !== id) {return item}
+    }))
+  }
+  const addToOutfitHandler = (event, product, styles, rating, productId) => {
+    console.log(event.nativeEvent)
+    console.log('ADD TO OUTFIT: ', product, styles, rating)
+    let tempObj = {}
+    tempObj.category = product.category
+    tempObj.name = product.name
+    tempObj.sale = styles.sale
+    tempObj.price = styles.price
+    tempObj.image = styles.image
+    tempObj.rating = rating
+    tempObj.id = productId
+    tempObj.added = true;
+    setOutfit([...outfit, tempObj])
+
   }
 
   useEffect(() => {
@@ -31,7 +53,8 @@ const App = () => {
       <h1>Hello world React!</h1>
       <p>AppState: {Object.keys(appState)}</p>
       <OverviewWidget />
-      <RelatedProducts />
+      <RelatedProducts addToOutfitHandler={addToOutfitHandler}/>
+      <Outfit outfit={outfit} deleteOutfit={deleteOutfit}/>
       <Questions />
       <Review
         productId={appState.productId}

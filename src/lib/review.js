@@ -3,7 +3,11 @@ export const ratingAvg = (ratings, n) => {
     (acc, key) => (acc += parseInt(key) * parseInt(ratings[key])),
     0
   )
-  return (Math.round((total / n) * 4) / 4).toFixed(2)
+  let count = 0;
+  for (var key in ratings) {
+    count += Number(ratings[key])
+  }
+  return (Math.round((total / count) * 4) / 4).toFixed(2)
 }
 
 export const maxChars = (str, max) => {
