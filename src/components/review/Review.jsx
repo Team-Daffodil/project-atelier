@@ -31,7 +31,7 @@ const Review = ({ productId, handleSetReviewData }) => {
   }, [productRating, totalReviews])
 
   return (
-    <section>
+    <section id="review-section">
       <h3>{rating && rating}</h3>
       <ReviewSidePanel
         productId={productId}
