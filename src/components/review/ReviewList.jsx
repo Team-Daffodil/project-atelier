@@ -71,7 +71,7 @@ const ReviewList = ({ productId, rating, handleSetReviewsTotal }) => {
 
   return (
     <section
-      style={{ height: elemHeight, overflowY: 'auto' }}
+      style={{ height: elemHeight, overflowY: 'auto', flexGrow: 1 }}
       onScroll={handleScroll}
     >
       <nav aria-labelledby="reviews-navigation">
@@ -111,7 +111,7 @@ const ReviewList = ({ productId, rating, handleSetReviewsTotal }) => {
         </label>
       </nav>
       {reviews.length > 0 && (
-        <ul title="review-list">
+        <ul title="review-list" style={{ listStyle: 'none', padding: 0 }}>
           {visibleReviews.map((review) => (
             <li data-testid="review-tile" key={review.review_id}>
               <ReviewTile review={review} />
@@ -121,11 +121,19 @@ const ReviewList = ({ productId, rating, handleSetReviewsTotal }) => {
       )}
       <div>
         {visibleReviews.length < reviews.length && (
-          <a href="#" onClick={handleMoreClick}>
-            More Reviews
-          </a>
+          <button
+            className="button-more-questions question-buttons"
+            onClick={handleMoreClick}
+          >
+            MORE REVIEWS
+          </button>
+          // <a href="#" onClick={handleMoreClick}>
+          //   More Reviews
+          // </a>
         )}
-        <a href="#">Add Review</a>
+        <button className="question-button-ask question-buttons">
+          ADD REVIEW
+        </button>
       </div>
     </section>
   )

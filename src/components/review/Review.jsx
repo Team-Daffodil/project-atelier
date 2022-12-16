@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react'
 import ReviewList from './ReviewList'
 import ReviewSidePanel from './ReviewSidePanel'
 
+const sectionContainerStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  margin: 25,
+}
+
 const Review = ({ productId, handleSetReviewData }) => {
   const [rating, setRating] = useState(undefined)
   const [productRating, setProductRating] = useState(undefined)
@@ -31,18 +37,20 @@ const Review = ({ productId, handleSetReviewData }) => {
   }, [productRating, totalReviews])
 
   return (
-    <section id="review-section">
-      <h3>{rating && rating}</h3>
-      <ReviewSidePanel
-        productId={productId}
-        handleRatingChange={handleRatingChange}
-        handleSetRating={handleSetRating}
-      />
-      <ReviewList
-        productId={productId}
-        rating={rating}
-        handleSetReviewsTotal={handleSetReviewsTotal}
-      />
+    <section id="review-section" style={sectionContainerStyle}>
+      <h3>Ratings & Review</h3>
+      <div style={{ display: 'flex', flexDirection: 'row' }}>
+        <ReviewSidePanel
+          productId={productId}
+          handleRatingChange={handleRatingChange}
+          handleSetRating={handleSetRating}
+        />
+        <ReviewList
+          productId={productId}
+          rating={rating}
+          handleSetReviewsTotal={handleSetReviewsTotal}
+        />
+      </div>
     </section>
   )
 }

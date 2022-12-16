@@ -12,7 +12,7 @@ const Bar = ({ percent }) => {
         style={{
           backgroundColor: 'lightgreen',
           width: calculateFillWidth(percent) + '%',
-          height: 20,
+          height: 13,
         }}
       ></div>
     </div>
