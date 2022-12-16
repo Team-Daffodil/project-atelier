@@ -3,8 +3,8 @@ import axios from 'axios'
 
 const SearchQuestion = ({ onSearchHandler }) => {
   return (
-    <form>
-      <input label="Answer" type="text" onChange={onSearchHandler}></input>
+    <form className='questions-search'>
+      <input className='question-search-input' label="Answer" type="text" onChange={onSearchHandler}></input>
     </form>
   )
 }

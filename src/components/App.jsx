@@ -63,8 +63,8 @@ const App = () => {
       <Navbar />
       <OverviewWidget appState={appState} />
 
-      <RelatedProducts addToOutfitHandler={addToOutfitHandler} />
-      <Outfit outfit={outfit} deleteOutfit={deleteOutfit} />
+      <RelatedProducts addToOutfitHandler={addToOutfitHandler}/>
+      <Outfit outfit={outfit} deleteOutfit={deleteOutfit}/>
       <Questions />
       <Review
         productId={appState.productId}
