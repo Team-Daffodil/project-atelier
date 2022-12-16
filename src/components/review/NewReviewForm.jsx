@@ -174,7 +174,7 @@ const NewReviewForm = ({ productInfo, setModalIsOpen }) => {
   const [submitted, setSubmitted] = useState(false)
 
   const initialValues = {
-    rating: '',
+    rating: 5,
     summary: '',
     body: '',
     characteristics: {},
