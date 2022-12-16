@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { ratingAvg } from '../../lib/review'
 import axios from 'axios'
+import styled from 'styled-components'
+
 import Bar from './Bar'
 import FactorBar from './FactorBar'
+import QuarterRating from '../common/QuarterRating'
 
 const headers = {
   Authorization: process.env.API_TOKEN,
@@ -29,6 +32,27 @@ const fetchProductData = async (id) => {
   // TODO: handle error here
   // https://rapidapi.com/guides/fetch-api-async-await
 }
+
+const Section = styled.section`
+  width: 400px;
+  flex-grow: 0;
+  padding: 16px;
+  box-sizing: border-box;
+
+  & ul {
+    list-style: none;
+    padding: 0;
+  }
+`
+
+const StarBarContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  a {
+    font-size: 13px;
+  }
+`
 
 const ReviewSidePanel = ({
   productId,
@@ -69,13 +93,14 @@ const ReviewSidePanel = ({
   }, [totalRatings, data])
 
   return (
-    <section>
-      <h3>Ratings & Reviews</h3>
+    <Section>
       {data.ratings !== undefined ? (
         <div>
           <div>
             <div>{ratingAvg(data.ratings, totalRatings)}</div>
-            <div>Stars</div>
+            <div>
+              {/* <QuarterRating rating={parseInt(data.ratings, totalRatings)} /> */}
+            </div>
           </div>
           <p>
             {recommended(data.recommended)}% of reviews recommended this product
@@ -84,16 +109,18 @@ const ReviewSidePanel = ({
             {['5', '4', '3', '2', '1'].map((rating) => {
               return (
                 <li key={rating + 'stars'}>
-                  <div>
-                    <a href="#" onClick={handleRatingClick(rating)}>
-                      {rating} stars
-                    </a>
-                  </div>
-                  <div>
-                    <Bar
-                      percent={parseInt(data.ratings[rating]) / totalRatings}
-                    />
-                  </div>
+                  <StarBarContainer>
+                    <div style={{ marginRight: 8 }}>
+                      <a href="#" onClick={handleRatingClick(rating)}>
+                        {rating} stars
+                      </a>
+                    </div>
+                    <div style={{ flexGrow: 1 }}>
+                      <Bar
+                        percent={parseInt(data.ratings[rating]) / totalRatings}
+                      />
+                    </div>
+                  </StarBarContainer>
                 </li>
               )
             })}
@@ -102,7 +129,7 @@ const ReviewSidePanel = ({
             <ul>
               {Object.keys(data.characteristics).map((key) => {
                 return (
-                  <li key={key}>
+                  <li key={key} style={{ fontSize: 15, marginBottom: 12 }}>
                     <label>{key}</label>
                     <FactorBar
                       feature={key}
@@ -117,7 +144,7 @@ const ReviewSidePanel = ({
       ) : (
         <div>Loading</div>
       )}
-    </section>
+    </Section>
   )
 }
 

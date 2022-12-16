@@ -24,7 +24,7 @@ const FactorBar = ({ feature, num }) => {
 
   return (
     <div>
-      <div style={{ background: 'lightgrey', height: 20, width: '100%' }}></div>
+      <div style={{ background: 'lightgrey', height: 13, width: '100%' }}></div>
       <div data-testid="arrow" style={cssArrow}></div>
       <div
         style={{
