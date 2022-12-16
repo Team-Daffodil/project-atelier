@@ -19,11 +19,7 @@ const ModalContainer = styled.div`
 `
 
 const Modal = ({ children, setModalIsOpen }) => {
-  return (
-    <ModalContainer onClick={() => setModalIsOpen(false)}>
-      {children}
-    </ModalContainer>
-  )
+  return <ModalContainer>{children}</ModalContainer>
 }
 
 export default Modal

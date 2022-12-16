@@ -34,7 +34,7 @@ const fetchProductData = async (id) => {
 }
 
 const Section = styled.section`
-  width: 400px;
+  width: 420px;
   flex-grow: 0;
   padding: 16px;
   box-sizing: border-box;
@@ -48,6 +48,10 @@ const Section = styled.section`
 const StarBarContainer = styled.div`
   display: flex;
   flex-direction: row;
+
+  &:hover {
+    font-weight: 700;
+  }
 
   a {
     font-size: 13px;
@@ -112,7 +116,7 @@ const ReviewSidePanel = ({
               return (
                 <li key={rating + 'stars'}>
                   <StarBarContainer>
-                    <div style={{ marginRight: 8 }}>
+                    <div style={{ width: 40, paddingRight: 4, flexGrow: 0 }}>
                       <a href="#" onClick={handleRatingClick(rating)}>
                         {rating} stars
                       </a>

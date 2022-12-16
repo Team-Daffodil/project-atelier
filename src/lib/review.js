@@ -1,9 +1,11 @@
+import React from 'react'
+
 export const ratingAvg = (ratings, n) => {
   let total = Object.keys(ratings).reduce(
     (acc, key) => (acc += parseInt(key) * parseInt(ratings[key])),
     0
   )
-  let count = 0;
+  let count = 0
   for (var key in ratings) {
     count += Number(ratings[key])
   }
@@ -19,4 +21,12 @@ export const maxChars = (str, max) => {
     result += '...'
   }
   return result
+}
+
+export const displayChars = (feature) => {
+  let chars = ['Too small', 'Perfect', 'Too big']
+  if (feature === 'Quality') {
+    chars = ['Poor', 'Perfect']
+  }
+  return chars.map((char) => <span key={char}>{char}</span>)
 }

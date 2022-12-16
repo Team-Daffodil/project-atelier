@@ -253,7 +253,10 @@ const ReviewList = ({
         </button>
         {modalIsOpen && (
           <Modal setModalIsOpen={setModalIsOpen}>
-            <NewReviewForm productInfo={productInfo} />
+            <NewReviewForm
+              productInfo={productInfo}
+              setModalIsOpen={setModalIsOpen}
+            />
           </Modal>
         )}
       </div>
