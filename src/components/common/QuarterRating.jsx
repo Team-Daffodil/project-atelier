@@ -24,19 +24,19 @@ const QuarterRating = ({rating}) => {
     <TbFlower />
   </IconContext.Provider>
 
-  let filledQ1 = <IconContext.Provider value={{color: 'ffff64', size: '20px', className: 'flower-q1'}}>
+  let filledQ1 = <IconContext.Provider value={{color: 'rgb(240 243 43)', size: '20px', className: 'flower-q1'}}>
     <TbFlower />
   </IconContext.Provider>
 
-  let filledQ2 = <IconContext.Provider value={{color: 'ffff64', size: '20px', className: 'flower-q2'}}>
+  let filledQ2 = <IconContext.Provider value={{color: 'rgb(240 243 43)', size: '20px', className: 'flower-q2'}}>
     <TbFlower />
   </IconContext.Provider>
 
-  let filledQ3 = <IconContext.Provider value={{color: 'ffff64', size: '20px', className: 'flower-q3'}}>
+  let filledQ3 = <IconContext.Provider value={{color: 'rgb(240 243 43)', size: '20px', className: 'flower-q3'}}>
     <TbFlower />
   </IconContext.Provider>
 
-  let filledQ4 = <IconContext.Provider value={{color: 'ffff64', size: '20px', className: 'flower- q4'}}>
+  let filledQ4 = <IconContext.Provider value={{color: 'rgb(240 243 43)', size: '20px', className: 'flower- q4'}}>
     <TbFlower />
   </IconContext.Provider>
 

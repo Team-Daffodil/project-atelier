@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { IconContext } from 'react-icons';
+import { CiSquareRemove } from 'react-icons/ci';
 
 const AnswerModal = ({ show, handleClose }) => {
   let toggleClass = show ? 'modal display-block' : 'display-none'
@@ -21,10 +23,16 @@ const AnswerModal = ({ show, handleClose }) => {
 
   return (
     <div className={toggleClass}>
+
       <form className="modal-main" onSubmit={onSubmitHandler}>
+        <div className='modal-ans-title' style={{width: '300px', display: 'flex', flexDirection: 'column', flexWrap: 'wrap', alignItems: 'center'}}>
+          <span style={{fontSize: '18px'}}>Submit Your Answer</span>
+          <span>Camo Onsie: Consequuntur ea dolorum distinctio quibusdam expedita excepturi cum quaerat eum.</span>
+        </div>
         <label style={{marginLeft: '10px', fontSize: '12px'}}>
           Answer:
           <input
+            className='modal-input'
             style={{ marginLeft: '10px', height: '40px' }}
             placeholder="42"
             type="text"
@@ -32,19 +40,20 @@ const AnswerModal = ({ show, handleClose }) => {
         </label>
         <label style={{ marginLeft: '10px', fontSize: '12px'}}>
           Name:
-          <input placeholder="Example: jack543!" type="text"></input>
+          <input className='modal-input' placeholder="Example: jack543!" type="text"></input>
         </label>
-        <div style={{marginLeft: '10px', fontSize: '12px'}}>For privacy reasons, do not use your full name or email address</div>
+        <div style={{marginLeft: '10px', fontSize: '8px', width: '200px'}}>For privacy reasons, do not use your full name or email address</div>
         <label style={{marginLeft: '10px', fontSize: '12px'}}>
           Email:
-          <input placeholder="bulbasaur@pokemon.com" type="text"></input>
+          <input className='modal-input' placeholder="bulbasaur@pokemon.com" type="text"></input>
         </label>
-        <div style={{marginLeft: '10px', fontSize: '12px'}}>For authentication reasons, you will not be emailed</div>
+        <div style={{marginLeft: '10px', fontSize: '8px', width: '200px'}}>For authentication reasons, you will not be emailed</div>
         <input type="submit"></input>
+        <IconContext.Provider value={{color: 'red', size: '40px'}}>
+          <CiSquareRemove />
+        </IconContext.Provider>
       </form>
-      <button className="button-close-question-modal" style={{width: '40px', height: '20px'}} onClick={handleClose}>
-        close
-      </button>
+
     </div>
   )
 }
