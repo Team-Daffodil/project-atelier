@@ -83,7 +83,7 @@ export default function InfoPanel({
           </a>
         </div>
         <div className="itemInfo">
-          <h4>{item.category}</h4>
+          <h4 className="category">{item.category}</h4>
           <h1>{item.name}</h1>
           <div>
             {selectedStyle[0].sale_price
@@ -113,33 +113,35 @@ export default function InfoPanel({
             })}
           </div>
         </div>
-        <div className="sizeselector">
-          <DropdownSize
-            sizeDropdownText={sizeDropdownText}
-            open={open}
-            setOpen={setOpen}
-            getSkuInfo={getSkuInfo}
-            setSizeSelected={setSizeSelected}
-          />
-          <DropdownQty
-            getSkuInfo={getSkuInfo}
-            sizeSelected={sizeSelected}
-            qtyText={qtyText}
-            setqtyText={setqtyText}
-          />
-        </div>
-        <div className="cart">
-          <Addtocart
-            setSizeDropdownText={setSizeDropdownText}
-            setOpen={setOpen}
-            qtyText={qtyText}
-            name={item.name}
-            style={selectedStyle[0]}
-            sizeSelected={sizeSelected}
-            getSkuInfo={getSkuInfo}
-            appState={appState}
-            setAppState={setAppState}
-          />
+        <div className="dropdown-wrapper">
+          <div className="sizeselector">
+            <DropdownSize
+              sizeDropdownText={sizeDropdownText}
+              open={open}
+              setOpen={setOpen}
+              getSkuInfo={getSkuInfo}
+              setSizeSelected={setSizeSelected}
+            />
+            <DropdownQty
+              getSkuInfo={getSkuInfo}
+              sizeSelected={sizeSelected}
+              qtyText={qtyText}
+              setqtyText={setqtyText}
+            />
+          </div>
+          <div className="cart">
+            <Addtocart
+              setSizeDropdownText={setSizeDropdownText}
+              setOpen={setOpen}
+              qtyText={qtyText}
+              name={item.name}
+              style={selectedStyle[0]}
+              sizeSelected={sizeSelected}
+              getSkuInfo={getSkuInfo}
+              appState={appState}
+              setAppState={setAppState}
+            />
+          </div>
         </div>
       </div>
     )
