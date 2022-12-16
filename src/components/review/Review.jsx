@@ -12,6 +12,7 @@ const Review = ({ productId, handleSetReviewData }) => {
   const [rating, setRating] = useState(undefined)
   const [productRating, setProductRating] = useState(undefined)
   const [totalReviews, setTotalReviews] = useState(undefined)
+  const [productInfo, setProductInfo] = useState(undefined)
 
   const handleRatingChange = (val) => {
     if (parseInt(val) === rating) {
@@ -28,6 +29,11 @@ const Review = ({ productId, handleSetReviewData }) => {
   const handleSetRating = (rating) => {
     setProductRating(rating)
   }
+
+  const handleSetProductInfo = (info) => {
+    setProductInfo(info)
+  }
+
   useEffect(() => {
     if (productRating === undefined || totalReviews === undefined) {
       return
@@ -44,10 +50,12 @@ const Review = ({ productId, handleSetReviewData }) => {
           productId={productId}
           handleRatingChange={handleRatingChange}
           handleSetRating={handleSetRating}
+          handleSetProductInfo={handleSetProductInfo}
         />
         <ReviewList
           productId={productId}
           rating={rating}
+          productInfo={productInfo}
           handleSetReviewsTotal={handleSetReviewsTotal}
         />
       </div>

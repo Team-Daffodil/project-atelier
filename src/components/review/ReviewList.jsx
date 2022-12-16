@@ -1,17 +1,114 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import axios from 'axios'
+import styled from 'styled-components'
+
 import ReviewTile from './ReviewTile'
+import Modal from './NewFormModal'
+import NewReviewForm from './NewReviewForm'
 
 const headers = { Authorization: process.env.API_TOKEN }
 
 const elemHeight = 800
 const scrollDelta = 10
 
-const ReviewList = ({ productId, rating, handleSetReviewsTotal }) => {
+const RadioGroup = styled.div`
+  margin-left: 12px;
+  display: flex;
+
+  label {
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    padding: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 12px;
+
+    &:hover {
+      background-color: #dfdfdf;
+    }
+  }
+
+  input[type='checkbox'],
+  input[type='radio'] {
+    appearance: none;
+    height: 18px;
+    width: 18px;
+    background: #fff;
+    border: 2px solid ${(props) => props.subtle};
+    margin: 0 8px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    outline-offset: 5px;
+    outline-color: ${(props) => props.subtle};
+
+    &:disabled {
+      opacity: 0.7;
+      background: ${(props) => props.subtle};
+      cursor: not-allowed;
+    }
+
+    &:after {
+      content: '';
+      display: block;
+      transform: scale(0);
+      transition: 120ms transform ease-in-out;
+    }
+
+    &:checked:after {
+      transform: scale(1);
+    }
+  }
+
+  input[type='checkbox'] {
+    border-radius: 5px;
+
+    &:after {
+      width: 16px;
+      height: 16px;
+    }
+
+    &:checked {
+      border: none;
+      background-color: ${(props) => props.primary};
+
+      &:after {
+        content: url("data:image/svg+xml, <svg viewBox='0 0 16 15' xmlns='http://www.w3.org/2000/svg'><path fill='white' d='M15.25.847a1.51 1.51 0 0 1 .405 2.096L8.106 14.11a1.944 1.944 0 0 1-2.94.329L.6 10.156a1.51 1.51 0 1 1 2.067-2.202l3.645 3.42 6.841-10.122a1.51 1.51 0 0 1 2.098-.405Z'/></svg>");
+      }
+    }
+  }
+
+  input[type='radio'] {
+    border-radius: 12px;
+
+    &:after {
+      width: 10px;
+      height: 10px;
+      border-radius: 4px;
+    }
+
+    &:checked {
+      border-color: ${(props) => props.primary};
+
+      &:after {
+        background-color: ${(props) => props.primary};
+      }
+    }
+  }
+`
+const ReviewList = ({
+  productId,
+  rating,
+  productInfo,
+  handleSetReviewsTotal,
+}) => {
   const [reviews, setReviews] = useState([])
   const [visibleReviews, setVisibleReviews] = useState([])
   const [sortParam, setSortParam] = useState('relevant')
+  const [modalIsOpen, setModalIsOpen] = useState(false)
 
   const appendVisible = () => {
     const len = visibleReviews.length
@@ -70,55 +167,72 @@ const ReviewList = ({ productId, rating, handleSetReviewsTotal }) => {
   }
 
   return (
-    <section
-      style={{ height: elemHeight, overflowY: 'auto', flexGrow: 1 }}
-      onScroll={handleScroll}
-    >
-      <nav aria-labelledby="reviews-navigation">
-        <span>{reviews.length} reviews, sorted by:</span>
-        <label htmlFor="relevance">
-          <input
-            type="radio"
-            id="relevant"
-            name="sort-by"
-            value="relevant"
-            checked={sortParam === 'relevant'}
-            onChange={handleSortOptionChange}
-          />
-          relevance
-        </label>
-        <label htmlFor="newest">
-          <input
-            type="radio"
-            id="newest"
-            name="sort-by"
-            value="newest"
-            checked={sortParam === 'newest'}
-            onChange={handleSortOptionChange}
-          />
-          newest
-        </label>
-        <label htmlFor="helpful">
-          <input
-            type="radio"
-            id="helpful"
-            name="sort-by"
-            value="helpful"
-            checked={sortParam === 'helpful'}
-            onChange={handleSortOptionChange}
-          />
-          helpful
-        </label>
-      </nav>
-      {reviews.length > 0 && (
-        <ul title="review-list" style={{ listStyle: 'none', padding: 0 }}>
-          {visibleReviews.map((review) => (
-            <li data-testid="review-tile" key={review.review_id}>
-              <ReviewTile review={review} />
-            </li>
-          ))}
-        </ul>
-      )}
+    <section style={{ flexGrow: 1 }}>
+      <div
+        style={{
+          height: elemHeight - 100,
+          maxHeight: elemHeight,
+          overflowY: 'auto',
+          width: '100%',
+        }}
+        onScroll={handleScroll}
+      >
+        <div
+          aria-labelledby="reviews-navigation"
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'baseline',
+          }}
+        >
+          <span>{reviews.length} reviews, sorted by:</span>
+          <RadioGroup primary={'red'} subtle={'black'}>
+            <label htmlFor="relevance">
+              <input
+                type="radio"
+                id="relevant"
+                name="sort-by"
+                value="relevant"
+                checked={sortParam === 'relevant'}
+                onChange={handleSortOptionChange}
+              />
+              relevance
+            </label>
+            <label htmlFor="newest">
+              <input
+                type="radio"
+                id="newest"
+                name="sort-by"
+                value="newest"
+                checked={sortParam === 'newest'}
+                onChange={handleSortOptionChange}
+              />
+              newest
+            </label>
+            <label htmlFor="helpful">
+              <input
+                type="radio"
+                id="helpful"
+                name="sort-by"
+                value="helpful"
+                checked={sortParam === 'helpful'}
+                onChange={handleSortOptionChange}
+              />
+              helpful
+            </label>
+          </RadioGroup>
+        </div>
+        {reviews.length > 0 && (
+          <ul title="review-list" style={{ listStyle: 'none', padding: 0 }}>
+            {visibleReviews.map((review) => (
+              <li data-testid="review-tile" key={review.review_id}>
+                <ReviewTile review={review} />
+              </li>
+            ))}
+          </ul>
+        )}
+        <div></div>
+      </div>
       <div>
         {visibleReviews.length < reviews.length && (
           <button
@@ -131,9 +245,17 @@ const ReviewList = ({ productId, rating, handleSetReviewsTotal }) => {
           //   More Reviews
           // </a>
         )}
-        <button className="question-button-ask question-buttons">
+        <button
+          className="question-button-ask question-buttons"
+          onClick={() => setModalIsOpen(true)}
+        >
           ADD REVIEW
         </button>
+        {modalIsOpen && (
+          <Modal setModalIsOpen={setModalIsOpen}>
+            <NewReviewForm productInfo={productInfo} />
+          </Modal>
+        )}
       </div>
     </section>
   )

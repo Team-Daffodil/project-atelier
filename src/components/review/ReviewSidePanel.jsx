@@ -58,6 +58,7 @@ const ReviewSidePanel = ({
   productId,
   handleRatingChange,
   handleSetRating,
+  handleSetProductInfo,
 }) => {
   const [data, setData] = useState({})
   const [totalRatings, setTotalRatings] = useState(0)
@@ -66,6 +67,7 @@ const ReviewSidePanel = ({
     fetchProductData(productId)
       .then((data) => {
         setData(data.data)
+        handleSetProductInfo(data.data)
         setTotalRatings(
           Object.values(data.data.ratings).reduce(
             (acc, val) => acc + parseInt(val),
