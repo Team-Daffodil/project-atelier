@@ -72,12 +72,13 @@ const QuestionList = ({ filter, answerModalHandler, questionModalHandler, produc
                 }
               })}
           <div className="questions-closing">
-            <button
+            <a
               className="question-button-more question-buttons"
               onClick={showMoreQuestionsHandler}
+              href="#qna-section"
             >
               MORE QUESTIONS
-            </button>
+            </a>
 
             <button
               className="question-button-ask question-buttons"
@@ -126,12 +127,14 @@ const QuestionList = ({ filter, answerModalHandler, questionModalHandler, produc
               }
             })}
           <div className="questions-closing">
-            <button
+            <a
               className="question-button-more question-buttons"
               onClick={showMoreQuestionsHandler}
+              href="#qna-section"
+              style={{fontSize: '15px', color: 'black', fontWeight: '400'}}
             >
               MORE QUESTIONS
-            </button>
+            </a>
 
             <button
               className="question-button-ask question-buttons"
