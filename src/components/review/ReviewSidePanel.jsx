@@ -48,7 +48,7 @@ const Section = styled.section`
 const StarBarContainer = styled.div`
   display: flex;
   flex-direction: row;
-
+  align-items: baseline;
   &:hover {
     font-weight: 700;
   }
@@ -103,7 +103,14 @@ const ReviewSidePanel = ({
       {data.ratings !== undefined ? (
         <div>
           <div>
-            <div>{ratingAvg(data.ratings, totalRatings)}</div>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+              <strong
+                style={{ fontSize: 48, fontWeight: 700, marginRight: 18 }}
+              >
+                {ratingAvg(data.ratings, totalRatings)}
+              </strong>
+              <QuarterRating rating={ratingAvg(data.ratings, totalRatings)} />
+            </div>
             <div>
               {/* <QuarterRating rating={parseInt(data.ratings, totalRatings)} /> */}
             </div>
@@ -116,7 +123,13 @@ const ReviewSidePanel = ({
               return (
                 <li key={rating + 'stars'}>
                   <StarBarContainer>
-                    <div style={{ width: 40, paddingRight: 4, flexGrow: 0 }}>
+                    <div
+                      style={{
+                        width: 50,
+                        paddingRight: 4,
+                        flexGrow: 0,
+                      }}
+                    >
                       <a href="#" onClick={handleRatingClick(rating)}>
                         {rating} stars
                       </a>

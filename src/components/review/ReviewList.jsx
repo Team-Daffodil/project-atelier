@@ -98,6 +98,10 @@ const RadioGroup = styled.div`
       }
     }
   }
+
+  button:hover {
+    cursor: pointer;
+  }
 `
 const ReviewList = ({
   productId,
@@ -238,6 +242,7 @@ const ReviewList = ({
           <button
             className="button-more-questions question-buttons"
             onClick={handleMoreClick}
+            style={{ cursor: 'pointer' }}
           >
             MORE REVIEWS
           </button>
@@ -248,6 +253,7 @@ const ReviewList = ({
         <button
           className="question-button-ask question-buttons"
           onClick={() => setModalIsOpen(true)}
+          style={{ cursor: 'pointer' }}
         >
           ADD REVIEW
         </button>
