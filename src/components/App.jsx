@@ -5,6 +5,7 @@ import RelatedProducts from './related/RelatedProducts.jsx'
 import axios from 'axios'
 import OverviewWidget from './overview/OverviewWidget.jsx'
 import Review from './review/Review'
+import Navbar from './navbar/Navbar.jsx'
 import Outfit from './related/Outfit.jsx'
 
 const fetchheaders = {
@@ -58,8 +59,8 @@ const App = () => {
   }, [appState])
 
   return (
-    <section id="app">
-      <h1>SearchBarPlaceholder</h1>
+    <section id="app" data-testid="app">
+      <Navbar />
       <OverviewWidget appState={appState} />
 
       <RelatedProducts addToOutfitHandler={addToOutfitHandler} />
