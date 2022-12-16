@@ -24,10 +24,10 @@ const OutfitCard = ({ product, i, deleteOutfit }) => {
       <button onClick={e => deleteCard(e)}>DELETE</button>
       <img className="outfit-card-image" src={product.image}></img>
       <div className="outfit-card-info">
-        <div>{product.category}</div>
-        <div>{product.name}</div>
-        <div>{product.sale ? salePrice() : product.price}</div>
-        <QuarterRating rating={product.rating} />
+        <div tyle={{fontSize: '14px', fontWeight: '200', marginBottom: '2px', marginLeft: '10px'}}>{product.category}</div>
+        <div style={{fontSize: '15px', fontWeight: '400', marginBottom: '3px', marginLeft: '20px'}}>{product.name}</div>
+        <div style={{ marginLeft: '40px'}}><div>{product.sale ? salePrice() : product.price}</div></div>
+        <div className='card-flowers' style={{ marginTop: '3px', marginLeft: '60px'}}><QuarterRating rating={product.rating} /></div>
       </div>
     </div>
   )

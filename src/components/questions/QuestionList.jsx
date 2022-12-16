@@ -73,7 +73,7 @@ const QuestionList = ({ filter, answerModalHandler, questionModalHandler }) => {
               })}
           <div className="questions-closing">
             <button
-              className="button-more-questions question-buttons"
+              className="question-button-more question-buttons"
               onClick={showMoreQuestionsHandler}
             >
               MORE QUESTIONS
@@ -127,7 +127,7 @@ const QuestionList = ({ filter, answerModalHandler, questionModalHandler }) => {
             })}
           <div className="questions-closing">
             <button
-              className="button-more-questions question-buttons"
+              className="question-button-more question-buttons"
               onClick={showMoreQuestionsHandler}
             >
               MORE QUESTIONS

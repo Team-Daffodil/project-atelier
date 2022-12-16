@@ -30,12 +30,15 @@ span {
 
 .button-helpful {
   border: none;
-  background-color: #fff0a354;
-  transition: 0.4s;
+  background-color: #f1e8b93b;
+  transition: 0.2s;
 }
 
 .button-helpful:hover {
-  transform: scale(1.2);
+  transform: scale(1.03);
+  background-color: #bebebe3b;
+  border-radius: 10px;
+  color: rgba(226, 100, 50, 0.74);
 }
 
 .button-load-answers {
@@ -49,6 +52,8 @@ span {
   height: 30px;
   margin: 0 0 3px 3px;
   transform: scale(.7);
+  border-bottom-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 .button-load-answers:hover {
   background-color: #ff8b59;
@@ -127,7 +132,7 @@ span {
   box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.1),
     3px 3px 2px rgba(0, 0, 0, 0.1);
   margin-right: 15px;
-  border-bottom-left-radius: 25px;
+  border-bottom-left-radius: 100px;
 }
 .button-add-outfit {
   width: 40px;
@@ -149,8 +154,6 @@ span {
   font-size: 12px;
   width: 225px;
   height: 125px;
-  align-items: baseline;
-  margin-left: 5px;
 }
 .outfit-container {
   display: flex;
@@ -194,7 +197,7 @@ span {
   box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.1),
     3px 3px 2px rgba(0, 0, 0, 0.1);
     margin-right: 15px;
-    border-bottom-left-radius: 25px;
+    border-bottom-left-radius: 100px;
 }
 .outfit-card-image {
   width: 225px;
@@ -207,10 +210,12 @@ span {
   font-size: 12px;
   width: 225px;
   height: 125px;
-  align-items: baseline;
   margin-left: 5px;
 }
 
+.card-flowers {
+  margin-left: 25px;
+}
 .rating {
   display: flex;
   position: relative;
@@ -299,12 +304,16 @@ span {
   display: flex;
   background-color: #d3c6bb;
 }
-.questions-search-input {
+.question-search-input {
   width: 600px;
-  height: 40px;
+  height: 20px;
   font-size: 28px;
   background-color: #111;
+  border-bottom-right-radius: 40px;
+  border-top-left-radius: 40px;
   color: #d3c6bb;
+  text-indent: 30px;
+  margin-left: 250px;
 }
 
 .questions-header {
@@ -327,7 +336,8 @@ span {
     3px 3px 2px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  margin-bottom: 5px
+  margin-bottom: 5px;
+  border-bottom-right-radius: 100px;
 }
 
 .question-individual-question {
@@ -369,28 +379,40 @@ span {
   border: none;
   padding: 15px 25px;
   margin: 10px;
+  box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.1),
+    3px 3px 2px rgba(0, 0, 0, 0.1);
+
 }
 
 .question-button-more {
   transition-duration: 0.4s;
-  background-color: #b3b3b3;
+  background-color: #c0bb8f;
   box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.1),
     3px 3px 2px rgba(0, 0, 0, 0.1);
+    border-top-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+
 }
 
 .question-button-more:hover {
-  background-color: #ff8b59;
+  background-color: #faee82;
+  box-shadow: inset 10px 10px 10px #ac9c0cad,
+    3px 3px 2px rgba(0, 0, 0, 0.1);
 }
 
 .question-button-ask {
   transition-duration: 0.4s;
-  background-color: #b3b3b3;
+  background-color: #c99c89;
   box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.1),
     3px 3px 2px rgba(0, 0, 0, 0.1);
+    border-top-left-radius: 50px;
+    border-bottom-right-radius: 50px;
 }
 
 .question-button-ask:hover {
   background-color: #ff8b59;
+  box-shadow: inset 10px 10px 10px rgba(180, 72, 10, 0.671),
+    3px 3px 2px rgba(0, 0, 0, 0.1);
 }
 
 .question-individual-info {
