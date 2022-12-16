@@ -32,7 +32,7 @@ test('loads more 2 more reviews when "More Reviews" button clicked', async () =>
   await waitFor(() => {
     expect(getByTitle('review-list')).toBeVisible()
   })
-  const moreBtn = getByRole('link', { name: 'More Reviews' })
+  const moreBtn = getByRole('button', { name: 'MORE REVIEWS' })
   fireEvent.click(moreBtn)
   await expect(getByTitle('review-list').childElementCount).toEqual(4)
 })
@@ -43,7 +43,7 @@ test('"More Reviews" button disappears when all reviews have been loaded', async
   await waitFor(() => {
     expect(getByTitle('review-list')).toBeVisible()
   })
-  const moreBtn = getByRole('link', { name: 'More Reviews' })
+  const moreBtn = getByRole('button', { name: 'MORE REVIEWS' })
   fireEvent.click(moreBtn)
   fireEvent.click(moreBtn)
   fireEvent.click(moreBtn)

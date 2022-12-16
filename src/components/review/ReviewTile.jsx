@@ -2,12 +2,20 @@ import React, { useState } from 'react'
 import DateFormatter from '../common/DateFormatter'
 import { maxChars } from '../../lib/review'
 import axios from 'axios'
+import styled from 'styled-components'
+
 import ImageThumbs from '../common/ImageThumbs'
+import QuarterRating from '../common/QuarterRating'
 
 const headers = {
   Authorization: process.env.API_TOKEN,
   ContentType: 'application/json',
 }
+
+const SummaryText = styled.p`
+  font-size: 18px;
+  font-weight: 700;
+`
 
 const ReviewTile = ({ review }) => {
   const [isExpanded, setExpanded] = useState(false)
@@ -50,17 +58,26 @@ const ReviewTile = ({ review }) => {
   }
 
   return (
-    <section>
-      <div>
-        <div>Stars: {review.rating}</div>
+    <section style={{ borderBottom: '1px solid black', marginBottom: 24 }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+        }}
+      >
         <div>
+          Stars: {review.rating}
+          {/* <QuarterRating rating={review.rating} /> */}
+        </div>
+        <div style={{ fontSize: 15 }}>
           {review.reviewer_name}, <DateFormatter ts={review.date} />
         </div>
       </div>
       <div>
-        <h3>{maxChars(review.summary, 60)}</h3>
+        <SummaryText>{maxChars(review.summary, 60)}</SummaryText>
       </div>
-      <div>
+      <div style={{ fontSize: 15 }}>
         <p title="review-content">
           {!isExpanded ? maxChars(review.body, 250) : review.body}
         </p>

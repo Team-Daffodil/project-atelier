@@ -8,7 +8,6 @@ test('loads bar and displays proper ratio', () => {
   expect(fillBar).toHaveStyle(`
           background-color: lightgreen;
           width: 50%;
-          height: 20px;
   `)
 })
 
@@ -18,7 +17,6 @@ test('bar does not exceed 100', () => {
   expect(fillBar).toHaveStyle(`
           background-color: lightgreen;
           width: 100%;
-          height: 20px;
   `)
 })
 
@@ -28,6 +26,5 @@ test('bar minimum is never lower than 0', () => {
   expect(fillBar).toHaveStyle(`
           background-color: lightgreen;
           width: 0%;
-          height: 20px;
   `)
 })
