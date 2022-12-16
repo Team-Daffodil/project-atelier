@@ -119,6 +119,7 @@ span {
   margin-left: 50px;
   font-size: 24px;
   font-family: 600;
+  margin-bottom: 10px;
 }
 .related-carousel {
   display: flex;
@@ -133,6 +134,7 @@ span {
     3px 3px 2px rgba(0, 0, 0, 0.1);
   margin-right: 15px;
   border-bottom-left-radius: 100px;
+  background-image: linear-gradient(to bottom right, rgb(218, 69, 1), rgba(218, 70, 1, 0.733),rgba(218, 70, 1, 0.466), rgba(218, 70, 1, 0.116) );
 }
 .button-add-outfit {
   width: 40px;
@@ -154,6 +156,7 @@ span {
   font-size: 12px;
   width: 225px;
   height: 125px;
+
 }
 .outfit-container {
   display: flex;
@@ -166,6 +169,7 @@ span {
   margin-left: 50px;
   font-size: 24px;
   font-family: 600;
+  margin-bottom: 10px;
 }
 .outfit-carousel {
   display: flex;
@@ -194,10 +198,12 @@ span {
   width: 225px;
   height: 375px;
   background-color: #d3c6bb;
+  position: relative;
   box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.1),
     3px 3px 2px rgba(0, 0, 0, 0.1);
     margin-right: 15px;
     border-bottom-left-radius: 100px;
+    background-image: linear-gradient(to bottom right, rgb(218, 142, 1),rgba(218, 124, 1, 0.733),rgba(218, 124, 1, 0.466), rgba(218, 142, 1, 0.116));
 }
 .outfit-card-image {
   width: 225px;
