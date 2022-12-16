@@ -3,6 +3,9 @@ import { Field, Form, Formik, useFormik } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
 import styled from 'styled-components'
+
+import RateProduct from '../common/RateProduct'
+
 import { displayChars } from '../../lib/review'
 
 const headers = { Authorization: process.env.API_TOKEN }
@@ -171,7 +174,7 @@ const NewReviewForm = ({ productInfo, setModalIsOpen }) => {
   const [submitted, setSubmitted] = useState(false)
 
   const initialValues = {
-    rating: '',
+    rating: 5,
     summary: '',
     body: '',
     characteristics: {},
@@ -185,7 +188,7 @@ const NewReviewForm = ({ productInfo, setModalIsOpen }) => {
       formValues.characteristics[key] = n
     })
     formValues['product_id'] = parseInt(productInfo.product_id)
-    formValues.rating = parseInt(values.rating)
+    formValues.rating = 5
     formValues.recommend = values.recommend === 'Yes' ? true : false
     formValues.name = 'abc123'
     formValues.email = 'fake@fake.com'
@@ -229,7 +232,8 @@ const NewReviewForm = ({ productInfo, setModalIsOpen }) => {
             <FormContainer>
               <div>
                 <h3>Your overall rating</h3>
-                <label htmlFor="rating">
+                <RateProduct />
+                {/* <label htmlFor="rating">
                   <Field
                     id="rating"
                     type="text"
@@ -240,7 +244,7 @@ const NewReviewForm = ({ productInfo, setModalIsOpen }) => {
                         : 'text-input'
                     }
                   />
-                </label>
+                </label> */}
                 <span className="error-msg">
                   {props.errors.rating && <div>{props.errors.rating}</div>}
                 </span>
