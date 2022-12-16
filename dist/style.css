@@ -144,6 +144,9 @@ p, span {
   align-items: baseline;
   margin-left: 5px;
 }
+.sale {
+  display: flex;
+}
 .outfit-carousel {
   display: flex;
   justify-content: space-around;

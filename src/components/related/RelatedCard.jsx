@@ -12,8 +12,9 @@ const RelatedCard = ({ productId, addToOutfitHandler }) => {
   const [rating, setRating] = useState(null)
   const salePrice = () => {
     return (
-      <div>
-        Sale: {styles.sale}{' '}
+      <div class='style'>
+        <>Sale: {' '}</>
+        <span style={{color: 'red'}}>{styles.sale}{' '}</span>
         <span style={{ textDecoration: 'line-through' }}>{styles.price}</span>
       </div>
     )

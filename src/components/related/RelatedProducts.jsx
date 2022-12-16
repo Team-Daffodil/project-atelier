@@ -58,7 +58,7 @@ const RelatedProducts = ({ addToOutfitHandler }) => {
 
   useEffect(() => {
     axios
-      .get(process.env.API_URL + '/products/37317/related', {
+      .get(process.env.API_URL + '/products/37332/related', {
         headers,
       })
       .then((response) => {

@@ -7,7 +7,6 @@ let headers = { Authorization: process.env.API_TOKEN }
 const OutfitCard = ({ product, i, deleteOutfit }) => {
 
   const deleteCard = (e) => {
-    console.log('DELETE CARD: ', product, i, e.nativeEvent)
     deleteOutfit(product.id)
   }
 

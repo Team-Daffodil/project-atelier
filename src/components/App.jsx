@@ -59,11 +59,11 @@ const App = () => {
 
       <RelatedProducts addToOutfitHandler={addToOutfitHandler}/>
       <Outfit outfit={outfit} deleteOutfit={deleteOutfit}/>
-      <Questions />
+      {/* <Questions />
       <Review
         productId={appState.productId}
         handleSetReviewData={handleSetReviewData}
-      />
+      /> */}
     </section>
   )
 }
