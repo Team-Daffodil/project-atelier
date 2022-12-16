@@ -7,6 +7,8 @@ import {
   faCircleChevronRight,
   faCircleXmark,
 } from '@fortawesome/free-solid-svg-icons'
+import { SlArrowDown, SlArrowUp } from 'react-icons/sl'
+import { IconContext } from 'react-icons'
 
 export default function Gallery({ selectedStyle }) {
   const [images, setImages] = useState(selectedStyle[0].photos)
@@ -180,7 +182,9 @@ export default function Gallery({ selectedStyle }) {
         <div className="left_1">
           {start >= 7 ? (
             <button className="morebtn" onClick={() => backHandler()}>
-              Back
+              <IconContext.Provider value={{ color: 'black', size: '40px' }}>
+                <SlArrowUp />
+              </IconContext.Provider>
             </button>
           ) : null}
           {images.slice(start, end).map((image, i) => {
@@ -198,7 +202,9 @@ export default function Gallery({ selectedStyle }) {
           })}
           {images.slice(start, end).length >= 7 ? (
             <button className="morebtn" onClick={() => moreHandler()}>
-              More
+              <IconContext.Provider value={{ color: 'black', size: '40px' }}>
+                <SlArrowDown />
+              </IconContext.Provider>
             </button>
           ) : null}
         </div>
