@@ -24,7 +24,7 @@ import { SlArrowRight, SlArrowLeft } from 'react-icons/sl'
 //   RIGHT
 // </button>
 let headers = { Authorization: process.env.API_TOKEN }
-const RelatedProducts = ({ addToOutfitHandler }) => {
+const RelatedProducts = ({ addToOutfitHandler, productId }) => {
   const [relatedID, setRelatedID] = useState([])
   const [related, setRelated] = useState([])
   const [curIndex, setCurIndex] = useState(2)
@@ -58,7 +58,7 @@ const RelatedProducts = ({ addToOutfitHandler }) => {
 
   useEffect(() => {
     axios
-      .get(process.env.API_URL + '/products/37332/related', {
+      .get(process.env.API_URL + `/products/${productId}/related`, {
         headers,
       })
       .then((response) => {

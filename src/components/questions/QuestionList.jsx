@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import QuestionListEntry from './QuestionListEntry.jsx'
 
-const QuestionList = ({ filter, answerModalHandler, questionModalHandler }) => {
+const QuestionList = ({ filter, answerModalHandler, questionModalHandler, productId }) => {
   const [data, setData] = useState([]) // product data array
   const [moreQs, setMoreQs] = useState(false) // bool toggle to show more than 4 questions
   const [questionCount, setQuestionCount] = useState(4)
@@ -147,12 +147,13 @@ const QuestionList = ({ filter, answerModalHandler, questionModalHandler }) => {
     } else if ((data.length > 4) & moreQs) {
       // render more than 4 questions after button click
       return (
-        <div
-          className="questions-wrapper"
-          style={questionWrapperStyle}
-          onScroll={onScrollHandler}
-        >
-          {data &&
+        <div>
+          <div
+            className="questions-wrapper"
+            style={questionWrapperStyle}
+            onScroll={onScrollHandler}
+          >
+            {data &&
             data.map((ele, i) => {
               if (i < questionCount + 2) {
                 return (
@@ -165,6 +166,8 @@ const QuestionList = ({ filter, answerModalHandler, questionModalHandler }) => {
                 )
               }
             })}
+
+          </div>
           <div className="questions-closing">
             <button
               className="question-button-ask question-buttons"
@@ -176,6 +179,7 @@ const QuestionList = ({ filter, answerModalHandler, questionModalHandler }) => {
             </button>
           </div>
         </div>
+
       )
     }
   } else if (data.length === 0) {
