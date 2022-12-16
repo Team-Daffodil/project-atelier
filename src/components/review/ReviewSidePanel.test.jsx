@@ -15,7 +15,13 @@ beforeAll(() => server.resetHandlers())
 afterAll(() => server.close())
 
 test('loads and renders side panel with initial GET request', async () => {
-  render(<ReviewSidePanel productId={1} handleSetRating={jest.fn()} />)
+  render(
+    <ReviewSidePanel
+      productId={1}
+      handleSetRating={jest.fn()}
+      handleSetProductInfo={() => {}}
+    />
+  )
 
   expect(screen.getByText('Loading')).toBeVisible()
 
