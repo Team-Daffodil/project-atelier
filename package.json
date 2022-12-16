@@ -32,6 +32,9 @@
     ]
   },
   "homepage": "https://github.com/Team-Daffodil/project-atelier#readme",
+  "resolutions": {
+    "@types/react": "^18.2.0"
+  },
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
