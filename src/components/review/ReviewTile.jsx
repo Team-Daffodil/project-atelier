@@ -67,10 +67,10 @@ const ReviewTile = ({ review }) => {
         }}
       >
         <div>
-          Stars: {review.rating}
-          {/* <QuarterRating rating={review.rating} /> */}
+          {/* Stars: {review.rating} */}
+          <QuarterRating rating={review.rating} />
         </div>
-        <div style={{ fontSize: 15 }}>
+        <div style={{ fontSize: 15, paddingRight: 16 }}>
           {review.reviewer_name}, <DateFormatter ts={review.date} />
         </div>
       </div>
@@ -87,7 +87,7 @@ const ReviewTile = ({ review }) => {
           </a>
         )}
       </div>
-      {review.photos.length && (
+      {review.photos.length > 0 && (
         <ImageThumbs photos={review.photos.map((photo) => photo.url)} />
       )}
       {review.recommend && <div>I recommend this product</div>}

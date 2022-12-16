@@ -103,7 +103,14 @@ const ReviewSidePanel = ({
       {data.ratings !== undefined ? (
         <div>
           <div>
-            <div>{ratingAvg(data.ratings, totalRatings)}</div>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+              <strong
+                style={{ fontSize: 48, fontWeight: 700, marginRight: 18 }}
+              >
+                {ratingAvg(data.ratings, totalRatings)}
+              </strong>
+              <QuarterRating rating={ratingAvg(data.ratings, totalRatings)} />
+            </div>
             <div>
               {/* <QuarterRating rating={parseInt(data.ratings, totalRatings)} /> */}
             </div>

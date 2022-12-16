@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Field, Form, Formik, useFormik } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
@@ -49,6 +49,10 @@ const renderCharacteristics = (char, id) => {
 const FormContainer = styled.div`
   width: 800px;
   padding: 24px;
+
+  .error-msg {
+    color: red;
+  }
 
   input[type='text'],
   textarea {
@@ -152,6 +156,10 @@ const FormContainer = styled.div`
       }
     }
   }
+
+  button:hover {
+    cursor: pointer;
+  }
 `
 
 const RadioGroup = styled.div`
@@ -160,6 +168,8 @@ const RadioGroup = styled.div`
 `
 
 const NewReviewForm = ({ productInfo, setModalIsOpen }) => {
+  const [submitted, setSubmitted] = useState(false)
+
   const initialValues = {
     rating: '',
     summary: '',
@@ -184,7 +194,10 @@ const NewReviewForm = ({ productInfo, setModalIsOpen }) => {
     formValues.summary = values.summary
     axios
       .post(process.env.API_URL + '/reviews', formValues, { headers: headers })
-      .then((data) => console.log('success:', data))
+      .then((data) => {
+        console.log('success:', data)
+        setSubmitted(true)
+      })
       .catch((err) => console.log(err))
   }
 
@@ -197,6 +210,10 @@ const NewReviewForm = ({ productInfo, setModalIsOpen }) => {
       .required('Review is required'),
     summary: Yup.string().required('Summary is required'),
     terms: Yup.bool().oneOf([true], 'You must accept the terms and conditions'),
+    username: Yup.string().required('Username is required'),
+    email: Yup.string()
+      .required('Email is required')
+      .email('Please enter a valid email'),
   })
 
   return (
@@ -213,9 +230,20 @@ const NewReviewForm = ({ productInfo, setModalIsOpen }) => {
               <div>
                 <h3>Your overall rating</h3>
                 <label htmlFor="rating">
-                  <Field id="rating" type="text" name="rating" />
+                  <Field
+                    id="rating"
+                    type="text"
+                    name="rating"
+                    className={
+                      props.errors.rating && props.touched.rating
+                        ? 'text-input error'
+                        : 'text-input'
+                    }
+                  />
                 </label>
-                {props.errors.rating && <div>{props.errors.rating}</div>}
+                <span className="error-msg">
+                  {props.errors.rating && <div>{props.errors.rating}</div>}
+                </span>
               </div>
               <div>
                 <h3>Would you recommend this product?</h3>
@@ -229,9 +257,11 @@ const NewReviewForm = ({ productInfo, setModalIsOpen }) => {
                     No
                   </label>
                 </RadioGroup>
-                {props.errors.recommended && (
-                  <div>{props.errors.recommended}</div>
-                )}
+                <span className="error-msg">
+                  {props.errors.recommend && (
+                    <div>{props.errors.recommend}</div>
+                  )}
+                </span>
               </div>
               <div>
                 <h3>Share your experience</h3>
@@ -246,8 +276,16 @@ const NewReviewForm = ({ productInfo, setModalIsOpen }) => {
                     id="body"
                     rows={8}
                     placeholder="Your Review"
+                    className={
+                      props.errors.body && props.touched.body
+                        ? 'textarea error'
+                        : 'textarea'
+                    }
                   />
                 </label>
+                <span className="error-msg">
+                  {props.errors.body && <div>{props.errors.body}</div>}
+                </span>
                 <label style={{ display: 'block' }}>
                   <p>
                     What's your opinion in one sentence? Example: Best purchase
@@ -258,8 +296,16 @@ const NewReviewForm = ({ productInfo, setModalIsOpen }) => {
                     name="summary"
                     id="summary"
                     placeholder="Review in Short *"
+                    className={
+                      props.errors.summary && props.touched.summary
+                        ? 'text-input error'
+                        : 'text-input'
+                    }
                   />
                 </label>
+                <span className="error-msg">
+                  {props.errors.summary && <div>{props.errors.summary}</div>}
+                </span>
               </div>
               {Object.keys(productInfo.characteristics).map((key) =>
                 renderCharacteristics(key, productInfo.characteristics[key].id)
@@ -279,8 +325,16 @@ const NewReviewForm = ({ productInfo, setModalIsOpen }) => {
                     name="username"
                     id="username"
                     placeholder="Username *"
+                    className={
+                      props.errors.username && props.touched.username
+                        ? 'text-input error'
+                        : 'text-input'
+                    }
                   />
                 </label>
+                <span className="error-msg">
+                  {props.errors.username && <div>{props.errors.username}</div>}
+                </span>
                 <label style={{ display: 'block' }}>
                   <p>
                     Enter your email for confirmation only - we won't send you
@@ -291,8 +345,16 @@ const NewReviewForm = ({ productInfo, setModalIsOpen }) => {
                     name="email"
                     id="email"
                     placeholder="Email *"
+                    className={
+                      props.errors.email && props.touched.email
+                        ? 'text-input error'
+                        : 'text-input'
+                    }
                   />
                 </label>
+                <span className="error-msg">
+                  {props.errors.email && <div>{props.errors.email}</div>}
+                </span>
               </div>
               <p>
                 <label>
@@ -302,22 +364,45 @@ const NewReviewForm = ({ productInfo, setModalIsOpen }) => {
                     <a href="#"> Terms and Conditions</a>
                   </span>
                 </label>
-                {props.errors.terms && <div>{props.errors.terms}</div>}
+                <span className="error-msg">
+                  {props.errors.terms && <div>{props.errors.terms}</div>}
+                </span>
               </p>
-              <button
-                className="button-more-questions question-buttons"
-                onClick={() => {
-                  setModalIsOpen(false)
-                }}
-              >
-                CANCEL
-              </button>
-              <button
-                className="question-button-ask question-buttons"
-                type="submit"
-              >
-                SUBMIT REVIEW
-              </button>
+              <div>
+                {submitted && (
+                  <span style={{ color: 'green', fontWeight: 700 }}>
+                    Thank you for your submission
+                  </span>
+                )}
+              </div>
+              {submitted ? (
+                <button
+                  className="button-more-questions question-buttons"
+                  onClick={() => {
+                    setModalIsOpen(false)
+                  }}
+                >
+                  CLOSE
+                </button>
+              ) : (
+                <>
+                  <button
+                    className="button-more-questions question-buttons"
+                    onClick={() => {
+                      setModalIsOpen(false)
+                    }}
+                  >
+                    CANCEL
+                  </button>
+                  <button
+                    className="question-button-ask question-buttons"
+                    type="submit"
+                    disabled={submitted}
+                  >
+                    SUBMIT REVIEW
+                  </button>
+                </>
+              )}
             </FormContainer>
           </Form>
         )}
