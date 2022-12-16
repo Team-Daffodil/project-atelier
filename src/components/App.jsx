@@ -12,10 +12,12 @@ const fetchheaders = {
 }
 
 let PRODUCT_ID = 37311
-// if (window !== undefined) {
-//   let segs = window.location.href.split('/')
-//   PRODUCT_ID = segs[segs.length - 1]
-// }
+if (window !== undefined) {
+  let segs = window.location.href.split('?')
+  if (segs.length > 1) {
+    PRODUCT_ID = segs[segs.length - 1]
+  }
+}
 
 const App = () => {
   const [appState, setAppState] = useState({ productId: PRODUCT_ID })
@@ -28,9 +30,13 @@ const App = () => {
   }
   const deleteOutfit = (id) => {
     console.log('SOMETHING')
-    setOutfit(outfit.filter(item => {
-      if (item.id !== id) {return item}
-    }))
+    setOutfit(
+      outfit.filter((item) => {
+        if (item.id !== id) {
+          return item
+        }
+      })
+    )
   }
   const addToOutfitHandler = (event, product, styles, rating, productId) => {
     console.log(event.nativeEvent)
@@ -43,9 +49,8 @@ const App = () => {
     tempObj.image = styles.image
     tempObj.rating = rating
     tempObj.id = productId
-    tempObj.added = true;
+    tempObj.added = true
     setOutfit([...outfit, tempObj])
-
   }
 
   useEffect(() => {
@@ -57,8 +62,8 @@ const App = () => {
       <h1>SearchBarPlaceholder</h1>
       <OverviewWidget appState={appState} />
 
-      <RelatedProducts addToOutfitHandler={addToOutfitHandler}/>
-      <Outfit outfit={outfit} deleteOutfit={deleteOutfit}/>
+      <RelatedProducts addToOutfitHandler={addToOutfitHandler} />
+      <Outfit outfit={outfit} deleteOutfit={deleteOutfit} />
       <Questions />
       <Review
         productId={appState.productId}
