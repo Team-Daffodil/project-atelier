@@ -24,7 +24,6 @@ export default function DropdownSize({
   }
 
   const handleMenu = (e) => {
-    console.log(e.target.innerHTML)
     setqtyText(e.target.innerHTML)
     setOpen(false)
   }

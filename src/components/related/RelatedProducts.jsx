@@ -29,8 +29,8 @@ const RelatedProducts = ({ addToOutfitHandler }) => {
   const [related, setRelated] = useState([])
   const [curIndex, setCurIndex] = useState(2)
   const carouselButtons = () => (
-    <div className='related-arrows'>
-      <IconContext.Provider value={{ color: 'black', size: '40px', }}>
+    <div className="related-arrows">
+      <IconContext.Provider value={{ color: 'black', size: '40px' }}>
         <SlArrowLeft
           className="button-related-left"
           onClick={carouselMoveLeftHandler}
@@ -68,7 +68,7 @@ const RelatedProducts = ({ addToOutfitHandler }) => {
 
   if (relatedID.length) {
     return (
-      <section className="related-container">
+      <section className="related-container" id="related-section">
         {relatedID.length > 5 ? carouselButtons() : null}
         <div className="related-header">Related Products</div>
         <div className="related-carousel">
