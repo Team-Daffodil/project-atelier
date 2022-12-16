@@ -35,7 +35,7 @@ export default function DropdownSize({
   for (const s in qty.quantities) {
     uArray.push(s)
   }
-  if (Number(uArray[0]) !== NaN) {
+  if (Number(uArray[0])) {
     for (const s in uArray) {
       qtyArray.push(Number(uArray[s]))
     }

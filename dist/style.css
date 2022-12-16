@@ -413,6 +413,7 @@ span {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  font-size: 18px;
 }
 .read {
   text-decoration: none;
@@ -436,12 +437,14 @@ span {
   border: 1px red;
   border-style: solid;
 }
+
 .stylethumbnails img {
   height: 35px;
   width: 35px;
   border-radius: 50%;
   border: 1px grey;
   border-style: solid;
+  object-fit: scale-down;
   transition: all 0.1s ease;
   transform: scale(1);
 }
@@ -449,7 +452,7 @@ span {
   height: 35px;
   width: 35px;
   border-radius: 50%;
-  border: 2px orange;
+  border: 1.5px yellow;
   border-style: solid;
   transform: scale(1.2);
 }
@@ -707,7 +710,7 @@ span {
 }
 
 .active {
-  border: 3px solid orange;
+  border: 3px solid yellow;
 }
 
 .morebtn {
@@ -810,8 +813,8 @@ span {
   border-radius: 1em;
 }
 
-.active {
-  border: 3px solid rgb(255, 187, 0);
+.modalImg_wrap.active {
+  border: 2px solid yellow;
 }
 /* -------------Navbar ---------------*/
 img#logo {
@@ -848,6 +851,10 @@ nav.sticky {
   font-size: 30px;
   text-decoration: none;
 }
+.links {
+  position: absolute;
+  right: 180px;
+}
 .links a {
   color: #fff;
   font-size: 20px;
@@ -862,4 +869,14 @@ nav.sticky {
 .ratings-reviews-container {
   display: flex;
   align-items: center;
+}
+
+#related-section {
+  padding-top: 160px;
+}
+#review-section {
+  padding-top: 160px;
+}
+#qna-section {
+  padding-top: 160px;
 }

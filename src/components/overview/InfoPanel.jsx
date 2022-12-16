@@ -5,6 +5,7 @@ import DropdownSize from './DropdownSize.jsx'
 import DropdownQty from './DropdownQty.jsx'
 import Addtocart from './Addtocart.jsx'
 import axios from 'axios'
+import QuarterRatings from '../common/QuarterRating.jsx'
 
 export default function InfoPanel({
   item,
@@ -27,6 +28,20 @@ export default function InfoPanel({
       let defaultStyle = styles.filter((el) => el['default?'] === true)
       setSelectedStyle(defaultStyle)
     }
+  }
+
+  const salePrice = () => {
+    return (
+      <div class="style">
+        <>Sale!: </>
+        <span style={{ color: 'red', fontSize: 16 }}>
+          {selectedStyle[0].sale_price}{' '}
+        </span>
+        <span style={{ textDecoration: 'line-through', fontSize: 16 }}>
+          {selectedStyle[0].original_price}
+        </span>
+      </div>
+    )
   }
   const handlePicClick = (e, i) => {
     let id = e.target.id
@@ -61,7 +76,6 @@ export default function InfoPanel({
       return { quantities: quantities, sku: result }
     }
   }
-
   useEffect(() => {
     getDefaultStyle()
   }, [styles])
@@ -70,14 +84,7 @@ export default function InfoPanel({
     return (
       <div className="info-container">
         <div className="reviews">
-          <Rating
-            name="simple-controlled"
-            value={value}
-            onChange={(event, newValue) => {
-              setValue(newValue)
-            }}
-          />
-          <div>{appState.rating}</div>
+          <QuarterRatings rating={appState.rating} />
           <a href="#review-section" className="read">
             Read all reviews ({appState.totalReviews})
           </a>
@@ -87,8 +94,8 @@ export default function InfoPanel({
           <h1>{item.name}</h1>
           <div>
             {selectedStyle[0].sale_price
-              ? '$' + selectedStyle[0].sale_price
-              : '$' + selectedStyle[0].original_price}
+              ? salePrice()
+              : 'Price: ' + selectedStyle[0].original_price}
           </div>
         </div>
         <div className="style">
