@@ -73,7 +73,6 @@ const RelatedCard = ({ productId, addToOutfitHandler }) => {
 
             <div className='card-flowers' style={{ marginTop: '3px', marginLeft: '60px'}}>
               <QuarterRating rating={rating} key={productId}/>
-              <RateProduct />
             </div>
 
           </div>

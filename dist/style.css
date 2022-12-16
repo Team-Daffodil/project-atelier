@@ -303,7 +303,13 @@ span {
     3px 3px 2px rgba(0, 0, 0, 0.1);
     margin-left: 10px
 }
-
+.submit-modal {
+  border-bottom-right-radius: 20px;
+  border-top-left-radius: 20px;
+  box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.1),
+    3px 3px 2px rgba(0, 0, 0, 0.1);
+    margin-left: 10px
+}
 .button-close-question-modal {
   position: absolute;
   top: 40%;
