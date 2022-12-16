@@ -1,7 +1,18 @@
 import React, { useState, useEffect } from 'react'
+import styled from 'styled-components'
+
 import ReviewList from './ReviewList'
 import ReviewSidePanel from './ReviewSidePanel'
 
+const SectionContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+  margin: 25px;
+
+  a {
+    color: black;
+  }
+`
 const sectionContainerStyle = {
   display: 'flex',
   flexDirection: 'column',
@@ -43,7 +54,7 @@ const Review = ({ productId, handleSetReviewData }) => {
   }, [productRating, totalReviews])
 
   return (
-    <section id="review-section" style={sectionContainerStyle}>
+    <SectionContainer id="review-section">
       <h3>Ratings & Review</h3>
       <div style={{ display: 'flex', flexDirection: 'row' }}>
         <ReviewSidePanel
@@ -59,7 +70,7 @@ const Review = ({ productId, handleSetReviewData }) => {
           handleSetReviewsTotal={handleSetReviewsTotal}
         />
       </div>
-    </section>
+    </SectionContainer>
   )
 }
 
