@@ -15,9 +15,12 @@ export default function OverviewWidget({ appState, setAppState }) {
   const [selectedStyle, setSelectedStyle] = useState([])
 
   const fetchItem = async () => {
-    const item = await axios.get(process.env.API_URL + '/products/37315', {
-      headers: fetchheaders,
-    })
+    const item = await axios.get(
+      process.env.API_URL + `/products/${appState.productId}`,
+      {
+        headers: fetchheaders,
+      }
+    )
     setItem(item.data)
     return item.data
   }
