@@ -13,7 +13,7 @@ const OutfitCard = ({ product, i, deleteOutfit }) => {
   const salePrice = () => {
     return (
       <div>
-        Sale: {' '}
+        Sale: ${' '}
         <span style={{color: 'red'}}>{product.sale}{' '}</span>
         <span style={{ textDecoration: 'line-through' }}>{product.price}</span>
       </div>
