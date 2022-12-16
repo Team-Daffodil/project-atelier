@@ -41,10 +41,14 @@ span {
 .button-load-answers {
   border: none;
   background-color: #b3b3b3;
-  border: 2px solid black;
-  border-radius: 7.5px;
+  box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.1),
+    3px 3px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 7.5px;
+    font-weight: 600;
   width: 175px;
   height: 30px;
+  margin: 0 0 3px 3px;
+  transform: scale(.7);
 }
 .button-load-answers:hover {
   background-color: #ff8b59;
@@ -104,10 +108,11 @@ span {
   display: flex;
   flex-direction: column;
   position: relative;
+  margin-left: 30px;
 }
 .related-header {
   margin-left: 50px;
-  font-size: 36px;
+  font-size: 24px;
   font-family: 600;
 }
 .related-carousel {
@@ -119,8 +124,10 @@ span {
   height: 375px;
   position: relative;
   background-color: #d3c6bb;
-  border: 1px solid black;
-  border-radius: 3px;
+  box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.1),
+    3px 3px 2px rgba(0, 0, 0, 0.1);
+  margin-right: 15px;
+  border-bottom-left-radius: 25px;
 }
 .button-add-outfit {
   width: 40px;
@@ -128,7 +135,8 @@ span {
   position: absolute;
   right: 0;
   background-color: #7b7b7b71;
-  border-radius: 10px;
+  box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.1),
+    3px 3px 2px rgba(0, 0, 0, 0.1);
 }
 .related-card-image {
   width: 225px;
@@ -144,15 +152,49 @@ span {
   align-items: baseline;
   margin-left: 5px;
 }
+.outfit-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-left: 30px;
+  margin-top: 20px;
+}
+.outfit-header {
+  margin-left: 50px;
+  font-size: 24px;
+  font-family: 600;
+}
 .outfit-carousel {
   display: flex;
+}
+.initial-card {
+  width: 225px;
+  height: 375px;
+  background-color: #d3c6bb;
+  box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.1),
+    3px 3px 2px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 15px;
+  border-bottom-left-radius: 25px;
+}
+.plus {
+  width: 125px;
+  height: 125px;
+  background-color: #f1e8d5;
+  margin-top: 50px;
+  clip-path: polygon(40% 0, 60% 0, 60% 40%, 100% 40%, 100% 60%, 60% 60%, 60% 100%, 40% 100%, 40% 60%, 0 60%, 0 40%, 40% 40%);
 }
 .outfit-card {
   width: 225px;
   height: 375px;
   background-color: #d3c6bb;
-  border: 1px solid black;
-  border-radius: 3px;
+  box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.1),
+    3px 3px 2px rgba(0, 0, 0, 0.1);
+    margin-right: 15px;
+    border-bottom-left-radius: 25px;
 }
 .outfit-card-image {
   width: 225px;
@@ -252,11 +294,17 @@ span {
 /*------- HEADER CONTAINER -------*/
 
 .questions-header-wrapper {
-  border: 3px solid black;
-  border-radius: 5px;
+  box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.1),
+    3px 3px 2px rgba(0, 0, 0, 0.1);
   display: flex;
-  flex-direction: column;
   background-color: #d3c6bb;
+}
+.questions-search-input {
+  width: 600px;
+  height: 40px;
+  font-size: 28px;
+  background-color: #111;
+  color: #d3c6bb;
 }
 
 .questions-header {
@@ -275,11 +323,11 @@ span {
 }
 
 .question-individual-wrapper {
-  border: 2px solid black;
-  border-radius: 4px;
+  box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.1),
+    3px 3px 2px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  background-color: #fff0a354;
+  margin-bottom: 5px
 }
 
 .question-individual-question {
@@ -326,8 +374,8 @@ span {
 .question-button-more {
   transition-duration: 0.4s;
   background-color: #b3b3b3;
-  border: 3px solid #303030;
-  border-radius: 10px;
+  box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.1),
+    3px 3px 2px rgba(0, 0, 0, 0.1);
 }
 
 .question-button-more:hover {
@@ -337,8 +385,8 @@ span {
 .question-button-ask {
   transition-duration: 0.4s;
   background-color: #b3b3b3;
-  border: 3px solid #303030;
-  border-radius: 10px;
+  box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.1),
+    3px 3px 2px rgba(0, 0, 0, 0.1);
 }
 
 .question-button-ask:hover {

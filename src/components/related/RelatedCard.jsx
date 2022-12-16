@@ -65,8 +65,8 @@ const RelatedCard = ({ productId, addToOutfitHandler }) => {
         <AddOutfit product={product} styles={styles} rating={rating} productId={productId} addToOutfitHandler={addToOutfitHandler}/>
         <img className="related-card-image" src={styles.image}></img>
         <div className="related-card-info">
-          <div>{product.category}</div>
-          <div>{product.name}</div>
+          <div style={{fontSize: '14px', fontWeight: '200'}}>{product.category}</div>
+          <div style={{fontSize: '15px', fontWeight: '400'}}>{product.name}</div>
           <div>{styles.sale ? salePrice() : styles.price}</div>
           <QuarterRating rating={rating} key={productId}/>
         </div>

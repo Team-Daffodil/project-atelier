@@ -41,8 +41,12 @@ const Outfit = ({ outfit, deleteOutfit }) => {
   return (
     <section className="outfit-container">
       {outfit.length > 5 ? carouselButtons() : null}
-      <div className="outfit-header">outfit Products</div>
+      <div className="outfit-header">Your Outfit</div>
       <div className="outfit-carousel">
+        <div className='initial-card'>
+          <div>Add products to your outfit</div>
+          <div className='plus'></div>
+        </div>
         {outfit &&
           outfit.map((item, i) => {
             if ((i >= curIndex - 2) & (i <= curIndex + 2)) {
