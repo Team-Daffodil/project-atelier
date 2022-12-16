@@ -62,8 +62,7 @@ const App = () => {
     <section id="app" data-testid="app">
       <Navbar />
       <OverviewWidget appState={appState} />
-
-      <RelatedProducts addToOutfitHandler={addToOutfitHandler} />
+      <RelatedProducts productId={appState.productId} addToOutfitHandler={addToOutfitHandler} />
       <Outfit outfit={outfit} deleteOutfit={deleteOutfit} />
       <Questions />
       <Review
