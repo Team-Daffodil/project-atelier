@@ -45,7 +45,7 @@ const RateProduct = () => {
       }
     </div>
 
-)
+  )
 }
 
 export default RateProduct;
