@@ -48,7 +48,7 @@ const Section = styled.section`
 const StarBarContainer = styled.div`
   display: flex;
   flex-direction: row;
-
+  align-items: baseline;
   &:hover {
     font-weight: 700;
   }
@@ -123,7 +123,13 @@ const ReviewSidePanel = ({
               return (
                 <li key={rating + 'stars'}>
                   <StarBarContainer>
-                    <div style={{ width: 40, paddingRight: 4, flexGrow: 0 }}>
+                    <div
+                      style={{
+                        width: 50,
+                        paddingRight: 4,
+                        flexGrow: 0,
+                      }}
+                    >
                       <a href="#" onClick={handleRatingClick(rating)}>
                         {rating} stars
                       </a>
