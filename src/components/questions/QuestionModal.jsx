@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { IconContext } from 'react-icons';
+import { CiSquareRemove } from 'react-icons/ci';
 
 const QuestionModal = ({ show, handleClose, children }) => {
   let toggleClass = show ? 'modal display-block' : 'display-none'
@@ -26,27 +28,30 @@ const QuestionModal = ({ show, handleClose, children }) => {
   return (
     <div className={toggleClass}>
       <form className="modal-main" onSubmit={onSubmitHandler}>
-        <label>
+        <div className='modal-ans-title' style={{width: '300px', display: 'flex', flexDirection: 'column', flexWrap: 'wrap', alignItems: 'center'}}>
+          <span style={{fontSize: '18px'}}>Ask Your Question</span>
+        </div>
+        <label style={{marginLeft: '10px', fontSize: '12px'}}>
           Question:
           <input
-            style={{ marginLeft: '10px' }}
+            style={{ marginLeft: '10px', fontSize: '12px' }}
             placeholder="What is life?"
             type="text"
           ></input>
         </label>
-        <label>
+        <label style={{marginLeft: '10px', fontSize: '12px'}}>
           Name:
-          <input placeholder="Jon Smith" type="text"></input>
+          <input style={{ marginLeft: '10px', fontSize: '12px' }} placeholder="Jon Smith" type="text"></input>
         </label>
-        <label>
+        <label style={{marginLeft: '10px', fontSize: '12px'}}>
           Email:
-          <input placeholder="bulbasaur@pokemon.com" type="text"></input>
+          <input style={{ marginLeft: '10px', fontSize: '12px' }} placeholder="bulbasaur@pokemon.com" type="text"></input>
         </label>
-        <input type="submit"></input>
+        <input className='submit-modal' type="submit"></input>
+        <IconContext.Provider value={{color: 'red', size: '40px'}}>
+          <CiSquareRemove style={{position: 'absolute', top: '1%', right: '1%'}} onClick={() => handleClose()}/>
+        </IconContext.Provider>
       </form>
-      <button className="button-close-question-modal" onClick={handleClose}>
-        close
-      </button>
     </div>
   )
 }

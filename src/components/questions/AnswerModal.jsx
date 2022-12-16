@@ -48,9 +48,9 @@ const AnswerModal = ({ show, handleClose }) => {
           <input className='modal-input' placeholder="bulbasaur@pokemon.com" type="text"></input>
         </label>
         <div style={{marginLeft: '10px', fontSize: '8px', width: '200px'}}>For authentication reasons, you will not be emailed</div>
-        <input type="submit"></input>
+        <input className='submit-modal' type="submit"></input>
         <IconContext.Provider value={{color: 'red', size: '40px'}}>
-          <CiSquareRemove />
+          <CiSquareRemove style={{position: 'absolute', top: '1%', right: '1%'}} onClick={() => handleClose()}/>
         </IconContext.Provider>
       </form>
 
