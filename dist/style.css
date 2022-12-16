@@ -220,11 +220,11 @@ p, span {
 .modal-main {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  position: fixed;
+  justify-content: space-evenly;
+  position: relative;
   background: white;
   width: 50%;
-  height: 200px;
+  height: 250px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
