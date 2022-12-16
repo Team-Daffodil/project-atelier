@@ -46,12 +46,12 @@ span {
   background-color: #b3b3b3;
   box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.1),
     3px 3px 2px rgba(0, 0, 0, 0.1);
-    border-radius: 7.5px;
-    font-weight: 600;
+  border-radius: 7.5px;
+  font-weight: 600;
   width: 175px;
   height: 30px;
   margin: 0 0 3px 3px;
-  transform: scale(.7);
+  transform: scale(0.7);
   border-bottom-left-radius: 20px;
   border-top-right-radius: 20px;
 }
@@ -139,7 +139,13 @@ span {
     3px 3px 2px rgba(0, 0, 0, 0.1);
   margin-right: 15px;
   border-bottom-left-radius: 100px;
-  background-image: linear-gradient(to bottom right, rgb(218, 69, 1), rgba(218, 70, 1, 0.733),rgba(218, 70, 1, 0.466), rgba(218, 70, 1, 0.116) );
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(218, 69, 1),
+    rgba(218, 70, 1, 0.733),
+    rgba(218, 70, 1, 0.466),
+    rgba(218, 70, 1, 0.116)
+  );
 }
 .button-add-outfit {
   width: 40px;
@@ -165,7 +171,6 @@ span {
   font-size: 12px;
   width: 225px;
   height: 125px;
-
 }
 .outfit-container {
   display: flex;
@@ -194,7 +199,7 @@ span {
   background-color: #d3c6bb;
   box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.1),
     3px 3px 2px rgba(0, 0, 0, 0.1);
-    text-align: center;
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -206,7 +211,20 @@ span {
   height: 125px;
   background-color: #f1e8d5;
   margin-top: 50px;
-  clip-path: polygon(40% 0, 60% 0, 60% 40%, 100% 40%, 100% 60%, 60% 60%, 60% 100%, 40% 100%, 40% 60%, 0 60%, 0 40%, 40% 40%);
+  clip-path: polygon(
+    40% 0,
+    60% 0,
+    60% 40%,
+    100% 40%,
+    100% 60%,
+    60% 60%,
+    60% 100%,
+    40% 100%,
+    40% 60%,
+    0 60%,
+    0 40%,
+    40% 40%
+  );
 }
 .outfit-card {
   width: 225px;
@@ -215,9 +233,15 @@ span {
   position: relative;
   box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.1),
     3px 3px 2px rgba(0, 0, 0, 0.1);
-    margin-right: 15px;
-    border-bottom-left-radius: 100px;
-    background-image: linear-gradient(to bottom right, rgb(218, 142, 1),rgba(218, 124, 1, 0.733),rgba(218, 124, 1, 0.466), rgba(218, 142, 1, 0.116));
+  margin-right: 15px;
+  border-bottom-left-radius: 100px;
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(218, 142, 1),
+    rgba(218, 124, 1, 0.733),
+    rgba(218, 124, 1, 0.466),
+    rgba(218, 142, 1, 0.116)
+  );
 }
 .outfit-card-image {
   width: 225px;
@@ -241,6 +265,7 @@ span {
   position: relative;
   width: 100px;
   height: 20px;
+  font-size: 18px;
 }
 .flower-merge {
   position: relative;
@@ -285,23 +310,23 @@ span {
 }
 .modal-main {
   display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    position: relative;
-    background: white;
-    width: 30%;
-    height: 300px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(1.5);
-    border-bottom-right-radius: 100px;
-    border-top-left-radius: 100px;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  position: relative;
+  background: white;
+  width: 30%;
+  height: 300px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.5);
+  border-bottom-right-radius: 100px;
+  border-top-left-radius: 100px;
 }
 .modal-input {
   box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.1),
     3px 3px 2px rgba(0, 0, 0, 0.1);
-    margin-left: 10px
+  margin-left: 10px;
 }
 .button-close-question-modal {
   position: absolute;
@@ -408,7 +433,6 @@ span {
   margin: 10px;
   box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.1),
     3px 3px 2px rgba(0, 0, 0, 0.1);
-
 }
 .button-more-questions {
   transition-duration: 0.4s;
@@ -427,15 +451,13 @@ span {
   background-color: #c0bb8f;
   box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.1),
     3px 3px 2px rgba(0, 0, 0, 0.1);
-    border-top-right-radius: 50px;
-    border-bottom-left-radius: 50px;
-
+  border-top-right-radius: 50px;
+  border-bottom-left-radius: 50px;
 }
 
 .question-button-more:hover {
   background-color: #faee82;
-  box-shadow: inset 10px 10px 10px #ac9c0cad,
-    3px 3px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 10px 10px 10px #ac9c0cad, 3px 3px 2px rgba(0, 0, 0, 0.1);
 }
 
 .question-button-ask {
@@ -443,8 +465,8 @@ span {
   background-color: #c99c89;
   box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.1),
     3px 3px 2px rgba(0, 0, 0, 0.1);
-    border-top-left-radius: 50px;
-    border-bottom-right-radius: 50px;
+  border-top-left-radius: 50px;
+  border-bottom-right-radius: 50px;
 }
 
 .question-button-ask:hover {
@@ -521,10 +543,13 @@ span {
   justify-content: flex-start;
   align-items: center;
   font-size: 18px;
-  background-image: linear-gradient(to right, rgba(218, 70, 1, 0.466), rgba(218, 70, 1, 0.116) );
+  background-image: linear-gradient(
+    to right,
+    rgba(218, 70, 1, 0.466),
+    rgba(218, 70, 1, 0.116)
+  );
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
-
 }
 .read {
   text-decoration: none;
