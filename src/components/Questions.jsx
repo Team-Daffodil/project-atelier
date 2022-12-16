@@ -28,17 +28,19 @@ const Questions = () => {
   }
   // c366465b6f6f186dbab8efe90b774b5288e447b8
   return (
-    <section className="questions-container">
+    <section className="questions-container" id="qna-section">
       <h1 className="questions-header-wrapper">
         <div className="questions-header">Questions & Answers</div>
         <SearchQuestion onSearchHandler={onSearchHandler} />
       </h1>
 
-      <QuestionList filter={filter} answerModalHandler={answerModalHandler} questionModalHandler={questionModalHandler}/>
+      <QuestionList
+        filter={filter}
+        answerModalHandler={answerModalHandler}
+        questionModalHandler={questionModalHandler}
+      />
       <QuestionModal show={questionModal} handleClose={closeQuestionForm} />
       <AnswerModal show={answerModal} handleClose={closeAnswerForm} />
-
-
     </section>
   )
 }

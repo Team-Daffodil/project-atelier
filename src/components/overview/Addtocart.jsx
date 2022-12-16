@@ -26,7 +26,6 @@ export default function Addtocart({
     }
   }
   let sku = getSku()
-
   let product = {
     product: {
       name: name,
