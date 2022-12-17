@@ -14,11 +14,19 @@ Project Atelier is a frontend retail web portal for HackReactor's Front End Caps
 
 ## Usage
 
-To be filled out later.
+To build project-atelier:
+
+```bash
+$npm install
+$npm run build:production
+```
+
+Build files can be found in `.dist/` folder. We suggest using nginx to serve the files.
 
 ## Requirements
 
-To be filled out later.
+- npm
+- nginx/apache to serve static files.
 
 ## Development
 
@@ -64,3 +72,9 @@ git push                            # push to your fork
 Rules for Pull Requests:
 
 - each pull requests requires another developer's approval before being able to merge.
+
+### Developers
+
+- Luke Anger: [LukeAnger](https://github.com/LukeAnger)
+- Nicholas Csaszar: [NCsaszar](https://github.com/NCsaszar)
+- Phea Duch: [phea](https://github.com/phea)
