@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import DateFormatter from '../common/DateFormatter.jsx'
+import { resizeImage } from '../../lib/images.js'
 
 const helpfulComponent = (count) => {
   count = count || 0
@@ -35,7 +36,7 @@ const QuestionListEntry = ({ question, answers, answerModalHandler }) => {
   }
   const loadPhotos = (photos) => {
     return photos.map((img, i) => {
-      return <img className="img" src={img} key={i}></img>
+      return <img className="img" src={resizeImage(img, 80)} key={i}></img>
     })
   }
 
@@ -106,7 +107,7 @@ const QuestionListEntry = ({ question, answers, answerModalHandler }) => {
         </div>
 
         <div className="question-individual-answer-wrapper">
-          <div className="question-individual-answer" >
+          <div className="question-individual-answer">
             <div className="answer">
               <b>A:</b>
               <div
@@ -130,10 +131,12 @@ const QuestionListEntry = ({ question, answers, answerModalHandler }) => {
               <DateFormatter ts={answers[0].date} />
             </div>
             <ul className="img-answers">
-              {answers[0].photos.length !== 0 ? loadPhotos(answers[0].photos) : null}
+              {answers[0].photos.length !== 0
+                ? loadPhotos(answers[0].photos)
+                : null}
             </ul>
           </div>
-          <div className="question-individual-answer" >
+          <div className="question-individual-answer">
             <div className="answer">
               <b>A:</b>
               <div
@@ -157,7 +160,9 @@ const QuestionListEntry = ({ question, answers, answerModalHandler }) => {
               <DateFormatter ts={answers[1].date} />
             </div>
             <ul className="img-answers">
-              {answers[1].photos.length !== 0 ? loadPhotos(answers[1].photos) : null}
+              {answers[1].photos.length !== 0
+                ? loadPhotos(answers[1].photos)
+                : null}
             </ul>
           </div>
         </div>
